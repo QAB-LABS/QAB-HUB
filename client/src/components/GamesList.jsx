@@ -9,7 +9,7 @@ class GameList extends React.Component {
   }
 
   renderGames() {
-    return this.props.games.map(game => <GameDetailsRow game={game} />)
+    return this.props.games.map(game => <GameDetailsRow key={game.id} game={game} />)
   }
 
   render() {

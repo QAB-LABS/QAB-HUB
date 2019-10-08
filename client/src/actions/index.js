@@ -24,22 +24,17 @@ export const fetchPostsAndUsers = () => async(dispatch, getState) => {
         .value();
 }
 
-export const fetchGames = dispatch => _fetchGames(dispatch)
-
-export const _fetchGames = _.memoize(async dispatch => {
+export const fetchGames = () => async dispatch => {
     const response = await jsonPlaceholder.get('/posts')
     dispatch({ type: FETCH_GAMES, payload: response.data })
-})
+}
 
-export const fetchPosts = dispatch => _fetchPosts(dispatch)
-
-export const _fetchPosts = _.memoize(async dispatch => {
+export const fetchPosts = () => async dispatch => {
     const response = await jsonPlaceholder.get('/posts')
     dispatch({ type: FETCH_POSTS, payload: response.data })
-})
+}
 
 export const fetchUser = id => dispatch => _fetchUser(id, dispatch)
-
 const _fetchUser = _.memoize(async(id, dispatch) => {
     const response = await jsonPlaceholder.get(`/users/${id}`)
     dispatch({ type: FETCH_USER, payload: response.data })

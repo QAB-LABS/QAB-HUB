@@ -14,8 +14,7 @@ function MainNavbar(props) {
     <nav className="App-header">
       <div className="ui secondary pointing menu">
         <NavLink className="item" to="/" exact>Home</NavLink>
-        <NavLink className="item" to="/countries">Countries</NavLink>
-        <NavLink className="item" to="/add-country">Add country</NavLink>
+        <NavLink className="item" to="/games">Games</NavLink>
 
         <div className="right menu">
           {!api.isLoggedIn() && <NavLink to="/signup">Signup</NavLink>}

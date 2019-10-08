@@ -1,23 +1,37 @@
-import React, { useState, useEffect } from 'react'
-import api from '../../apis/backend'
+import React from 'react';
+import UserHeader from './UserHeader'
+import { connect } from 'react-redux'
+import { fetchPostsAndUsers } from '../actions'
 
-export default function Secret() {
-  const [state, setState] = useState({ secret: null, message: null })
+class UserProfile extends React.Component {
+  componentDidMount() {
+    this.props.fetchPostsAndUsers()
+  }
 
-  useEffect(() => {
-    console.log('Boom!')
-    api
-      .getSecret()
-      .then(data => setState({ secret: data.secret }))
-      .catch(err => setState({ message: err.toString() }))
-  }, [])
-  return (
-    <div className="Secret">
-      <h2>Secret</h2>
+  renderList() {
+    return this.props.posts.map(post => {
+      return (
+        <div className="item" key={post.id}>
+          <i className="large middle aligned icon user" />
+          <div className="content">
+            <div className="description">
+              <h2>{post.title}</h2>
+              <p>{post.body}</p>
+            </div>
+            <UserHeader userId={post.userId} />
+          </div>
+        </div>
+      )
+    })
+  }
 
-      <div className="result">{state.secret}</div>
-
-      {state.message && <div className="info info-danger">{state.message}</div>}
-    </div>
-  )
+  render() {
+    return <div className="ui relaxed divided list"> {this.renderList()} </div>
+  }
 }
+
+const mapStateToProps = (state) => {
+  return { posts: state.posts }
+}
+
+export default connect(mapStateToProps, { fetchPostsAndUsers })(UserProfile);

@@ -24,7 +24,6 @@ function MainNavbar(props) {
           Logout
         </Link>
       )}
-      <NavLink to="/secret">Secret</NavLink>
     </nav>
   )
 }

@@ -4,7 +4,6 @@ import MainNavbar from './MainNavbar'
 import Home from './pages/Home'
 import Countries from './pages/Countries'
 import AddCountry from './pages/AddCountry'
-import Secret from './pages/Secret'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
 
@@ -18,7 +17,6 @@ export default function App() {
         <Route path="/add-country" component={AddCountry} />
         <Route path="/signup" component={Signup} />
         <Route path="/login" component={Login} />
-        <Route path="/secret" component={Secret} />
         <Route render={() => <h2>404</h2>} />
       </Switch>
     </div>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import api from '../../api'
+import api from '../../apis/backend'
 
 export default function AddCountry(props) {
   const [state, setState] = useState({

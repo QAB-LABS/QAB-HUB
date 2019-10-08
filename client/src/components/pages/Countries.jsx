@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import api from '../../api'
+import api from '../../apis/backend'
 
 export default function Countries() {
   const [countries, setCountries] = useState([])

@@ -1,32 +1,37 @@
 import React from 'react'
-import api from '../api'
-import logo from '../logo.svg'
-import { Link, NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { withRouter } from 'react-router'
+import { connect } from 'react-redux'
+import GoogleAuth from './GoogleAuth'
+import api from '../apis/backend'
 
-function MainNavbar(props) {
-  function handleLogoutClick(e) {
+class MainNavbar extends React.Component {
+  handleLogoutClick = () => {
     api.logout()
   }
-  return (
-    <nav className="App-header">
-      <img src={logo} className="App-logo" alt="logo" />
-      <h1 className="App-title">MERN Boilerplate</h1>
-      <NavLink to="/" exact>
-        Home
-      </NavLink>
-      <NavLink to="/countries">Countries</NavLink>
-      <NavLink to="/add-country">Add country</NavLink>
-      {!api.isLoggedIn() && <NavLink to="/signup">Signup</NavLink>}
-      {!api.isLoggedIn() && <NavLink to="/login">Login</NavLink>}
-      {api.isLoggedIn() && (
-        <Link to="/" onClick={handleLogoutClick}>
-          Logout
-        </Link>
-      )}
-      <NavLink to="/secret">Secret</NavLink>
-    </nav>
-  )
+
+  render() {
+    return (
+      <nav className="App-header" >
+        <div className="ui secondary pointing menu">
+          <NavLink className="item" to="/" exact>Home</NavLink>
+          <NavLink className="item" to="/games">Games</NavLink>
+
+          <div className="right menu">
+            <NavLink to="/profile">Profile</NavLink>
+            {!api.isLoggedIn() && <NavLink to="/signup">Signup</NavLink>}
+            {!api.isLoggedIn() && <NavLink to="/login">Login</NavLink>}
+            {api.isLoggedIn() && <NavLink to="/" onClick={this.handleLogoutClick}>Logout</NavLink>}
+            <GoogleAuth />
+          </div>
+        </div>
+      </nav>
+    )
+  }
 }
 
-export default withRouter(MainNavbar)
+const mapStateToProps = state => {
+  return { currentUserId: state.auth.userId }
+}
+
+export default connect(mapStateToProps, {})(withRouter(MainNavbar))

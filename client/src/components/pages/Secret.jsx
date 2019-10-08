@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import api from '../../api'
+import api from '../../apis/backend'
 
 export default function Secret() {
   const [state, setState] = useState({ secret: null, message: null })

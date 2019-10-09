@@ -2,8 +2,7 @@ import axios from 'axios'
 
 const service = axios.create({
     baseURL: process.env.NODE_ENV === 'production' ?
-        '/api' :
-        `http://${window.location.hostname}:5000/api`,
+        '/api' : `http://${window.location.hostname}:5000/api`,
 
     withCredentials: true,
 })
@@ -79,9 +78,9 @@ export default {
             .catch(errHandler)
     },
 
-    getSecret() {
+    getGames() {
         return service
-            .get('/secret')
+            .get('/games')
             .then(res => res.data)
             .catch(errHandler)
     },

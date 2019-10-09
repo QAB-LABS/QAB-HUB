@@ -1,11 +1,10 @@
-import React from 'react';
-import UserCard from '../UserCard'
-import GamesList from '../GamesList'
+import React from 'react'
+import UserCard from '../UserCard/UserCard'
+import GamesList from '../GamesList/GamesList'
 import { connect } from 'react-redux'
 
 class UserProfile extends React.Component {
-  componentDidMount() {
-  }
+  componentDidMount() {}
 
   render() {
     return (
@@ -21,4 +20,7 @@ const mapStateToProps = state => {
   return { currentUserId: state.auth.userId }
 }
 
-export default connect(mapStateToProps, {})(UserProfile);
+export default connect(
+  mapStateToProps,
+  {}
+)(UserProfile)

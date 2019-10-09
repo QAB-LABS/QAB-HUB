@@ -1,4 +1,14 @@
 {
   "editor.tabSize": 2,
-  "editor.formatOnSave": true
+  "editor.formatOnSave": true,
+  "cSpell.ignoreWords": [
+    "a",
+    "bnv",
+    "gph",
+    "ip",
+    "mhprj",
+    "o",
+    "ut",
+    "vr"
+  ]
 }

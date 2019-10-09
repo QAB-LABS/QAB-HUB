@@ -41,7 +41,7 @@ router.post('/', (req, res, next) => {
         title: req.body.title,
         content: req.body.content,
         author: req.user._id,
-        game: req.game._id
+        game: req.body.game._id
     }
 
     Review.create(reviewData)

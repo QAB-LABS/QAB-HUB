@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const gameSchema = new mongoose.Schema({
+const reviewSchema = new mongoose.Schema({
     title: String,
     content: String,
     game: { type: mongoose.Schema.Types.ObjectId, ref: "BoardGame" },
@@ -12,6 +12,6 @@ const gameSchema = new mongoose.Schema({
     }
 })
 
-const Game = mongoose.model('Game', gameSchema)
+const Review = mongoose.model('Review', reviewSchema)
 
-module.exports = Game
+module.exports = Review

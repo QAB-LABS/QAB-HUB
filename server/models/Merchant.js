@@ -2,9 +2,21 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const merchantSchema = new Schema({
-  url: String,
-  name: String,
-  country: String,
+  url: {
+    type: String,
+    validate(value) {
+      if (!validator.isURL(value)) throw new Error("url is invalid")
+    },
+    required: true,
+  },
+  name: {
+    type: String,
+    required: true
+  },
+  country: {
+    type: String,
+    required: true
+  },
 }, {
   timestamps: {
     createdAt: 'created_at',

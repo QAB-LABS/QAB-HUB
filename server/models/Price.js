@@ -6,14 +6,14 @@ const priceSchema = new Schema({
   game: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Game",
-    require: true,
+    required: true,
   },
   merchant: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Merchant",
     required: true,
   },
-  price_text: {
+  price: {
     type: String,
     required: true,
   },

@@ -13,8 +13,8 @@ const gameSchema = new mongoose.Schema({
     max_playtime: Number,
     min_age: Number,
     mechanics: [String],
-    designer: [String],
-    artist: [String],
+    designers: [String],
+    artists: [String],
     publisher: String,
     family: String,
     categories: [{

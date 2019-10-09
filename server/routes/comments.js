@@ -1,7 +1,6 @@
 const express = require('express')
-const { isLoggedIn } = require('../../middleware/auth')
-const uploadCloud = require('../../configs/cloudinary')
-const Comment = require('../../models/Comment')
+const { isLoggedIn } = require('../middlewares')
+const Comment = require('../models/Comment')
 const router = express.Router()
 
 /** 
@@ -37,7 +36,7 @@ router.get('/', async(req, res, next) => {
  * Create a comment
  * @example POST /api/comments
  */
-router.comment('/', (req, res, next) => {
+router.post('/', (req, res, next) => {
     commentData = {
         content: req.body.content,
         author: req.user._id,

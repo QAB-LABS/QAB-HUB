@@ -3,8 +3,8 @@ const mongoose = require('mongoose')
 const gameSchema = new mongoose.Schema({
     title: String,
     content: String,
-    game: { type: Mongoose.Schema.types.ObjectID, ref: "BoardGame" },
-    author: { type: Mongoose.Schema.types.ObjectID, ref: "User" },
+    game: { type: mongoose.Schema.Types.ObjectId, ref: "BoardGame" },
+    author: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
 }, {
     timestamps: {
         createdAt: 'created_at',

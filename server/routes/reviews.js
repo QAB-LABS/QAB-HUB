@@ -1,7 +1,6 @@
 const express = require('express')
-const { isLoggedIn } = require('../../middleware/auth')
-const uploadCloud = require('../../configs/cloudinary')
-const Review = require('../../models/Review')
+const { isLoggedIn } = require('../middlewares')
+const Review = require('../models/Review')
 const router = express.Router()
 
 /** 
@@ -37,16 +36,12 @@ router.get('/', async(req, res, next) => {
  * Create a review
  * @example POST /api/reviews
  */
-router.review('/', uploadCloud.single('image'), (req, res, next) => {
+router.post('/', (req, res, next) => {
     reviewData = {
         title: req.body.title,
         content: req.body.content,
         author: req.user._id,
         game: req.game._id
-    }
-
-    if (req.file) {
-        reviewData.image = req.file.url
     }
 
     Review.create(reviewData)

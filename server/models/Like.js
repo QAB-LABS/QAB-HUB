@@ -3,11 +3,11 @@ const Schema = mongoose.Schema
 
 const likeSchema = new Schema({
     user: {
-        type: mongoose.Schema.types.ObjectID,
+        type: mongoose.Schema.Types.ObjectId,
         ref: "User"
     },
     game: {
-        type: mongoose.Schema.types.ObjectID,
+        type: mongoose.Schema.Types.ObjectId,
         ref: "BoardGame"
     }
 }, {

@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const Schema = mongoose.Schema
 
 const gameSchema = new mongoose.Schema({
     name: String,
@@ -16,13 +17,10 @@ const gameSchema = new mongoose.Schema({
     artist: [String],
     publisher: String,
     family: String,
-    categories: {
-        type: [{
-            type: Schema.Types.ObjectID,
-            ref: "Category"
-        }],
-        default: []
-    }
+    categories: [{
+        type: Schema.Types.ObjectId,
+        ref: "Category"
+    }]
 })
 
 gameSchema.virtual('likes', {

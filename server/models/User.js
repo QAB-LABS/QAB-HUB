@@ -1,6 +1,17 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
-const pointSchema = require('./Point')
+
+const pointSchema = new mongoose.Schema({
+    type: {
+        type: String,
+        default: 'Point'
+    },
+    coordinates: {
+        type: [Number],
+        index: '2dsphere',
+        default: [25.766111, -80.196183]
+    }
+});
 
 const userSchema = new Schema({
     username: {
@@ -32,20 +43,14 @@ const userSchema = new Schema({
         enum: ['admin', 'user', 'moderator', 'guest']
     },
     likes: [{
-        type: Schema.types.ObjectID,
+        type: Schema.Types.ObjectId,
         ref: "BoardGame"
-    }],
-    reviews: [{
-        type: Schema.types.ObjectID,
-        ref: "Review"
     }],
     wishlist: [{
-        type: Schema.types.ObjectID,
+        type: Schema.Types.ObjectId,
         ref: "BoardGame"
     }],
-    location: {
-        type: pointSchema,
-    },
+    location: pointSchema,
 }, {
     timestamps: {
         createdAt: 'created_at',

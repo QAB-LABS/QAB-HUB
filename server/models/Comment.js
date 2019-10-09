@@ -9,7 +9,8 @@ const commentSchema = new Schema({
     },
     post: {
         type: Schema.Types.ObjectID,
-        ref: 'Post'
+        ref: 'Post',
+        required: true
     },
     author: {
         type: Schema.Types.ObjectID,

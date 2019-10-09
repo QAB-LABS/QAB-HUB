@@ -12,12 +12,28 @@ const gameSchema = new mongoose.Schema({
     max_playtime: Number,
     min_age: Number,
     mechanics: [String],
-    categories: [String],
     designer: [String],
     artist: [String],
     publisher: String,
     family: String,
+    categories: {
+        type: [{
+            type: Schema.Types.ObjectID,
+            ref: "Category"
+        }],
+        default: []
+    }
 })
+
+gameSchema.virtual('likes', {
+    ref: 'Like',
+    localField: '_id',
+    foreignField: 'game',
+    justOne: false
+})
+
+gameSchema.set('toObject', { virtuals: true })
+gameSchema.set('toJSON', { virtuals: true })
 
 const Game = mongoose.model('Game', gameSchema)
 

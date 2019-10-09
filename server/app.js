@@ -14,11 +14,9 @@ const MongoStore = require('connect-mongo')(session)
 require('./configs/database')
 
 const app_name = require('./package.json').name
-
 const app = express()
 
 app.use(nocache())
-
 app.use(
     cors({
         origin: (origin, cb) => {
@@ -37,7 +35,7 @@ app.use(express.static(path.join(__dirname, '../client/build')))
 
 app.use(
     session({
-        secret: process.env.SESSION_SECRET || 'irongenerator',
+        secret: process.env.SESSION_SECRET || 'default-secret-not-secure',
         resave: true,
         saveUninitialized: true,
         store: new MongoStore({ mongooseConnection: mongoose.connection }),
@@ -45,8 +43,9 @@ app.use(
 )
 require('./passport')(app)
 
-app.use('/api', require('./routes/index'))
 app.use('/api', require('./routes/auth'))
+app.use('/api/posts', require('./routes/posts'))
+app.use('/api/comments', require('./routes/comments'))
 app.use('/api/games', require('./routes/games'))
 
 app.use('/api/*', (req, res, next) => {
@@ -55,22 +54,12 @@ app.use('/api/*', (req, res, next) => {
     next(err)
 })
 
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/build/index.html'))
-})
-
 app.use((err, req, res, next) => {
-    console.error('----- An error happened -----')
     console.error(err)
-
-    // only render if the error ocurred before sending the response
     if (!res.headersSent) {
         res.status(err.status || 500)
-
-        // A limited amount of information sent in production
         if (process.env.NODE_ENV === 'production') res.json(err)
-        else
-            res.json(JSON.parse(JSON.stringify(err, Object.getOwnPropertyNames(err))))
+        else res.json(JSON.parse(JSON.stringify(err, Object.getOwnPropertyNames(err))))
     }
 })
 

@@ -57,6 +57,8 @@ router.post('/', (req, res, next) => {
 router.get('/:id', async(req, res, next) => {
     try {
         const review = await Review.findById(req.params.id)
+            .populate('author')
+            .populate('game')
         if (!review) throw new Error()
         res.send(review)
     } catch (e) {

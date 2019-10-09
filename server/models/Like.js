@@ -8,7 +8,7 @@ const likeSchema = new Schema({
     },
     game: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "BoardGame"
+        ref: "Game"
     }
 }, {
     timestamps: {

@@ -58,6 +58,7 @@ router.post('/', uploadCloud.single('image'), (req, res, next) => {
 router.get('/:id', async(req, res, next) => {
     try {
         const post = await Post.findById(req.params.id)
+            .populate('author')
         if (!post) throw new Error()
         res.send(post)
     } catch (e) {

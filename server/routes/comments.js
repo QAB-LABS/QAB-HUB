@@ -56,6 +56,8 @@ router.post('/', (req, res, next) => {
 router.get('/:id', async(req, res, next) => {
     try {
         const comment = await Comment.findById(req.params.id)
+            .populate('author')
+            .populate('post')
         if (!comment) throw new Error()
         res.send(comment)
     } catch (e) {

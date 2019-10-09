@@ -44,11 +44,11 @@ const userSchema = new Schema({
     },
     likes: [{
         type: Schema.Types.ObjectId,
-        ref: "BoardGame"
+        ref: "Game"
     }],
     wishlist: [{
         type: Schema.Types.ObjectId,
-        ref: "BoardGame"
+        ref: "Game"
     }],
     location: pointSchema,
 }, {

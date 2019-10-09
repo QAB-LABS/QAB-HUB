@@ -59,8 +59,7 @@ router.post('/', isLoggedIn, (req, res, next) => {
 router.get('/:id', async (req, res, next) => {
   try {
     const price = await Price.findById(req.params.id)
-      .populate('game')
-      .populate('merchant')
+      .populate('game merchant')
     if (!price) throw new Error()
     res.send(price)
   } catch (e) {

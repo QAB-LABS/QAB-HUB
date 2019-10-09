@@ -4,7 +4,7 @@ class GameDetails extends React.Component {
   render() {
     const { game } = this.props
     return (
-      <div>{game}</div>
+      <div>{game.name}</div>
     )
   }
 }

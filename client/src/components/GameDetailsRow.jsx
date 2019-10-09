@@ -4,7 +4,7 @@ class GameDetailsRow extends React.Component {
   render() {
     const { game } = this.props
     return (
-      <div>{game.title}</div>
+      <div>{game.name}</div>
     )
   }
 }

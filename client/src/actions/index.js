@@ -1,5 +1,7 @@
 import _ from 'lodash'
 import jsonPlaceholder from '../apis/jsonPlaceholder'
+import api from '../apis/backend'
+
 import { SIGN_IN, SIGN_OUT, FETCH_GAMES, FETCH_POSTS, FETCH_USER } from './types'
 
 export const signIn = userId => {
@@ -25,8 +27,8 @@ export const fetchPostsAndUsers = () => async(dispatch, getState) => {
 }
 
 export const fetchGames = () => async dispatch => {
-    const response = await jsonPlaceholder.get('/posts')
-    dispatch({ type: FETCH_GAMES, payload: response.data })
+    const response = await api.getGames()
+    dispatch({ type: FETCH_GAMES, payload: response })
 }
 
 export const fetchPosts = () => async dispatch => {

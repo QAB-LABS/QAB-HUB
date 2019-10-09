@@ -44,6 +44,7 @@ app.use(
 require('./passport')(app)
 
 app.use('/api', require('./routes/auth'))
+app.use('/api/reviews', require('./routes/reviews'))
 app.use('/api/posts', require('./routes/posts'))
 app.use('/api/comments', require('./routes/comments'))
 app.use('/api/games', require('./routes/games'))

@@ -24,7 +24,11 @@ const priceSchema = new Schema({
     validate(value) {
       if (!validator.isURL(value)) throw new Error("url is invalid")
     }
-  }
+  },
+  timestamps: {
+    createdAt: 'created_at',
+    updatedAt: 'updated_at',
+  },
 })
 
 const Price = mongoose.model('Price', priceSchema)

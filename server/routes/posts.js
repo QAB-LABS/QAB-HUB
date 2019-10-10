@@ -49,6 +49,9 @@ router.post('/', uploadCloud.single('image'), (req, res, next) => {
         .then((post) => {
             res.json(post)
         })
+        .catch(err => {
+            res.status(404).send(err)
+        })
 })
 
 /**

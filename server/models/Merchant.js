@@ -1,6 +1,8 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const validator = require("validator");
+const Price = require('../models/Price');
+
 
 const merchantSchema = new Schema({
   url: {
@@ -36,6 +38,13 @@ merchantSchema.virtual('prices', {
 
 merchantSchema.set('toObject', { virtuals: true })
 merchantSchema.set('toJSON', { virtuals: true })
+
+
+merchantSchema.pre('remove', async function (next) {
+  await Price.deleteMany({ merchant: this._id })
+  next()
+})
+
 
 const Merchant = mongoose.model('Merchant', merchantSchema)
 module.exports = Merchant

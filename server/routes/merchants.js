@@ -78,14 +78,7 @@ router.delete('/:id', isLoggedIn, async (req, res) => {
     const merchant = await Merchant.findById(req.params.id)
     if (!merchant) throw new Error()
     if (req.user.role !== "admin") res.status(403).send('You do not have permission to delete this resource.')
-    Price.deleteMany({ merchant: merchant._id })
-      .then(
-        await merchant.remove()
-      )
-      .catch(err => {
-        console.log(err)
-        res.status(404).send(e)
-      })
+    await merchant.remove()
     res.status(202).send(merchant)
   } catch (e) {
     res.status(404).send(e)

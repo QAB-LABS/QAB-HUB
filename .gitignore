@@ -14,7 +14,7 @@ yarn-error.log*
 
 /client/build
 
-.vscode
+.vscode/
 
 # Temp
 client-old

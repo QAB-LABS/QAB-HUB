@@ -88,11 +88,11 @@ async function createDBEntries() {
             artists: [faker.name.findName()],
             publisher: faker.company.companyName(),
             family: faker.commerce.productAdjective(),
-            categories: [String(databaseEntries.categories[Math.floor(databaseEntries.categories.length * Math.random())]._id)],
+            categories: Array.from({ length: Math.floor(Math.random() * 5) }).map(e => getRandomElement(databaseEntries.categories)._id),
         }
     }))
 
-    await submitDocuments('reviews', Review, Array.from({ length: 500 }).map((e, i) => {
+    await submitDocuments('reviews', Review, Array.from({ length: 500 }).map(e => {
         return {
             title: faker.lorem.sentence(),
             content: faker.lorem.paragraph(),
@@ -101,14 +101,14 @@ async function createDBEntries() {
         }
     }))
 
-    await submitDocuments('likes', Like, Array.from({ length: 2000 }).map((e, i) => {
+    await submitDocuments('likes', Like, Array.from({ length: 2000 }).map(e => {
         return {
             game: getRandomElement(databaseEntries.games)._id,
             user: getRandomElement(databaseEntries.users)._id
         }
     }))
 
-    await submitDocuments('merchants', Merchant, Array.from({ length: 75 }).map((e, i) => {
+    await submitDocuments('merchants', Merchant, Array.from({ length: 75 }).map(e => {
         return {
             name: faker.commerce.price(1, 1000, 2, ''),
             url: faker.internet.url(),
@@ -116,7 +116,7 @@ async function createDBEntries() {
         }
     }))
 
-    await submitDocuments('prices', Price, Array.from({ length: 1000 }).map((e, i) => {
+    await submitDocuments('prices', Price, Array.from({ length: 1000 }).map(e => {
         return {
             price: faker.commerce.price(1, 1000, 2, ''),
             url: faker.internet.url() + faker.internet.domainWord(),

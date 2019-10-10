@@ -3,13 +3,14 @@ const mongoose = require('mongoose')
 // Don't forget to set "MONGODB_URI" in ~/server/.env
 const uri = process.env.MONGODB_URI || `mongodb://localhost/please-set-process-env-mongodb-uri`
 
-mongoose.connect(uri, {
+module.export = mongoose.connect(uri, {
         useUnifiedTopology: true,
         useNewUrlParser: true,
         useCreateIndex: true
     })
     .then(x => {
         console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
+        return x
     })
     .catch(err => {
         console.error('Error connecting to mongo', err)

@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const validator = require('validator')
 const Schema = mongoose.Schema
 
 const pointSchema = new mongoose.Schema({

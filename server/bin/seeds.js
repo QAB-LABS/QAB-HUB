@@ -1,43 +1,81 @@
 const path = require('path')
 require('dotenv').config({ path: path.join(__dirname, '../.env') })
 
-// Seeds file that remove all users and create 2 new users
-
-// To execute this seed, run from the root of the project
-// $ node bin/seeds.js
-
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
-const User = require('../models/User')
-
-const bcryptSalt = 10
-
+const faker = require('faker');
 require('../configs/database')
 
-let users = [
-  {
-    username: 'alice',
-    password: bcrypt.hashSync('alice', bcrypt.genSaltSync(bcryptSalt)),
-  },
-  {
-    username: 'bob',
-    password: bcrypt.hashSync('bob', bcrypt.genSaltSync(bcryptSalt)),
-  },
-]
+const User = require('../models/User')
+const Post = require('../models/Post')
+const Comment = require('../models/Comment')
+const Review = require('../models/Review')
+const Category = require('../models/Category')
+const Like = require('../models/Like')
 
-User.deleteMany()
-  .then(() => {
-    return User.create(users)
-  })
-  .then(usersCreated => {
-    console.log(`${usersCreated.length} users created with the following id:`)
-    console.log(usersCreated.map(u => u._id))
-  })
-  .then(() => {
-    // Close properly the connection to Mongoose
-    mongoose.disconnect()
-  })
-  .catch(err => {
-    mongoose.disconnect()
-    throw err
-  })
+
+faker.seed(123);
+const bcryptSalt = 10
+var databaseEntries = {
+    users: [],
+    posts: [],
+    comments: [],
+    reviews: [],
+    games: [],
+    categories: [],
+    merchants: [],
+}
+
+async function seed() {
+    var usersJSONData = Array.from({ length: 10 }).map(e => {
+        return {
+            username: faker.name.findName(),
+            password: bcrypt.hashSync(faker.internet.password(), bcrypt.genSaltSync(bcryptSalt)),
+            email: faker.internet.email()
+        }
+    })
+
+    const userPromise = await User.deleteMany()
+        .then(() => {
+            return User.create(usersJSONData)
+        })
+        .then(usersCreated => {
+            console.log(`${usersCreated.length} users created with the following id:`)
+            console.log(usersCreated.map(u => u._id))
+            databaseEntries.users = usersCreated
+        })
+
+
+    var postsJSONData = Array.from({ length: 100 }).map((e, i) => {
+        return {
+            title: faker.lorem.sentence(),
+            content: faker.lorem.paragraph(),
+            author: databaseEntries.users[i % 10]._id
+        }
+    })
+
+    const postPromise = await Post.deleteMany()
+        .then(() => {
+            return Post.create(postsJSONData)
+        })
+        .then(postsCreated => {
+            console.log(`${postsCreated.length} posts created with the following id:`)
+            console.log(postsCreated.map(u => u._id))
+            databaseEntries.posts = postsCreated
+        })
+
+    const commentPromise = await Comment.deleteMany()
+
+    const reviewPromise = await Review.deleteMany()
+
+    const categoryPromise = await Category.deleteMany()
+
+    const likePromise = await Like.deleteMany()
+
+    return [userPromise, postPromise, commentPromise, reviewPromise, categoryPromise, likePromise]
+}
+
+Promise.all(seed())
+    .then(() => {
+        mongoose.disconnect()
+    })

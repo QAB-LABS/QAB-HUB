@@ -25,6 +25,7 @@ const priceSchema = new Schema({
       if (!validator.isURL(value)) throw new Error("url is invalid")
     }
   },
+}, {
   timestamps: {
     createdAt: 'created_at',
     updatedAt: 'updated_at',

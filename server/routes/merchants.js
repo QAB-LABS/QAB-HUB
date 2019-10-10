@@ -35,14 +35,14 @@ router.get('/', async (req, res, next) => {
  * @example 
  * POST /api/merchants
  */
-router.post('/', (req, res, next) => {
+router.post('/', isLoggedIn, (req, res, next) => {
   postData = {
     url: req.body.url,
     name: req.body.name,
     country: req.body.country,
   }
 
-  // if (req.user.role !== "admin") res.status(403).send('You do not have permission to add a new merchant.')
+  if (req.user.role !== "admin") res.status(403).send('You do not have permission to add a new merchant.')
 
   Merchant.create(postData)
     .then((merchant) => {
@@ -73,11 +73,11 @@ router.get('/:id', async (req, res, next) => {
  * @example 
  * DELETE /api/merchants/:id
  */
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', isLoggedIn, async (req, res) => {
   try {
     const merchant = await Merchant.findById(req.params.id)
     if (!merchant) throw new Error()
-    // if (req.user.role !== "admin") res.status(403).send('You do not have permission to delete this resource.')
+    if (req.user.role !== "admin") res.status(403).send('You do not have permission to delete this resource.')
     Price.deleteMany({ merchant: merchant._id })
       .then(
         await merchant.remove()
@@ -97,8 +97,8 @@ router.delete('/:id', async (req, res) => {
  * @example 
  * POST /api/merchants/:id
  */
-router.patch(`/:id`, async (req, res) => {
-  // if (req.user.role !== "admin") res.status(403).send('You do not have permission to update this resource.')
+router.patch(`/:id`, isLoggedIn, async (req, res) => {
+  if (req.user.role !== "admin") res.status(403).send('You do not have permission to update this resource.')
 
   const updates = Object.keys(req.body)
   const allowedUpdates = ['url', 'name', 'country']

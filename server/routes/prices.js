@@ -74,7 +74,7 @@ router.get('/:id', async (req, res, next) => {
  */
 router.delete('/:id', async (req, res) => {
   try {
-    const price = await price.findById(req.params.id)
+    const price = await Price.findById(req.params.id)
     if (!price) throw new Error()
     if (req.user.role !== "admin") res.status(403).send('You do not have permission to delete this resource.')
     await price.remove()

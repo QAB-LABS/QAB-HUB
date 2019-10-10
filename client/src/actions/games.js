@@ -1,9 +1,13 @@
 import * as types from './types'
 import api from '../apis/backend'
-import _ from 'lodash'
 
-export const fetchGames = id => dispatch => _fetchGames(id, dispatch)
-const _fetchGames = _.memoize(async dispatch => {
-    const response = await api.getGames()
-    dispatch({ type: types.FETCH_GAMES, payload: response.data })
-})
+export const getGames = () => {
+    return async dispatch => {
+        try {
+            const response = await api.getGames()
+            return dispatch({ type: types.FETCH_GAMES, payload: response });
+        } catch (error) {
+            return dispatch({ type: types.ERROR, error });
+        }
+    }
+}

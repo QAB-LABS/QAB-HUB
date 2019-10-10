@@ -1,20 +1,20 @@
 import * as types from './types'
 import api from '../apis/backend'
 import _ from 'lodash'
-import fetchPosts from './posts'
+import getPosts from './posts'
 
-export const fetchUser = id => dispatch => _fetchUser(id, dispatch)
-const _fetchUser = _.memoize(async(id, dispatch) => {
+export const getUser = id => dispatch => _getUser(id, dispatch)
+const _getUser = _.memoize(async(id, dispatch) => {
     const response = await api.getUser(`/users/${id}`)
     dispatch({ type: types.FETCH_USER, payload: response.data })
 })
 
 
-export const fetchPostsAndUsers = () => async(dispatch, getState) => {
-    await dispatch(fetchPosts())
+export const getPostsAndUsers = () => async(dispatch, getState) => {
+    await dispatch(getPosts())
     _.chain(getState().posts)
         .map('userId')
         .uniq()
-        .forEach(id => dispatch(fetchUser(id)))
+        .forEach(id => dispatch(getUser(id)))
         .value();
 }

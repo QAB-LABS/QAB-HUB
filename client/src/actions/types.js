@@ -48,3 +48,5 @@ export const DELETE_PRICE = 'DELETE_PRICE';
 
 export const SIGN_IN = 'SIGN_IN';
 export const SIGN_OUT = 'SIGN_OUT';
+
+export const ERROR = 'ERROR'

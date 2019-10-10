@@ -1,11 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import GameDetailsRow from '../GameDetailsRow/GameDetailsRow'
-import { fetchGames } from '../../actions/index'
+import { getGames } from '../../actions/games'
 
 class GameList extends React.Component {
   componentDidMount() {
-    this.props.fetchGames()
+    this.props.getGames()
   }
 
   renderGames() {
@@ -28,5 +28,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { fetchGames }
+  { getGames }
 )(GameList)

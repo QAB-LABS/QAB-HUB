@@ -1,0 +1,57 @@
+.container {
+  width: 100%;
+}
+
+.row {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.col-1 {
+  width: percentage($columnWidth);
+}
+
+.col-2 {
+  width: percentage($columnWidth * 2);
+}
+
+.col-3 {
+  width: percentage($columnWidth * 3);
+}
+
+.col-4 {
+  width: percentage($columnWidth * 4);
+}
+
+.col-5 {
+  width: percentage($columnWidth * 5);
+}
+
+.col-6 {
+  width: percentage($columnWidth * 6);
+}
+
+.col-7 {
+  width: percentage($columnWidth * 7);
+}
+
+.col-8 {
+  width: percentage($columnWidth * 8);
+}
+
+.col-9 {
+  width: percentage($columnWidth * 9);
+}
+
+.col-10 {
+  width: percentage($columnWidth * 10);
+}
+
+.col-11 {
+  width: percentage($columnWidth * 11);
+}
+
+.col-12 {
+  width: percentage($columnWidth * 12);
+}

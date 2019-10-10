@@ -29,23 +29,23 @@ export default {
             .catch(errHandler)
     },
 
-    getGame(body) {
+    getGame(id) {
         return service
-            .get(`/${body.id}`)
+            .get(`/${id}`)
             .then(res => res.data)
             .catch(errHandler)
     },
 
-    updateGame(body) {
+    updateGame(id, body) {
         return service
-            .patch(`/${body.id}`, body)
+            .patch(`/${id}`, body)
             .then(res => res.data)
             .catch(errHandler)
     },
 
-    deleteGame(body) {
+    deleteGame(id, body) {
         return service
-            .patch(`/${body.id}`, body)
+            .patch(`/${id}`, body)
             .then(res => res.data)
             .catch(errHandler)
     },

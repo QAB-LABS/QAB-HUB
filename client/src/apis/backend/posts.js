@@ -29,23 +29,23 @@ export default {
             .catch(errHandler)
     },
 
-    getPost(body) {
+    getPost(id, body) {
         return service
-            .get(`/${body.id}`)
+            .get(`/${id}`)
             .then(res => res.data)
             .catch(errHandler)
     },
 
-    updatePost(body) {
+    updatePost(id, body) {
         return service
-            .patch(`/${body.id}`, body)
+            .patch(`/${id}`, body)
             .then(res => res.data)
             .catch(errHandler)
     },
 
-    deletePost(body) {
+    deletePost(id, body) {
         return service
-            .patch(`/${body.id}`, body)
+            .patch(`/${id}`, body)
             .then(res => res.data)
             .catch(errHandler)
     },

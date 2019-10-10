@@ -29,23 +29,23 @@ export default {
             .catch(errHandler)
     },
 
-    getMerchant(body) {
+    getMerchant(id) {
         return service
-            .get(`/${body.id}`)
+            .get(`/${id}`)
             .then(res => res.data)
             .catch(errHandler)
     },
 
-    updateMerchant(body) {
+    updateMerchant(id, body) {
         return service
-            .patch(`/${body.id}`, body)
+            .patch(`/${id}`, body)
             .then(res => res.data)
             .catch(errHandler)
     },
 
-    deleteMerchant(body) {
+    deleteMerchant(id, body) {
         return service
-            .patch(`/${body.id}`, body)
+            .patch(`/${id}`, body)
             .then(res => res.data)
             .catch(errHandler)
     },

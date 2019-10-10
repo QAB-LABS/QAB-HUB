@@ -43,10 +43,6 @@ const userSchema = new Schema({
         type: String,
         enum: ['admin', 'user', 'moderator', 'guest']
     },
-    likes: [{
-        type: Schema.Types.ObjectId,
-        ref: "Game"
-    }],
     wishlist: [{
         type: Schema.Types.ObjectId,
         ref: "Game"
@@ -70,6 +66,13 @@ userSchema.virtual('chats', {
     ref: 'Chat',
     localField: '_id',
     foreignField: 'users',
+    justOne: false
+})
+
+userSchema.virtual('likes', {
+    ref: 'Like',
+    localField: '_id',
+    foreignField: 'user',
     justOne: false
 })
 

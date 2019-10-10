@@ -9,6 +9,9 @@ require('../configs/database')
 const User = require('../models/User')
 const Post = require('../models/Post')
 const Comment = require('../models/Comment')
+const Game = require('../models/Game')
+const Merchant = require('../models/Merchant')
+const Price = require('../models/Price')
 const Review = require('../models/Review')
 const Category = require('../models/Category')
 const Like = require('../models/Like')
@@ -26,48 +29,101 @@ var databaseEntries = {
     merchants: [],
 }
 
+const getRandomElement = (arr) => {
+    return arr[Math.floor(Math.random() * arr.length)]
+}
+
+async function submitDocuments(name, model, jsonData) {
+    try {
+        await model.deleteMany()
+        const documents = await model.create(jsonData)
+        console.log(`${documents.length} ${name} created.`)
+        databaseEntries[name] = documents
+    } catch (err) {
+        console.log(`Could not populate documents for ${name}: ${err.name} - ${err._message}`, err)
+    }
+}
+
 async function createDBEntries() {
-    var usersJSONData = Array.from({ length: 10 }).map(e => {
+    await submitDocuments('users', User, Array.from({ length: 10 }).map(e => {
         return {
             username: faker.name.findName(),
             password: bcrypt.hashSync(faker.internet.password(), bcrypt.genSaltSync(bcryptSalt)),
             email: faker.internet.email()
         }
-    })
-    await User.deleteMany()
-    const users = await User.create(usersJSONData)
-    console.log(`${users.length} users created.`)
-    databaseEntries.users = users
+    }))
 
-    var postsJSONData = Array.from({ length: 100 }).map((e, i) => {
+    await submitDocuments('posts', Post, Array.from({ length: 100 }).map((e, i) => {
         return {
             title: faker.lorem.sentence(),
             content: faker.lorem.paragraph(),
-            author: databaseEntries.users[i % 10]._id
+            author: databaseEntries.users[i % databaseEntries.users.length]._id
         }
-    })
-    await Post.deleteMany()
-    const posts = await Post.create(postsJSONData)
-    console.log(`${posts.length} posts created.`)
-    databaseEntries.posts = posts
+    }))
 
-    var commentsJSONData = Array.from({ length: 1000 }).map((e, i) => {
+    await submitDocuments('comments', Comment, Array.from({ length: 1000 }).map((e, i) => {
         return {
             content: faker.lorem.paragraph(),
-            post: databaseEntries.posts[i & 10]._id,
-            author: databaseEntries.users[i % 100]._id
+            post: databaseEntries.posts[i % databaseEntries.posts.length]._id,
+            author: databaseEntries.users[i % databaseEntries.users.length]._id
         }
-    })
-    await Comment.deleteMany()
-    const comments = await Comment.create(commentsJSONData)
-    console.log(`${comments.length} comments created.`)
-    databaseEntries.comments = comments
+    }))
 
-    await Review.deleteMany()
+    await submitDocuments('categories', Category, require('./categories.json'))
 
-    await Category.deleteMany()
+    await submitDocuments('games', Game, Array.from({ length: 100 }).map(e => {
+        return {
+            name: faker.commerce.productName(),
+            description: faker.lorem.sentence(),
+            price: faker.commerce.price(1, 1000, 2, ''),
+            image: faker.image.abstract(),
+            year_published: Number(faker.date.between('1990-01-01', new Date().toISOString().slice(0, 10)).toISOString().slice(0, 4)),
+            min_players: faker.random.number({ min: 1, max: 4 }),
+            max_players: faker.random.number({ min: 4, max: 20 }),
+            min_playtime: faker.random.number({ min: 5, max: 30 }),
+            max_playtime: faker.random.number({ min: 30, max: 180 }),
+            min_age: faker.random.number({ min: 5, max: 60 }),
+            mechanics: [faker.commerce.productMaterial()],
+            designers: [faker.commerce.department()],
+            artists: [faker.name.findName()],
+            publisher: faker.company.companyName(),
+            family: faker.commerce.productAdjective(),
+            categories: [String(databaseEntries.categories[Math.floor(databaseEntries.categories.length * Math.random())]._id)],
+        }
+    }))
 
-    await Like.deleteMany()
+    await submitDocuments('reviews', Review, Array.from({ length: 500 }).map((e, i) => {
+        return {
+            title: faker.lorem.sentence(),
+            content: faker.lorem.paragraph(),
+            game: getRandomElement(databaseEntries.games)._id,
+            author: getRandomElement(databaseEntries.users)._id
+        }
+    }))
+
+    await submitDocuments('likes', Like, Array.from({ length: 2000 }).map((e, i) => {
+        return {
+            game: getRandomElement(databaseEntries.games)._id,
+            user: getRandomElement(databaseEntries.users)._id
+        }
+    }))
+
+    await submitDocuments('merchants', Merchant, Array.from({ length: 75 }).map((e, i) => {
+        return {
+            name: faker.commerce.price(1, 1000, 2, ''),
+            url: faker.internet.url(),
+            country: faker.address.countryCode()
+        }
+    }))
+
+    await submitDocuments('prices', Price, Array.from({ length: 1000 }).map((e, i) => {
+        return {
+            price: faker.commerce.price(1, 1000, 2, ''),
+            url: faker.internet.url() + faker.internet.domainWord(),
+            game: getRandomElement(databaseEntries.games)._id,
+            merchant: getRandomElement(databaseEntries.merchants)._id
+        }
+    }))
 }
 
 async function seed() {

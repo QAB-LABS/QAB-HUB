@@ -34,7 +34,7 @@ router.get('/', async (req, res, next) => {
  * Create a post
  * @example POST /api/posts
  */
-router.post('/', uploadCloud.single('image'), (req, res, next) => {
+router.post('/', isLoggedIn, uploadCloud.single('image'), (req, res, next) => {
     postData = {
         title: req.body.title,
         content: req.body.content,
@@ -48,6 +48,9 @@ router.post('/', uploadCloud.single('image'), (req, res, next) => {
     Post.create(postData)
         .then((post) => {
             res.json(post)
+        })
+        .catch(err => {
+            res.status(404).send(err)
         })
 })
 
@@ -86,7 +89,7 @@ router.delete(`/:id`, isLoggedIn, async (req, res) => {
  * Update a specific post
  * @example POST /api/posts/:id
  */
-router.patch(`/:id`, async (req, res) => {
+router.patch(`/:id`, isLoggedIn, async (req, res) => {
     const updates = Object.keys(req.body)
     const allowedUpdates = ['title', 'content', 'image']
     const isValidOperation = updates.every((update) => allowedUpdates.includes(update))

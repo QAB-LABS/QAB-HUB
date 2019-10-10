@@ -9,10 +9,12 @@ const merchantSchema = new Schema({
       if (!validator.isURL(value)) throw new Error("url is invalid")
     },
     required: true,
+    unique: true,
   },
   name: {
     type: String,
-    required: true
+    required: true,
+    unique: true,
   },
   country: {
     type: String,

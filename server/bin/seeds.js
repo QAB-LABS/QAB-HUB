@@ -26,7 +26,7 @@ var databaseEntries = {
     merchants: [],
 }
 
-async function seed() {
+async function createDBEntries() {
     var usersJSONData = Array.from({ length: 10 }).map(e => {
         return {
             username: faker.name.findName(),
@@ -34,17 +34,10 @@ async function seed() {
             email: faker.internet.email()
         }
     })
-
-    const userPromise = await User.deleteMany()
-        .then(() => {
-            return User.create(usersJSONData)
-        })
-        .then(usersCreated => {
-            console.log(`${usersCreated.length} users created with the following id:`)
-            console.log(usersCreated.map(u => u._id))
-            databaseEntries.users = usersCreated
-        })
-
+    await User.deleteMany()
+    const users = await User.create(usersJSONData)
+    console.log(`${users.length} users created.`)
+    databaseEntries.users = users
 
     var postsJSONData = Array.from({ length: 100 }).map((e, i) => {
         return {
@@ -53,29 +46,38 @@ async function seed() {
             author: databaseEntries.users[i % 10]._id
         }
     })
+    await Post.deleteMany()
+    const posts = await Post.create(postsJSONData)
+    console.log(`${posts.length} posts created.`)
+    databaseEntries.posts = posts
 
-    const postPromise = await Post.deleteMany()
-        .then(() => {
-            return Post.create(postsJSONData)
-        })
-        .then(postsCreated => {
-            console.log(`${postsCreated.length} posts created with the following id:`)
-            console.log(postsCreated.map(u => u._id))
-            databaseEntries.posts = postsCreated
-        })
+    var commentsJSONData = Array.from({ length: 1000 }).map((e, i) => {
+        return {
+            content: faker.lorem.paragraph(),
+            post: databaseEntries.posts[i & 10]._id,
+            author: databaseEntries.users[i % 100]._id
+        }
+    })
+    await Comment.deleteMany()
+    const comments = await Comment.create(commentsJSONData)
+    console.log(`${comments.length} comments created.`)
+    databaseEntries.comments = comments
 
-    const commentPromise = await Comment.deleteMany()
+    await Review.deleteMany()
 
-    const reviewPromise = await Review.deleteMany()
+    await Category.deleteMany()
 
-    const categoryPromise = await Category.deleteMany()
-
-    const likePromise = await Like.deleteMany()
-
-    return [userPromise, postPromise, commentPromise, reviewPromise, categoryPromise, likePromise]
+    await Like.deleteMany()
 }
 
-Promise.all(seed())
-    .then(() => {
+async function seed() {
+    try {
+        await createDBEntries()
+    } catch (err) {
+        console.log('Error populating the database:  ', err)
+    } finally {
         mongoose.disconnect()
-    })
+    }
+}
+
+seed()

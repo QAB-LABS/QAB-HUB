@@ -4,7 +4,6 @@ import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
 import GoogleAuth from '../GoogleAuth'
 import api from '../../apis/backend'
-
 class MainNavbar extends React.Component {
   handleLogoutClick = () => {
     api.logout()

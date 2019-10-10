@@ -43,9 +43,9 @@ export default {
             .catch(errHandler)
     },
 
-    deleteMerchant(id, body) {
+    deleteMerchant(id) {
         return service
-            .patch(`/${id}`, body)
+            .delete(`/${id}`)
             .then(res => res.data)
             .catch(errHandler)
     },

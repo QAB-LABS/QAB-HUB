@@ -43,9 +43,9 @@ export default {
             .catch(errHandler)
     },
 
-    deletePrice(id, body) {
+    deletePrice(id) {
         return service
-            .patch(`/${id}`, body)
+            .delete(`/${id}`)
             .then(res => res.data)
             .catch(errHandler)
     },

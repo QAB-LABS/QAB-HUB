@@ -43,9 +43,9 @@ export default {
             .catch(errHandler)
     },
 
-    deleteLike(id, body) {
+    deleteLike(id) {
         return service
-            .patch(`/${id}`, body)
+            .delete(`/${id}`)
             .then(res => res.data)
             .catch(errHandler)
     },

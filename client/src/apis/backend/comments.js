@@ -43,9 +43,9 @@ export default {
             .catch(errHandler)
     },
 
-    deleteComment(id, body) {
+    deleteComment(id) {
         return service
-            .patch(`/${id}`, body)
+            .delete(`/${id}`)
             .then(res => res.data)
             .catch(errHandler)
     },

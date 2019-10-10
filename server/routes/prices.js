@@ -39,7 +39,7 @@ router.post('/', isLoggedIn, (req, res, next) => {
   postData = {
     game: req.body.game,
     merchant: req.body.merchant,
-    price_text: req.body.price_text,
+    price: req.body.price,
     url: req.body.url,
   }
 
@@ -48,6 +48,9 @@ router.post('/', isLoggedIn, (req, res, next) => {
   Price.create(postData)
     .then((price) => {
       res.json(price)
+    })
+    .catch(err => {
+      res.status(404).send(err)
     })
 })
 
@@ -72,7 +75,7 @@ router.get('/:id', async (req, res, next) => {
  * @example 
  * DELETE /api/prices/:id
  */
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', isLoggedIn, async (req, res) => {
   try {
     const price = await Price.findById(req.params.id)
     if (!price) throw new Error()

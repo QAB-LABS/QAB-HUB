@@ -10,7 +10,15 @@ import Signup from './Pages/Signup'
 export default function App() {
   return (
     <div className="App">
-      <MainNavbar />
+      <div className="container">
+        <div className="row">
+          <div class="col-2">Left</div>
+          <div class="col-10">
+            <MainNavbar />
+            Right
+          </div>
+        </div>
+      </div>
       <Switch>
         <Route path="/" exact component={Home} />
         <Route path="/games" component={Games} />

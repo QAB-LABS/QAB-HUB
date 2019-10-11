@@ -1,5 +1,7 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
+const Like = require('../models/Like');
+
 
 const pointSchema = new mongoose.Schema({
     type: {
@@ -88,6 +90,11 @@ userSchema.virtual('posts', {
 
 userSchema.set('toObject', { virtuals: true })
 userSchema.set('toJSON', { virtuals: true })
+
+userSchema.pre('remove', async function (next) {
+    await Like.deleteMany({ user: this._id })
+    next()
+})
 
 userSchema.index({ location: "2dsphere" });
 

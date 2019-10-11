@@ -94,14 +94,7 @@ router.delete('/:id', isLoggedIn, async(req, res) => {
         const game = await Game.findById(req.params.id)
         if (!game) throw new Error()
         if (req.user.role !== "admin") res.status(403).send('You do not have permission to delete this resource.')
-        Like.deleteMany({ game: game._id })
-            .then(
-                await game.remove()
-            )
-            .catch(err => {
-                console.log(err)
-                res.status(404).send(err)
-            })
+        await game.remove()
         res.status(202).send(game)
     } catch (e) {
         res.status(404).send(e)
@@ -116,7 +109,11 @@ router.delete('/:id', isLoggedIn, async(req, res) => {
 router.patch(`/:id`, isLoggedIn, async(req, res) => {
     if (req.user.role !== "admin") res.status(403).send('You do not have permission to update this resource.')
 
-    const updates = Object.keys(req.body).filter(e => fields.includes(e))
+    const updates = Object.keys(req.body)
+    const allowedUpdates = fields
+    const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
+
+    if (!isValidOperation) return res.status(400).send({ error: 'Invalid updates!' })
 
     try {
         const game = await Game.findById(req.params.id)

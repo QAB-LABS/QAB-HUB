@@ -3,6 +3,13 @@ const { isLoggedIn } = require('../middlewares')
 const Review = require('../models/Review')
 const router = express.Router()
 
+const fields = [
+    'title',
+    'content',
+    'game',
+    'author'
+]
+
 /** 
  * Get all reviews with the given search parameters 
  * Only supports limit currently.
@@ -11,10 +18,11 @@ const router = express.Router()
  * */
 router.get('/search', async(req, res, next) => {
     const limit = req.query.limit || 50
-    Review.find()
+    const terms = req.query.terms || ''
+
+    Review.find({ $text: { $search: terms } })
         .limit(limit)
-        .populate('author')
-        .populate('game')
+        .populate('author game')
         .then(reviews => {
             res.json(reviews)
         })
@@ -27,9 +35,7 @@ router.get('/search', async(req, res, next) => {
  * GET /api/reviews/
  * */
 router.get('/', async(req, res, next) => {
-    res.json(await Review.find()
-        .populate('author')
-        .populate('game'))
+    res.json(await Review.find().populate('author game'))
 })
 
 /**
@@ -37,17 +43,14 @@ router.get('/', async(req, res, next) => {
  * @example POST /api/reviews
  */
 router.post('/', (req, res, next) => {
-    reviewData = {
-        title: req.body.title,
-        content: req.body.content,
-        author: req.user._id,
-        game: req.body.game._id
-    }
+    reviewData = {}
+    fields.forEach(field => { if (req.body[field]) reviewData[field] = req.body[field] })
+    review.author = review.author._id
+    review.game = review.game._id
 
     Review.create(reviewData)
-        .then((review) => {
-            res.json(review)
-        })
+        .then((review) => res.json(review))
+        .catch(err => res.status(422).send(err))
 })
 
 /**
@@ -57,8 +60,7 @@ router.post('/', (req, res, next) => {
 router.get('/:id', async(req, res, next) => {
     try {
         const review = await Review.findById(req.params.id)
-            .populate('author')
-            .populate('game')
+            .populate('author game')
         if (!review) throw new Error()
         res.send(review)
     } catch (e) {
@@ -100,7 +102,7 @@ router.patch(`/:id`, async(req, res) => {
         await review.save()
         res.json(review)
     } catch (e) {
-        res.status(400).send(e)
+        res.status(422).send(e)
     }
 })
 

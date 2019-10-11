@@ -32,6 +32,7 @@ gameSchema.virtual('likes', {
 
 gameSchema.set('toObject', { virtuals: true })
 gameSchema.set('toJSON', { virtuals: true })
+gameSchema.index({ name: "text", description: "text" })
 
 const Game = mongoose.model('Game', gameSchema)
 

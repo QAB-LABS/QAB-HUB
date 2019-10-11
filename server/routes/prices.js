@@ -96,7 +96,7 @@ router.patch(`/:id`, isLoggedIn, async (req, res) => {
   if (req.user.role !== "admin") res.status(403).send('You do not have permission to update this resource.')
 
   const updates = Object.keys(req.body)
-  const allowedUpdates = ['price_text', 'url']
+  const allowedUpdates = ['price', 'url']
   const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
 
   if (!isValidOperation) return res.status(400).send({ error: 'Invalid updates!' })

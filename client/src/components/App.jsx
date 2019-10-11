@@ -1,6 +1,6 @@
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
-import MainNavbar from './MainNavbar/MainNavbar'
+import MainNavbar from '../components/MainNavbar/MainNavbar'
 import Home from './pages/Home'
 import Games from './pages/Games'
 import Profile from './pages/Profile'

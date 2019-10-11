@@ -37,7 +37,7 @@ router.get('/', async(req, res, next) => {
  * @example POST /api/comments
  */
 router.post('/', (req, res, next) => {
-    commentData = {
+    let commentData = {
         content: req.body.content,
         author: req.user._id,
         post: req.post._id

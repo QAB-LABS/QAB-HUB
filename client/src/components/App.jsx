@@ -22,7 +22,9 @@ export default function App() {
       <Switch>
         <Route path="/" exact component={Home} />
         <Route path="/games" component={Games} />
-        <Route path="/profile" component={Profile} />
+        <Route path="/me" component={Profile} />
+        <Route path="/profile" exact component={Profile} />
+        <Route path="/profile/:id" component={Profile} />
         <Route path="/signup" component={Signup} />
         <Route path="/login" component={Login} />
         <Route render={() => <h2>404</h2>} />

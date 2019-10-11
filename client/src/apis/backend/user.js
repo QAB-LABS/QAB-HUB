@@ -2,12 +2,22 @@ import axios from 'axios'
 import errHandler from './error'
 
 const service = axios.create({
-    baseURL: process.env.NODE_ENV === 'production' ?
-        '/api/comments' : `http://${window.location.hostname}:5000/api`,
+    baseURL: process.env.NODE_ENV === 'production' ? '/api/users' : `http://${window.location.hostname}:5000/api/users`,
     withCredentials: true,
 })
 
 export default {
+    getUser(userId) {
+        console.log(`getting user from id ${userId}`, service)
+        return service
+            .get(`/${userId}`)
+            .then(res => {
+                console.log('responssse', res.data)
+                return res.data
+            })
+            .catch(errHandler)
+    },
+
     isLoggedIn() {
         return localStorage.getItem('user') != null
     },

@@ -24,7 +24,7 @@ router.get('/search', async(req, res, next) => {
 
     User.find({ $text: { $search: terms } })
         .limit(limit)
-        .populate('reviews chats likes messages posts')
+        .populate('reviews likes posts')
         .then(users => res.json(users))
         .catch(err => next(err))
 })
@@ -35,7 +35,7 @@ router.get('/search', async(req, res, next) => {
  * GET /api/users/
  * */
 router.get('/', async(req, res, next) => {
-    res.json(await User.find().populate('reviews chats likes messages posts'))
+    res.json(await User.find().populate('reviews likes posts'))
 })
 
 /**
@@ -62,7 +62,7 @@ router.post('/', (req, res, next) => {
 router.get('/:id', async(req, res, next) => {
     try {
         const user = await User.findById(req.params.id)
-            .populate('reviews chats likes messages posts')
+            .populate('reviews likes posts')
         if (!user) throw new Error()
         res.send(user)
     } catch (e) {

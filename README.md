@@ -13,6 +13,8 @@
         <img alt="deploy" src="https://www.herokucdn.com/deploy/button.png">
     </a>
 </div>
+[![Maintainability](https://api.codeclimate.com/v1/badges/c71735f10ca4c79a333c/maintainability)](https://codeclimate.com/github/AndresMWeber/QAB-HUB/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/c71735f10ca4c79a333c/test_coverage)](https://codeclimate.com/github/AndresMWeber/QAB-HUB/test_coverage)
 
 # Setup
 

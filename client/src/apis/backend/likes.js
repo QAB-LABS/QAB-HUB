@@ -29,23 +29,23 @@ export default {
             .catch(errHandler)
     },
 
-    getLike(body) {
+    getLike(id) {
         return service
-            .get(`/${body.id}`)
+            .get(`/${id}`)
             .then(res => res.data)
             .catch(errHandler)
     },
 
-    updateLike(body) {
+    updateLike(id, body) {
         return service
-            .patch(`/${body.id}`, body)
+            .patch(`/${id}`, body)
             .then(res => res.data)
             .catch(errHandler)
     },
 
-    deleteLike(body) {
+    deleteLike(id) {
         return service
-            .patch(`/${body.id}`, body)
+            .delete(`/${id}`)
             .then(res => res.data)
             .catch(errHandler)
     },

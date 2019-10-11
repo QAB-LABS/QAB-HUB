@@ -16,6 +16,7 @@
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/c71735f10ca4c79a333c/maintainability)](https://codeclimate.com/github/AndresMWeber/QAB-HUB/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/c71735f10ca4c79a333c/test_coverage)](https://codeclimate.com/github/AndresMWeber/QAB-HUB/test_coverage)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 # Setup
 

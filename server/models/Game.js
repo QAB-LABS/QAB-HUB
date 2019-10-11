@@ -1,5 +1,7 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
+const Like = require('../models/Like');
+
 
 const gameSchema = new mongoose.Schema({
     name: {
@@ -20,7 +22,6 @@ const gameSchema = new mongoose.Schema({
     designers: [String],
     artists: [String],
     publisher: String,
-    family: String,
     categories: [{
         type: Schema.Types.ObjectId,
         ref: "Category"

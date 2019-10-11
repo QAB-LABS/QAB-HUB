@@ -2,7 +2,7 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
-import GoogleAuth from '../GoogleAuth'
+import GoogleAuth from '../GoogleAuth/GoogleAuth'
 import api from '../../apis/backend'
 class MainNavbar extends React.Component {
   handleLogoutClick = () => {

@@ -2,7 +2,11 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const gameSchema = new mongoose.Schema({
-    name: String,
+    name: {
+        type: String,
+        required: true,
+        unique: true,
+    },
     description: String,
     price: Number,
     image: String,
@@ -32,6 +36,13 @@ gameSchema.virtual('likes', {
 
 gameSchema.set('toObject', { virtuals: true })
 gameSchema.set('toJSON', { virtuals: true })
+
+
+gameSchema.pre('remove', async function (next) {
+    await Like.deleteMany({ game: this._id })
+    next()
+})
+
 
 const Game = mongoose.model('Game', gameSchema)
 

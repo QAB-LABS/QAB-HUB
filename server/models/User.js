@@ -1,7 +1,10 @@
 const mongoose = require('mongoose')
+const validator = require('validator')
 const Schema = mongoose.Schema
-const Like = require('../models/Like');
-
+const Post = require('../models/Post')
+const ChatMessage = require('../models/ChatMessage')
+const Like = require('../models/Like')
+const Review = require('../models/Review')
 
 const pointSchema = new mongoose.Schema({
     type: {
@@ -13,7 +16,7 @@ const pointSchema = new mongoose.Schema({
         index: '2dsphere',
         default: [25.766111, -80.196183]
     }
-});
+})
 
 const userSchema = new Schema({
     username: {
@@ -44,10 +47,6 @@ const userSchema = new Schema({
         type: String,
         enum: ['admin', 'user', 'moderator', 'guest']
     },
-    likes: [{
-        type: Schema.Types.ObjectId,
-        ref: "Game"
-    }],
     wishlist: [{
         type: Schema.Types.ObjectId,
         ref: "Game"
@@ -74,6 +73,13 @@ userSchema.virtual('chats', {
     justOne: false
 })
 
+userSchema.virtual('likes', {
+    ref: 'Like',
+    localField: '_id',
+    foreignField: 'user',
+    justOne: false
+})
+
 userSchema.virtual('messages', {
     ref: 'ChatMessage',
     localField: '_id',
@@ -88,6 +94,25 @@ userSchema.virtual('posts', {
     justOne: false
 })
 
+userSchema.methods.toJSON = function () {
+    const user = this
+    const userObject = user.toObject()
+
+    delete userObject.password
+    delete userObject.tokens
+    delete userObject.avatar
+
+    return userObject
+}
+
+userSchema.pre('remove', async function (next) {
+    await Post.deleteMany({ author: this._id })
+    await ChatMessage.deleteMany({ author: this._id })
+    await Like.deleteMany({ user: this._id })
+    await Review.deleteMany({ author: this._id })
+    next()
+})
+
 userSchema.set('toObject', { virtuals: true })
 userSchema.set('toJSON', { virtuals: true })
 
@@ -97,6 +122,7 @@ userSchema.pre('remove', async function (next) {
 })
 
 userSchema.index({ location: "2dsphere" });
+userSchema.index({ name: "text", description: "text" })
 
 const User = mongoose.model('User', userSchema)
 module.exports = User

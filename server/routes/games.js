@@ -1,10 +1,28 @@
 const express = require('express')
-const axios = require('axios')
 const { isLoggedIn } = require('../middlewares')
 const Game = require('../models/Game')
 const Like = require('../models/Like')
-
 const router = express.Router()
+
+const fields = [
+    "url",
+    "name",
+    "description",
+    "price",
+    "image",
+    "year_published",
+    "min_players",
+    "max_players",
+    "min_playtime",
+    "max_playtime",
+    "min_age",
+    "mechanics",
+    "designers",
+    "artists",
+    "publisher",
+    "family",
+    "categories"
+]
 
 /** 
  * Get all games with the given search parameters 
@@ -14,9 +32,11 @@ const router = express.Router()
  * */
 router.get('/search', async (req, res, next) => {
     const limit = Number(req.query.limit) || 50
-    Game.find()
+    const terms = req.query.terms || ''
+
+    Game.find({ $text: { $search: terms } })
         .limit(limit)
-        .populate('categories likes')
+        .populate('likes')
         .then(games => {
             res.json(games)
         })
@@ -35,29 +55,12 @@ router.get('/', async (req, res, next) => {
 /**
  * Create a game
  * @example 
- * POST /api/games
+ * POST /api/games/
  */
 router.post('/', isLoggedIn, (req, res, next) => {
-    postData = {
-        name: req.body.name,
-        description: req.body.description,
-        price: req.body.price,
-        image: req.body.ie,
-        year_published: req.body.year_published,
-        min_players: req.body.min_players,
-        max_players: req.body.max_players,
-        min_playtime: req.body.min_playtime,
-        max_playtime: req.body.max_playtime,
-        min_age: req.body.min_age,
-        mechanics: req.body.mechanics,
-        designers: req.body.designers,
-        artists: req.body.artists,
-        publisher: req.body.publisher,
-        family: req.body.family,
-        categories: req.body.categories,
-    }
-
-    if (req.user.role !== "admin") res.status(403).send('You do not have permission to add a new merchant.')
+    if (req.user.role !== "admin") res.status(403).send('You do not have permission to add a new game.')
+    const postData = {}
+    fields.forEach(field => postData[field] = req.body[field])
 
     Game.create(postData)
         .then((game) => {
@@ -103,13 +106,13 @@ router.delete('/:id', isLoggedIn, async (req, res) => {
 /**
  * Update a specific game
  * @example 
- * POST /api/games/:id
+ * PATCH /api/games/:id
  */
 router.patch(`/:id`, isLoggedIn, async (req, res) => {
     if (req.user.role !== "admin") res.status(403).send('You do not have permission to update this resource.')
 
     const updates = Object.keys(req.body)
-    const allowedUpdates = ['name', 'description', 'price', 'image', 'year_published', 'min_players', 'max_players', 'min_playtime', 'max_playtime', 'min_age', 'mechanics', 'designers', 'artists', 'publisher', 'family', 'categories']
+    const allowedUpdates = fields
     const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
 
     if (!isValidOperation) return res.status(400).send({ error: 'Invalid updates!' })

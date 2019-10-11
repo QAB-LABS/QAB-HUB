@@ -1,5 +1,4 @@
 <div align=center>
-
     <h1 align=center>
         <img align=center
             src="https://github.com/QAB-LABS/QAB-HUB/blob/master/client/public/logo-placeholder.png?raw=true"
@@ -8,13 +7,23 @@
         QAB HUB
         <br>
     </h1>
-    <p style="font-size: 1.35rem; font-weight: 500; padding: 2rem; text-align: center"> TBD</p>
+    <p style="font-size: 1.35rem; font-weight: 500; padding: 2rem; text-align: center">TBD</p>
     <br>
     <a align=center href="https://heroku.com/deploy?template=https://github.com/QAB-LABS/QAB-HUB/">
         <img alt="deploy" src="https://www.herokucdn.com/deploy/button.png">
     </a>
-
+    <br>
+    <a align=center href="https://codeclimate.com/github/QAB-LABS/QAB-HUB/maintainability">
+        <img src="https://api.codeclimate.com/v1/badges/c47607ce54e6f401a1de/maintainability" />
+    </a>
+    <a align=center href="https://codeclimate.com/github/QAB-LABS/QAB-HUB/test_coverage">
+        <img src="https://api.codeclimate.com/v1/badges/c47607ce54e6f401a1de/test_coverage" />
+    </a>
+    <a align=center href="https://www.gnu.org/licenses/gpl-3.0">
+        <img src="https://img.shields.io/badge/License-GPLv3-blue.svg" />
+    </a>
 </div>
+
 # Setup
 
 ### Installation

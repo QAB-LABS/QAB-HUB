@@ -37,6 +37,7 @@ gameSchema.virtual('likes', {
 
 gameSchema.set('toObject', { virtuals: true })
 gameSchema.set('toJSON', { virtuals: true })
+gameSchema.index({ name: "text", description: "text" })
 
 
 gameSchema.pre('remove', async function (next) {

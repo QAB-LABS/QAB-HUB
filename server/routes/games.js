@@ -1,4 +1,5 @@
 const express = require('express')
+const { isLoggedIn } = require('../middlewares')
 const Game = require('../models/Game')
 const Like = require('../models/Like')
 const router = express.Router()

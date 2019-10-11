@@ -12,6 +12,7 @@
     <a align=center href="https://heroku.com/deploy?template=https://github.com/QAB-LABS/QAB-HUB/">
         <img alt="deploy" src="https://www.herokucdn.com/deploy/button.png">
     </a>
+    <br>
     <a align=center href="https://codeclimate.com/github/QAB-LABS/QAB-HUB/maintainability">
         <img src="https://api.codeclimate.com/v1/badges/c47607ce54e6f401a1de/maintainability" />
     </a>

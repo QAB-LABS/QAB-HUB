@@ -10,7 +10,7 @@ const router = express.Router()
  * GET /api/likes/search?limit=50
  * */
 router.get('/search', async (req, res, next) => {
-  const limit = req.query.limit || 50
+  const limit = Number(req.query.limit) || 50
   Like.find()
     .limit(limit)
     .populate('user game')
@@ -37,19 +37,21 @@ router.get('/', async (req, res, next) => {
  */
 router.post('/', (req, res, next) => {
   postData = {
-    user: req.body.user._id,
-    game: req.body.game._id
+    user: req.body.user,
+    game: req.body.game
   }
 
-  Like.find({ postData })
+  Like.find(postData)
     .then((like) => {
-      res.status(409).send("This like already exists")
-    })
-    .catch(err => console.error(err))
-
-  Like.create(postData)
-    .then((like) => {
-      res.json(like)
+      if (like.length > 0)
+        res.status(409).send("This like already exists")
+      else {
+        Like.create(postData)
+          .then((like) => {
+            res.json(like)
+          })
+          .catch(err => console.error(err))
+      }
     })
     .catch(err => console.error(err))
 })

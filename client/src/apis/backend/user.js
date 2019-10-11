@@ -8,13 +8,9 @@ const service = axios.create({
 
 export default {
     getUser(userId) {
-        console.log(`getting user from id ${userId}`, service)
         return service
             .get(`/${userId}`)
-            .then(res => {
-                console.log('responssse', res.data)
-                return res.data
-            })
+            .then(res => res.data)
             .catch(errHandler)
     },
 

@@ -12,8 +12,8 @@ export default function App() {
     <div className="App">
       <div className="container">
         <div className="row">
-          <div class="col-2">Left</div>
-          <div class="col-10">
+          <div className="col-2">Left</div>
+          <div className="col-10">
             <MainNavbar />
             Right
           </div>

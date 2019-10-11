@@ -9,15 +9,13 @@ class UserCard extends React.Component {
 
   render() {
     const { user } = this.props
-    console.log(this.props)
-    return (!user) ? null : <div className="header"> <h1>{user.name}</h1> </div>
+    return (!user) ? null : <div className="header"> <h1>{user.username}</h1> </div>
   }
 }
 
 const mapStateToProps = (state, ownProps) => {
-  console.log(state)
   return {
-    user: state.selectedUser,
+    user: state.users.selectedUser,
   }
 }
 

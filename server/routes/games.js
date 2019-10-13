@@ -30,7 +30,7 @@ const fields = [
  * @example
  * GET /api/games/search?limit=50
  * */
-router.get('/search', async(req, res, next) => {
+router.get('/search', async (req, res, next) => {
     const limit = Number(req.query.limit) || 50
     const terms = req.query.terms || ''
 
@@ -48,8 +48,8 @@ router.get('/search', async(req, res, next) => {
  * @example
  * GET /api/games/
  * */
-router.get('/', async(req, res, next) => {
-    res.json(await Game.find().populate('likes'))
+router.get('/', async (req, res, next) => {
+    res.json(await Game.find().populate('categories likes'))
 })
 
 /**
@@ -75,9 +75,10 @@ router.post('/', isLoggedIn, (req, res, next) => {
  * @example 
  * GET /api/games/:id
  */
-router.get('/:id', async(req, res, next) => {
+router.get('/:id', async (req, res, next) => {
     try {
-        const game = await Game.findById(req.params.id).populate('likes')
+        const game = await Game.findById(req.params.id)
+            .populate('categories likes')
         if (!game) throw new Error()
         res.send(game)
     } catch (e) {
@@ -90,7 +91,7 @@ router.get('/:id', async(req, res, next) => {
  * @example 
  * DELETE /api/games/:id
  */
-router.delete('/:id', isLoggedIn, async(req, res) => {
+router.delete('/:id', isLoggedIn, async (req, res) => {
     try {
         const game = await Game.findById(req.params.id)
         if (!game) throw new Error()
@@ -107,7 +108,7 @@ router.delete('/:id', isLoggedIn, async(req, res) => {
  * @example 
  * PATCH /api/games/:id
  */
-router.patch(`/:id`, isLoggedIn, async(req, res) => {
+router.patch(`/:id`, isLoggedIn, async (req, res) => {
     if (req.user.role !== "admin") res.status(403).send('You do not have permission to update this resource.')
 
     const updates = Object.keys(req.body)

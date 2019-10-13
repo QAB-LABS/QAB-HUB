@@ -1,53 +1,50 @@
 const express = require('express')
 const { isLoggedIn } = require('../middlewares')
-const Price = require('../models/Price')
-const Merchant = require("../models/Merchant")
+const Category = require("../models/Category")
 const router = express.Router()
 
 /** 
- * Get all price with the given search parameters 
+ * Get all category with the given search parameters 
  * Only supports limit currently.
  * @example
- * GET /api/prices/search?limit=50
+ * GET /api/categories/search?limit=50
  * */
 router.get('/search', async (req, res, next) => {
   const limit = req.query.limit || 50
-  Price.find()
+  const name = (req.query.name || "").toLowerCase();
+  Category.find()
     .limit(Number(limit))
-    .populate('game merchant')
-    .then(prices => {
-      res.json(prices)
+    .then(categories => {
+      categories = categories.filter((category) => category.name.toLowerCase().includes(name))
+      res.json(categories)
     })
     .catch(err => next(err))
 })
 
 /** 
- * Get all prices.  
+ * Get all categories.  
  * @example
- * GET /api/prices/
+ * GET /api/categories/
  * */
 router.get('/', async (req, res, next) => {
-  res.json(await Price.find().populate('game merchant'))
+  res.json(await Category.find())
 })
 
 /**
- * Create a price
+ * Create a category
  * @example 
- * POST /api/prices
+ * POST /api/categories
  */
 router.post('/', isLoggedIn, (req, res, next) => {
   postData = {
-    game: req.body.game,
-    merchant: req.body.merchant,
-    price: req.body.price,
-    url: req.body.url,
+    name: req.body.name,
   }
 
-  if (req.user.role !== "admin") res.status(403).send('You do not have permission to add a new price.')
+  if (req.user.role !== "admin") res.status(403).send('You do not have permission to add a new category.')
 
-  Price.create(postData)
-    .then((price) => {
-      res.json(price)
+  Category.create(postData)
+    .then((category) => {
+      res.json(category)
     })
     .catch(err => {
       res.status(404).send(err)
@@ -55,58 +52,57 @@ router.post('/', isLoggedIn, (req, res, next) => {
 })
 
 /**
- * Get a specific price 
+ * Get a specific category 
  * @example 
- * GET /api/prices/:id
+ * GET /api/categories/:id
  */
 router.get('/:id', async (req, res, next) => {
   try {
-    const price = await Price.findById(req.params.id)
-      .populate('game merchant')
-    if (!price) throw new Error()
-    res.send(price)
+    const category = await Category.findById(req.params.id)
+    if (!category) throw new Error()
+    res.send(category)
   } catch (e) {
     res.status(404).send()
   }
 })
 
 /**
- * Delete a specific price
+ * Delete a specific category
  * @example 
- * DELETE /api/prices/:id
+ * DELETE /api/categories/:id
  */
 router.delete('/:id', isLoggedIn, async (req, res) => {
   try {
-    const price = await Price.findById(req.params.id)
-    if (!price) throw new Error()
+    const category = await Category.findById(req.params.id)
+    if (!category) throw new Error()
     if (req.user.role !== "admin") res.status(403).send('You do not have permission to delete this resource.')
-    await price.remove()
-    res.status(202).send(price)
+    await category.remove()
+    res.status(202).send(category)
   } catch (e) {
     res.status(404).send(e)
   }
 })
 
 /**
- * Update a specific price
+ * Update a specific category
  * @example 
- * POST /api/prices/:id
+ * POST /api/categories/:id
  */
 router.patch(`/:id`, isLoggedIn, async (req, res) => {
   if (req.user.role !== "admin") res.status(403).send('You do not have permission to update this resource.')
 
   const updates = Object.keys(req.body)
-  const allowedUpdates = ['price', 'url']
+  const allowedUpdates = ['name']
   const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
 
   if (!isValidOperation) return res.status(400).send({ error: 'Invalid updates!' })
 
   try {
-    const price = await Price.findById(req.params.id)
-    if (!price) throw new Error()
-    updates.forEach((update) => price[update] = req.body[update])
-    await price.save()
-    res.json(price)
+    const category = await Category.findById(req.params.id)
+    if (!category) throw new Error()
+    updates.forEach((update) => category[update] = req.body[update])
+    await category.save()
+    res.json(category)
   } catch (e) {
     res.status(400).send(e)
   }

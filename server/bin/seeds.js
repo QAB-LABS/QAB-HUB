@@ -65,7 +65,7 @@ async function createDBEntries() {
         return {
             content: faker.lorem.paragraph(),
             post: databaseEntries.posts[i % databaseEntries.posts.length]._id,
-            author: databaseEntries.users[i % databaseEntries.users.length]._id
+            author: databaseEntries.users[Math.random() * databaseEntries.users.length]._id
         }
     }))
 

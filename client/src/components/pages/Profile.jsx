@@ -5,13 +5,14 @@ import { connect } from 'react-redux'
 
 class UserProfile extends React.Component {
   render() {
+    console.log(this.props)
     return (
       <div className="ui segments">
         <div className="ui segment">
           <p>Profile</p>
         </div>
         <div className="ui segments">
-          <UserCard userId={(this.props.match.params) ? this.props.match.params.id : this.props.currentUserId} />
+          <UserCard user={this.props.currentUser} />
         </div>
         <div className="ui segment">
           <p>Middle</p>
@@ -22,7 +23,7 @@ class UserProfile extends React.Component {
               <div className="ui segment">
                 <p>Description</p>
                 <p>
-Sed euismod, erat quis varius facilisis, magna dui tempus nunc, at scelerisque ex massa id nisi.</p>
+                  Sed euismod, erat quis varius facilisis, magna dui tempus nunc, at scelerisque ex massa id nisi.</p>
               </div>
               <div className="ui segment">
                 <p>User Level</p>
@@ -54,11 +55,11 @@ Sed euismod, erat quis varius facilisis, magna dui tempus nunc, at scelerisque e
   }
 }
 
-const mapStateToProps = state => {
-  return { currentUserId: state.auth.userId }
+const mapState = state => {
+  return {
+    currentUser: state.authentication.user
+  }
 }
 
-export default connect(
-  mapStateToProps,
-  {}
-)(UserProfile)
+
+export default connect(mapState, {})(UserProfile)

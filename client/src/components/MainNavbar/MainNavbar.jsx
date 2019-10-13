@@ -1,4 +1,5 @@
 import React from 'react'
+import { authActions } from '../../actions/auth'
 import { NavLink } from 'react-router-dom'
 import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
@@ -18,7 +19,7 @@ class MainNavbar extends React.Component {
 
                 {api.isLoggedIn() && (
                   <div className="item">
-                    <NavLink className="item" to="/" onClick={this.handleLogoutClick}>Logout</NavLink>
+                    <NavLink className="item" to="/" onClick={this.props.logout}>Logout</NavLink>
                   </div>)}
 
                 {api.isLoggedIn() && (
@@ -43,14 +44,14 @@ class MainNavbar extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
-  return { 
-    currentUserId: state.auth.userId,
-    user: state.users.selectedUser
+const mapState = state => {
+  return {
+    currentUser: state.authentication.user
   }
 }
 
-export default connect(
-  mapStateToProps,
-  {}
-)(withRouter(MainNavbar))
+const actionCreators = {
+  logout: authActions.logout
+};
+
+export default connect(mapState, actionCreators)(withRouter(MainNavbar))

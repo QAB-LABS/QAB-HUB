@@ -26,7 +26,6 @@ export default {
     },
 
     login(username, password) {
-        console.log('logging in user', username, password, service)
         return service
             .post('/login', {
                 username,

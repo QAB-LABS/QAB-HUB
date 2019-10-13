@@ -1,32 +1,26 @@
 import React from 'react'
-import api from '../../apis/backend'
-import { login, logout, loginSuccess } from '../../actions/users'
+import { authActions } from '../../actions/auth'
 import { connect } from 'react-redux'
 
 class Login extends React.Component {
   state = {
-    message: null,
     username: '',
     password: '',
+    submitted: false
   }
 
-  handleInputChange = (e) => {
-    const { name, value } = e.target
-    this.setState({
-      [name]: value
-    })
+  handleChange = (e) => {
+    const { name, value } = e.target;
+    this.setState({ [name]: value });
   }
 
   handleSubmit = (e) => {
-    e.preventDefault()
-    api
-      .login(this.state.username, this.state.password)
-      .then(result => {
-        this.loginSuccessUser(result.data)
-        console.log('SUCCESS!')
-        this.state.history.push('/') // Redirect to the home page
-      })
-      .catch(err => this.setState({ message: err.toString() }))
+    e.preventDefault();
+    this.setState({ submitted: true });
+    const { username, password } = this.state;
+    if (username && password) {
+      this.props.login(username, password);
+    }
   }
 
   render() {
@@ -34,8 +28,8 @@ class Login extends React.Component {
       <div className="Login">
         <h2>Login</h2>
         <form onSubmit={this.handleSubmit}>
-          Username: <input type="text" name="username" onChange={this.handleInputChange} /> <br />
-          Password: <input type="password" name="password" onChange={this.handleInputChange} />
+          Username: <input type="text" name="username" onChange={this.handleChange} /> <br />
+          Password: <input type="password" name="password" onChange={this.handleChange} />
           <br />
           <button>Login</button>
         </form>
@@ -52,8 +46,8 @@ function mapState(state) {
 }
 
 const actionCreators = {
-  login,
-  logout
+  login: authActions.login,
+  logout: authActions.logout
 };
 
 export default connect(mapState, actionCreators)(Login)

@@ -1,4 +1,4 @@
-import users from './backend/user'
+import { userService } from './backend/user'
 import auth from './backend/auth'
 import comments from './backend/comments'
 import posts from './backend/posts'
@@ -9,7 +9,7 @@ import reviews from './backend/reviews'
 import likes from './backend/likes'
 
 export default {
-    ...users,
+    ...userService,
     ...comments,
     ...posts,
     ...games,

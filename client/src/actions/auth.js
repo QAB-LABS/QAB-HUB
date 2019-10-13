@@ -1,8 +1,9 @@
 import * as types from './types';
 import api from '../apis/backend';
-import { alertActions } from './';
+import { alertActions } from './alert';
+import { history } from '../helpers/history';
 
-export const userActions = {
+export const authActions = {
     login,
     logout,
     register,
@@ -17,6 +18,7 @@ function login(username, password) {
             .then(
                 user => {
                     dispatch(success(user));
+                    history.push('/');
                 },
                 error => {
                     dispatch(failure(error.toString()));

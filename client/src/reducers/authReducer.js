@@ -1,20 +1,24 @@
-import { PassThrough } from "stream"
-import * as types from '../actions/types'
+import * as types from '../actions/types';
 
-const INITIAL_STATE = {
-    isSignedIn: null,
-    userId: null
-}
+let user = JSON.parse(localStorage.getItem('user'));
+const initialState = user ? { loggedIn: true, user } : {};
 
-export default (state = INITIAL_STATE, action) => {
+export default (state = initialState, action) => {
     switch (action.type) {
-        case types.SIGN_IN:
-            return {...state, isSignedIn: true, userId: action.payload }
-        case types.SIGN_OUT:
-            return {...state, isSignedIn: false, userId: null }
-        case types.SIGN_IN_SUCCESS:
-            console.log('runnign this')
-            return {...state, isSignedIn: true, user: action.payload }
+        case types.LOGIN_REQUEST:
+            return {
+                loggingIn: true,
+                user: action.user
+            };
+        case types.LOGIN_SUCCESS:
+            return {
+                loggedIn: true,
+                user: action.user
+            };
+        case types.LOGIN_FAILURE:
+            return {};
+        case types.LOGOUT:
+            return {};
         default:
             return state
     }

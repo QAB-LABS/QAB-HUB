@@ -45,7 +45,8 @@ const userSchema = new Schema({
     },
     role: {
         type: String,
-        enum: ['admin', 'user', 'moderator', 'guest']
+        enum: ['admin', 'user', 'moderator', 'guest'],
+        default: 'user'
     },
     wishlist: [{
         type: Schema.Types.ObjectId,

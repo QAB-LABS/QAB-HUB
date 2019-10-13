@@ -13,6 +13,7 @@ import Signup from './pages/Signup'
 class App extends React.Component {
 
   render() {
+    console.log(this.props)
     const { alert } = this.props;
     return (
       <div className="App">

@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import GameDetailsRow from '../GameDetailsRow/GameDetailsRow'
 import { getGames } from '../../actions/games'
+import GameDetailsRow from './GameDetailsRow'
 
 class GameList extends React.Component {
   componentDidMount() {

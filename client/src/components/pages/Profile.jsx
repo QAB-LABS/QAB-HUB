@@ -1,17 +1,23 @@
 import React from 'react'
-import UserCard from '../UserCard/UserCard'
-import GamesList from '../GamesList/GamesList'
 import { connect } from 'react-redux'
+import { getUser } from '../../actions/users'
+import UserCard from '../UserCard/UserCard'
+import GamesList from '../Games/GamesList'
 
 class UserProfile extends React.Component {
+  componentDidMount() {
+    this.props.getUser(this.props.match.params.id)
+  }
+
   render() {
+    console.log('user Profile:', this.props)
     return (
       <div className="ui segments">
         <div className="ui segment">
           <p>Profile</p>
         </div>
         <div className="ui segments">
-          <UserCard user={this.props.currentUser} />
+          <UserCard user={this.props.currentProfile || this.props.currentUser} />
         </div>
         <div className="ui segment">
           <p>Middle</p>
@@ -55,10 +61,12 @@ class UserProfile extends React.Component {
 }
 
 const mapState = state => {
+  console.log('updating state', state)
   return {
+    currentProfile: state.users.user,
     currentUser: state.authentication.user
   }
 }
 
 
-export default connect(mapState, {})(UserProfile)
+export default connect(mapState, { getUser })(UserProfile)

@@ -10,6 +10,6 @@ const _getUsers = _.memoize(async(dispatch) => {
 
 export const getUser = id => dispatch => _getUser(id, dispatch)
 const _getUser = _.memoize(async(id, dispatch) => {
-    const response = await api.getById(id)
+    const response = await api.getUser(id)
     dispatch({ type: types.FETCH_USER, payload: response })
 })

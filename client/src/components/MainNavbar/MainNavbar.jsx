@@ -9,33 +9,31 @@ class MainNavbar extends React.Component {
     return (
       <nav className="App-header">
         <div className="ui secondary pointing menu">
-          <NavLink className="item" to="/" exact>Home</NavLink>
-          <NavLink className="item" to="/games">Games</NavLink>
-          <div className="right menu">
-            <div className="ui simple dropdown">
+          <div className="ui simple dropdown">
+            <div className="item">
               <i className="user icon" />
-              <div className="text">Account</div>
-              <div className="menu">
+              Account
+            </div>
+            <div className="menu">
 
-                {api.isLoggedIn() && (
-                  <div className="item">
-                    <NavLink className="item" to="/" onClick={this.props.logout}>Logout</NavLink>
-                  </div>)}
-
-                {api.isLoggedIn() && (
-                  <div className="item">
-                    <NavLink className="item" to="/profile">My Profile</NavLink>
-                  </div>
-                )}
+              {api.isLoggedIn() && (
                 <div className="item">
-                  <NavLink className="item" to="/login">Log In</NavLink>
-                </div>
+                  <NavLink className="item" to="/" onClick={this.props.logout}>Logout</NavLink>
+                </div>)}
 
+              {api.isLoggedIn() && (
                 <div className="item">
-                  <NavLink className="item" to="/signup">Sign Up</NavLink>
+                  <NavLink className="item" to="/profile">My Profile</NavLink>
                 </div>
-
+              )}
+              <div className="item">
+                <NavLink className="item" to="/login">Log In</NavLink>
               </div>
+
+              <div className="item">
+                <NavLink className="item" to="/signup">Sign Up</NavLink>
+              </div>
+
             </div>
           </div>
         </div>

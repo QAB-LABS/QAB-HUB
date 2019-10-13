@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom'
 
 const CommentList = props => {
     const { author, content, created_at } = props.comment
-    console.log(author)
+    
     return (
         <div className="comment">
             {/* <div className="avatar">

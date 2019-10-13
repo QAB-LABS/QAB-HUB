@@ -1,7 +1,7 @@
 import React from 'react';
-import PostDetails from '../PostDetails/PostDetails'
 import { getPost } from '../../actions/posts'
 import { connect } from 'react-redux'
+import PostDetails from '../Post/PostDetails'
 
 class Post extends React.Component {
   componentDidMount() {

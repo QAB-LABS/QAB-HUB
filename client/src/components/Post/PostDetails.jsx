@@ -1,11 +1,12 @@
 import React from 'react'
+import CommentList from './CommentList'
 import { NavLink } from 'react-router-dom'
 
-const PostCard = props => {
-    const { title, created_at, author, content, _id} = props.post
-    
+const PostDetails = props => {
+    const { title, created_at, author, content, comments, _id } = props.post
+
     return (
-        <div className="ui card">
+        <div className={props.card ? "ui card" : "segment"}>
             <div className="content">
                 <NavLink to={`/post/${_id}`}><p className="header">{title}</p></NavLink>
                 <div className="meta">
@@ -15,12 +16,17 @@ const PostCard = props => {
                     {content}
                 </div>
             </div>
+
             <div className="extra content">
-                <i className="user icon" />
-                {author.username}
+                <NavLink to={`/profile/${author._id}`}>
+                    <i className="user icon" />
+                    {author.username}
+                </NavLink>
             </div>
+
+            {props.card ? null : <CommentList comments={comments} />}
         </div>
     )
 }
 
-export default PostCard
+export default PostDetails

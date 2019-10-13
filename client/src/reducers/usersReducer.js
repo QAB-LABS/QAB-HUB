@@ -19,8 +19,7 @@ export default (state = {}, action) => {
             return {
                 ...state,
                 items: state.items.map(user =>
-                    user.id === action.id ?
-                    {...user, deleting: true } :
+                    user.id === action.id ? {...user, deleting: true } :
                     user
                 )
             };
@@ -44,6 +43,16 @@ export default (state = {}, action) => {
                     return user;
                 })
             };
+        case types.FETCH_USER:
+            return {
+                ...state,
+                user: action.payload
+            }
+        case types.FETCH_USERS:
+            return {
+                ...state,
+                users: action.payload
+            }
         default:
             return state
     }

@@ -5,7 +5,6 @@ import { connect } from 'react-redux'
 
 class UserProfile extends React.Component {
   render() {
-    console.log(this.props)
     return (
       <div className="ui segments">
         <div className="ui segment">

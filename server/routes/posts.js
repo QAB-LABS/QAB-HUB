@@ -4,6 +4,7 @@ const uploadCloud = require('../configs/cloudinary')
 const Post = require('../models/Post')
 const router = express.Router()
 
+const populatable_virtuals = 'author comments'
 /** 
  * Get all posts with the given search parameters 
  * Only supports limit currently.
@@ -14,7 +15,7 @@ router.get('/search', async (req, res, next) => {
     const limit = Number(req.query.limit) || 50
     Post.find()
         .limit(limit)
-        .populate('author')
+        .populate(populatable_virtuals)
         .then(posts => {
             res.json(posts)
         })
@@ -27,7 +28,7 @@ router.get('/search', async (req, res, next) => {
  * GET /api/posts/
  * */
 router.get('/', async (req, res, next) => {
-    res.json(await Post.find().populate('author'))
+    res.json(await Post.find().populate(populatable_virtuals))
 })
 
 /**
@@ -61,7 +62,8 @@ router.post('/', isLoggedIn, uploadCloud.single('image'), (req, res, next) => {
 router.get('/:id', async (req, res, next) => {
     try {
         const post = await Post.findById(req.params.id)
-            .populate('author')
+            .populate(populatable_virtuals)
+        console.log(post)
         if (!post) throw new Error()
         res.send(post)
     } catch (e) {

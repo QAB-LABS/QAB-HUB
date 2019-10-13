@@ -1,28 +1,29 @@
 import React from 'react'
-import PostDetails from '../PostDetails/PostDetails'
+import PostCard from '../PostDetails/PostCard'
 import { connect } from 'react-redux'
 import { getPosts } from '../../actions/posts'
 
 class Home extends React.Component {
   componentDidMount() {
     this.props.getPosts()
+    console.log(this.props)
   }
 
   getPosts = () => {
     return this.props.posts.slice(0, 4).map(post => (
-      <PostDetails key={post._id} post={post} />
+      <PostCard key={post._id} post={post} />
     ))
   }
 
   getEvents = () => {
     return this.props.posts.slice(0, 4).map(post => (
-      <PostDetails key={post._id} post={post} />
+      <PostCard key={post._id} post={post} />
     ))
   }
 
   getConventions = () => {
     return this.props.posts.slice(0, 4).map(post => (
-      <PostDetails key={post._id} post={post} />
+      <PostCard key={post._id} post={post} />
     ))
   }
 
@@ -44,7 +45,7 @@ class Home extends React.Component {
               <div className="eight wide column">
                 <div className="segment">
                   <h2>Conventions</h2>
-                  <div class="ui one cards">
+                  <div className="ui one cards">
                     {this.getConventions()}
                   </div>
                 </div>
@@ -53,7 +54,7 @@ class Home extends React.Component {
               <div className="eight wide column">
                 <div className="segment">
                   <h2>Events</h2>
-                  <div class="ui one cards">
+                  <div className="ui one cards">
                     {this.getConventions()}
                   </div>
                 </div>
@@ -69,7 +70,7 @@ class Home extends React.Component {
 
 function mapState(state) {
   return {
-    posts: state.posts,
+    posts: state.posts.all,
   }
 }
 

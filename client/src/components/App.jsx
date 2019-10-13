@@ -7,6 +7,7 @@ import SideBar from './SideBar/SideBar'
 import Home from './pages/Home'
 import Games from './pages/Games'
 import Profile from './pages/Profile'
+import Post from './pages/Post'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
 
@@ -14,19 +15,19 @@ import Signup from './pages/Signup'
 class App extends React.Component {
 
   render() {
-    console.log(this.props)
     const { alert } = this.props;
     return (
       <div className="App">
         <SideBar />
         <div className="pusher">
           {alert.message &&
-            <div className={`alert ${alert.type}`}>{alert.message}</div>
+            <div className={`ui message ${alert.type}`}>{alert.message}</div>
           }
           <MainNavbar />
           <Switch>
             <Route path="/" exact component={Home} />
             <Route path="/games" component={Games} />
+            <Route path="/post/:id" component={Post} />
             <Route path="/me" component={Profile} />
             <Route path="/profile" exact component={Profile} />
             <Route path="/profile/:id" component={Profile} />

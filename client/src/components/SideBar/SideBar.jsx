@@ -5,7 +5,7 @@ import { withRouter } from 'react-router'
 class SideBar extends React.Component {
     render() {
         return (
-            <div class="ui thin left vertical inverted sidebar menu visible ">
+            <div className="ui thin left vertical inverted sidebar menu visible ">
 
                 <div className="item">
                     <i className="home icon"></i>

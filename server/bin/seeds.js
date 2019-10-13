@@ -110,7 +110,7 @@ async function createDBEntries() {
 
     await submitDocuments('merchants', Merchant, Array.from({ length: 75 }).map(e => {
         return {
-            name: faker.commerce.price(1, 1000, 2, ''),
+            name: faker.commerce.productName(),
             url: faker.internet.url(),
             country: faker.address.countryCode()
         }

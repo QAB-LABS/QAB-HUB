@@ -1,4 +1,6 @@
-import { SIGN_IN, SIGN_OUT } from '../actions/types'
+import { PassThrough } from "stream"
+import * as types from '../actions/types'
+
 const INITIAL_STATE = {
     isSignedIn: null,
     userId: null
@@ -6,10 +8,13 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
-        case SIGN_IN:
+        case types.SIGN_IN:
             return {...state, isSignedIn: true, userId: action.payload }
-        case SIGN_OUT:
+        case types.SIGN_OUT:
             return {...state, isSignedIn: false, userId: null }
+        case types.SIGN_IN_SUCCESS:
+            console.log('runnign this')
+            return {...state, isSignedIn: true, user: action.payload }
         default:
             return state
     }

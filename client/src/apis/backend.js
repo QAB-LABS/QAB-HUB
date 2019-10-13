@@ -1,4 +1,5 @@
 import users from './backend/user'
+import auth from './backend/auth'
 import comments from './backend/comments'
 import posts from './backend/posts'
 import games from './backend/games'
@@ -15,5 +16,6 @@ export default {
     ...merchants,
     ...prices,
     ...reviews,
-    ...likes
+    ...likes,
+    ...auth
 }

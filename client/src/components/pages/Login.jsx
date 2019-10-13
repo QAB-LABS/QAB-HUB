@@ -1,36 +1,59 @@
-import React, { useState } from 'react'
+import React from 'react'
 import api from '../../apis/backend'
-import { useForm } from '../../hooks'
+import { login, logout, loginSuccess } from '../../actions/users'
+import { connect } from 'react-redux'
 
-export default function Login(props) {
-  const { formValues, getInputProps } = useForm({
+class Login extends React.Component {
+  state = {
+    message: null,
     username: '',
     password: '',
-  })
-
-  function handleSubmit(e) {
-    e.preventDefault()
-    api
-      .login(formValues.username, formValues.password)
-      .then(result => {
-        console.log('SUCCESS!')
-        props.history.push('/') // Redirect to the home page
-      })
-      .catch(err => setMessage(err.toString()))
   }
 
-  const [message, setMessage] = useState(null)
+  handleInputChange = (e) => {
+    const { name, value } = e.target
+    this.setState({
+      [name]: value
+    })
+  }
 
-  return (
-    <div className="Login">
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        Username: <input type="text" {...getInputProps('username')} /> <br />
-        Password: <input type="password" {...getInputProps('password')} />
-        <br />
-        <button>Login</button>
-      </form>
-      {message && <div className="info info-danger">{message}</div>}
-    </div>
-  )
+  handleSubmit = (e) => {
+    e.preventDefault()
+    api
+      .login(this.state.username, this.state.password)
+      .then(result => {
+        this.loginSuccessUser(result.data)
+        console.log('SUCCESS!')
+        this.state.history.push('/') // Redirect to the home page
+      })
+      .catch(err => this.setState({ message: err.toString() }))
+  }
+
+  render() {
+    return (
+      <div className="Login">
+        <h2>Login</h2>
+        <form onSubmit={this.handleSubmit}>
+          Username: <input type="text" name="username" onChange={this.handleInputChange} /> <br />
+          Password: <input type="password" name="password" onChange={this.handleInputChange} />
+          <br />
+          <button>Login</button>
+        </form>
+        {this.state.message && <div className="info info-danger">{this.state.message}</div>}
+      </div>
+    )
+  }
 }
+
+
+function mapState(state) {
+  const { loggingIn } = state.authentication;
+  return { loggingIn };
+}
+
+const actionCreators = {
+  login,
+  logout
+};
+
+export default connect(mapState, actionCreators)(Login)

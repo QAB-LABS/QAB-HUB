@@ -2,34 +2,40 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
-import GoogleAuth from '../GoogleAuth/GoogleAuth'
 import api from '../../apis/backend'
 class MainNavbar extends React.Component {
-  handleLogoutClick = () => {
-    api.logout()
-  }
-
   render() {
     return (
       <nav className="App-header">
         <div className="ui secondary pointing menu">
-          <NavLink className="item" to="/" exact>
-            Home
-          </NavLink>
-          <NavLink className="item" to="/games">
-            Games
-          </NavLink>
-
+          <NavLink className="item" to="/" exact>Home</NavLink>
+          <NavLink className="item" to="/games">Games</NavLink>
           <div className="right menu">
-            <NavLink to="/profile">Profile</NavLink>
-            {!api.isLoggedIn() && <NavLink to="/signup">Signup</NavLink>}
-            {!api.isLoggedIn() && <NavLink to="/login">Login</NavLink>}
-            {api.isLoggedIn() && (
-              <NavLink to="/" onClick={this.handleLogoutClick}>
-                Logout
-              </NavLink>
-            )}
-            <GoogleAuth />
+            <div className="ui simple dropdown">
+              <i className="user icon" />
+              <div className="text">Account</div>
+              <div className="menu">
+
+                {api.isLoggedIn() && (
+                  <div className="item">
+                    <NavLink className="item" to="/" onClick={this.handleLogoutClick}>Logout</NavLink>
+                  </div>)}
+
+                {api.isLoggedIn() && (
+                  <div className="item">
+                    <NavLink className="item" to="/profile">My Profile</NavLink>
+                  </div>
+                )}
+                <div className="item">
+                  <NavLink className="item" to="/login">Log In</NavLink>
+                </div>
+
+                <div className="item">
+                  <NavLink className="item" to="/signup">Sign Up</NavLink>
+                </div>
+
+              </div>
+            </div>
           </div>
         </div>
       </nav>
@@ -38,7 +44,10 @@ class MainNavbar extends React.Component {
 }
 
 const mapStateToProps = state => {
-  return { currentUserId: state.auth.userId }
+  return { 
+    currentUserId: state.auth.userId,
+    user: state.users.selectedUser
+  }
 }
 
 export default connect(

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import api from '../../api'
+import api from '../../apis/backend'
 import { useForm } from '../../hooks'
 
 export default function Login(props) {

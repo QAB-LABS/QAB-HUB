@@ -1,20 +1,28 @@
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
-import MainNavbar from './MainNavbar'
+import MainNavbar from './MainNavbar/MainNavbar'
 import Home from './pages/Home'
-import Countries from './pages/Countries'
-import AddCountry from './pages/AddCountry'
+import Games from './pages/Games'
+import Profile from './pages/Profile'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
 
 export default function App() {
   return (
     <div className="App">
-      <MainNavbar />
+      <div className="container">
+        <div className="row">
+          <div class="col-2">Left</div>
+          <div class="col-10">
+            <MainNavbar />
+            Right
+          </div>
+        </div>
+      </div>
       <Switch>
         <Route path="/" exact component={Home} />
-        <Route path="/countries" component={Countries} />
-        <Route path="/add-country" component={AddCountry} />
+        <Route path="/games" component={Games} />
+        <Route path="/profile" component={Profile} />
         <Route path="/signup" component={Signup} />
         <Route path="/login" component={Login} />
         <Route render={() => <h2>404</h2>} />

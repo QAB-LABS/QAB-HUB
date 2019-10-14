@@ -6,6 +6,7 @@ const categorySchema = new Schema({
         type: String,
         required: true
     },
+    bga_id: String,
 }, {
     timestamps: {
         createdAt: 'created_at',

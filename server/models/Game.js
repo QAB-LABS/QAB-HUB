@@ -9,6 +9,7 @@ const gameSchema = new mongoose.Schema({
         required: true,
         unique: true,
     },
+    bga_id: String,
     description: String,
     price: Number,
     image: String,

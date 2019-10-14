@@ -86,7 +86,7 @@ router.delete('/:id', isLoggedIn, async (req, res) => {
 /**
  * Update a specific category
  * @example 
- * POST /api/categories/:id
+ * PATCH /api/categories/:id
  */
 router.patch(`/:id`, isLoggedIn, async (req, res) => {
   if (req.user.role !== "admin") res.status(403).send('You do not have permission to update this resource.')

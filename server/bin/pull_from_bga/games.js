@@ -25,12 +25,15 @@ async function submitDocuments(name, model, jsonData) {
 async function createDBEntries() {
   try {
     const games = await axios.get(`${baseUrl}skip=${skip}&client_id=${process.env.BGA_CLIENT_ID}`);
-    console.log(games.data.games.length)
+    if(games.data.error || games.data.games.length < 100){
+      clearIntervalAsync(timer);
+      mongoose.disconnect()
+    }
     await submitDocuments('games', Game, games.data.games.map((e) => {
       return {
         name: e.name,
         bga_id: e.id,
-        description: e.description,
+        description: e.description_preview,
         price: e.price,
         image: e.image_url,
         year_published: e.year_published,
@@ -40,8 +43,7 @@ async function createDBEntries() {
         max_playtime: e.max_playtime,
         min_age: e.min_age,
         mechanics: e.mechanics ? 
-          e.mechanics.map((mechanic) =>mechanic.id) 
-          : [],
+          e.mechanics.map((mechanic) =>mechanic.id): [],
         designers: e.designers,
         artists: e.artists,
         publishers: e.publishers,
@@ -52,7 +54,6 @@ async function createDBEntries() {
     }))
     skip += limit;
     console.log("Currently on ", (skip -9), "documents")
-    if (games.data.games.length < limit) clearIntervalAsync(timer);
   } catch (err) {
     console.log('Could not connect to API', err)
   }
@@ -60,12 +61,12 @@ async function createDBEntries() {
 
 async function seed() {
   try {
-    timer = setIntervalAsync(createDBEntries
-    ,1200)
+    Game.deleteMany();
+    timer = setIntervalAsync(
+      async() =>{await createDBEntries()}
+    , 1200)
   } catch (err) {
     console.log('Error populating the database:  ', err)
-  } finally {
-    mongoose.disconnect()
   }
 }
 

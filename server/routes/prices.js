@@ -90,7 +90,7 @@ router.delete('/:id', isLoggedIn, async (req, res) => {
 /**
  * Update a specific price
  * @example 
- * POST /api/prices/:id
+ * PATCH /api/prices/:id
  */
 router.patch(`/:id`, isLoggedIn, async (req, res) => {
   if (req.user.role !== "admin") res.status(403).send('You do not have permission to update this resource.')

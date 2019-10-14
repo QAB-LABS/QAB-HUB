@@ -86,7 +86,8 @@ router.delete(`/:id`, isLoggedIn, async(req, res) => {
 
 /**
  * Update a specific review
- * @example POST /api/reviews/:id
+ * @example 
+ * PATCH /api/reviews/:id
  */
 router.patch(`/:id`, async(req, res) => {
     const updates = Object.keys(req.body)

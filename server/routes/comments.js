@@ -83,7 +83,8 @@ router.delete(`/:id`, isLoggedIn, async(req, res) => {
 
 /**
  * Update a specific comment
- * @example POST /api/comments/:id
+ * @example 
+ * PATCH /api/comments/:id
  */
 router.patch(`/:id`, async(req, res) => {
     const updates = Object.keys(req.body)

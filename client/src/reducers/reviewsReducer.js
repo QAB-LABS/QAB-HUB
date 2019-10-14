@@ -1,9 +1,16 @@
-import * as types from '../actions/types'
+import * as type from '../actions/types'
 
-export default (state = [], action) => {
+const initialState = {
+    selected: null,
+    all: []
+};
+
+export default (state = initialState, action) => {
     switch (action.type) {
-        case types.FETCH_REVIEWS:
-            return action.payload
+        case type.FETCH_REVIEWS:
+            return { ...state, all: action.payload }
+        case type.FETCH_REVIEW:
+            return { ...state, selected: action.payload }
         default:
             return state
     }

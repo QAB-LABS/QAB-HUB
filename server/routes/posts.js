@@ -4,17 +4,19 @@ const uploadCloud = require('../configs/cloudinary')
 const Post = require('../models/Post')
 const router = express.Router()
 
+const populatable_virtuals = 'author comments'
+
 /** 
  * Get all posts with the given search parameters 
  * Only supports limit currently.
  * @example
  * GET /api/posts/search?limit=50
  * */
-router.get('/search', async (req, res, next) => {
+router.get('/search', async(req, res, next) => {
     const limit = Number(req.query.limit) || 50
     Post.find()
         .limit(limit)
-        .populate('author')
+        .populate(populatable_virtuals)
         .then(posts => {
             res.json(posts)
         })
@@ -26,8 +28,8 @@ router.get('/search', async (req, res, next) => {
  * @example
  * GET /api/posts/
  * */
-router.get('/', async (req, res, next) => {
-    res.json(await Post.find().populate('author'))
+router.get('/', async(req, res, next) => {
+    res.json(await Post.find().populate(populatable_virtuals))
 })
 
 /**
@@ -58,10 +60,16 @@ router.post('/', isLoggedIn, uploadCloud.single('image'), (req, res, next) => {
  * Get a specific post 
  * @example GET /api/posts/:id
  */
-router.get('/:id', async (req, res, next) => {
+router.get('/:id', async(req, res, next) => {
     try {
         const post = await Post.findById(req.params.id)
-            .populate('author')
+            .populate(populatable_virtuals)
+            .populate({
+                path: 'comments',
+                populate: {
+                    path: 'author'
+                }
+            })
         if (!post) throw new Error()
         res.send(post)
     } catch (e) {
@@ -73,7 +81,7 @@ router.get('/:id', async (req, res, next) => {
  * Delete a specific post
  * @example DELETE /api/posts/:id
  */
-router.delete(`/:id`, isLoggedIn, async (req, res) => {
+router.delete(`/:id`, isLoggedIn, async(req, res) => {
     try {
         const post = await Post.findById(req.params.id)
         if (!post) throw new Error()
@@ -89,7 +97,7 @@ router.delete(`/:id`, isLoggedIn, async (req, res) => {
  * Update a specific post
  * @example POST /api/posts/:id
  */
-router.patch(`/:id`, isLoggedIn, async (req, res) => {
+router.patch(`/:id`, isLoggedIn, async(req, res) => {
     const updates = Object.keys(req.body)
     const allowedUpdates = ['title', 'content', 'image']
     const isValidOperation = updates.every((update) => allowedUpdates.includes(update))

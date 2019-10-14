@@ -65,7 +65,7 @@ async function createDBEntries() {
         return {
             content: faker.lorem.paragraph(),
             post: databaseEntries.posts[i % databaseEntries.posts.length]._id,
-            author: databaseEntries.users[i % databaseEntries.users.length]._id
+            author: databaseEntries.users[Math.floor(Math.random() * databaseEntries.users.length)]._id
         }
     }))
 
@@ -110,7 +110,7 @@ async function createDBEntries() {
 
     await submitDocuments('merchants', Merchant, Array.from({ length: 75 }).map(e => {
         return {
-            name: faker.commerce.price(1, 1000, 2, ''),
+            name: faker.commerce.productName(),
             url: faker.internet.url(),
             country: faker.address.countryCode()
         }

@@ -1,60 +1,46 @@
 import axios from 'axios'
-import errHandler from './error'
 
 const service = axios.create({
-    baseURL: process.env.NODE_ENV === 'production' ?
-        '/api/comments' : `http://${window.location.hostname}:5000/api`,
+    baseURL: process.env.NODE_ENV === 'production' ? '/api/users' : `http://${window.location.hostname}:5000/api/users`,
     withCredentials: true,
 })
 
-export default {
-    isLoggedIn() {
-        return localStorage.getItem('user') != null
-    },
+export const userService = {
+    getUsers,
+    getUser,
+    updateUser,
+    deleteUser
+};
 
-    getLocalStorageUser() {
-        return JSON.parse(localStorage.getItem('user'))
-    },
+function getUsers() {
+    return service
+        .get('/')
+        .then(handleResponse)
+}
 
-    signup(userInfo) {
-        return service
-            .post('/signup', userInfo)
-            .then(res => {
-                localStorage.setItem('user', JSON.stringify(res.data))
-                return res.data
-            })
-            .catch(errHandler)
-    },
+function getUser(id) {
+    return service
+        .get(`/${id}`)
+        .then(handleResponse)
+}
 
-    login(username, password) {
-        return service
-            .post('/login', {
-                username,
-                password,
-            })
-            .then(res => {
-                localStorage.setItem('user', JSON.stringify(res.data))
-                return res.data
-            })
-            .catch(errHandler)
-    },
+function updateUser(user) {
+    return service
+        .post('/login', JSON.stringify(user))
+        .then(handleResponse)
+}
 
-    logout() {
-        localStorage.removeItem('user')
-        return service.get('/logout')
-    },
+function deleteUser(id) {
+    return service
+        .delete(`/${id}`)
+        .then(handleResponse)
+}
 
-
-    addPicture(file) {
-        const formData = new FormData()
-        formData.append('picture', file)
-        return service
-            .post('/endpoint/to/add/a/picture', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
-            })
-            .then(res => res.data)
-            .catch(errHandler)
-    },
+function handleResponse(response) {
+    const { data } = response
+    if (!response.statusText) {
+        const error = (data && data.message) || response.statusText;
+        return error
+    }
+    return data;
 }

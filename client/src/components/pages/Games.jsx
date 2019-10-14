@@ -1,5 +1,5 @@
 import React from 'react'
-import GamesList from '../GamesList/GamesList'
+import GamesList from '../Games/GamesList'
 
 export default function Games() {
   return (

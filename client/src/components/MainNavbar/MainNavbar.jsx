@@ -1,35 +1,40 @@
 import React from 'react'
+import { authActions } from '../../actions/auth'
 import { NavLink } from 'react-router-dom'
 import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
-import GoogleAuth from '../GoogleAuth/GoogleAuth'
 import api from '../../apis/backend'
 class MainNavbar extends React.Component {
-  handleLogoutClick = () => {
-    api.logout()
-  }
-
   render() {
     return (
       <nav className="App-header">
         <div className="ui secondary pointing menu">
-          <NavLink className="item" to="/" exact>
-            Home
-          </NavLink>
-          <NavLink className="item" to="/games">
-            Games
-          </NavLink>
+          <div className="ui simple dropdown">
+            <div className="item">
+              <i className="user icon" />
+              Account
+            </div>
+            <div className="menu">
 
-          <div className="right menu">
-            <NavLink to="/profile">Profile</NavLink>
-            {!api.isLoggedIn() && <NavLink to="/signup">Signup</NavLink>}
-            {!api.isLoggedIn() && <NavLink to="/login">Login</NavLink>}
-            {api.isLoggedIn() && (
-              <NavLink to="/" onClick={this.handleLogoutClick}>
-                Logout
-              </NavLink>
-            )}
-            <GoogleAuth />
+              {api.isLoggedIn() && (
+                <div className="item">
+                  <NavLink className="item" to="/" onClick={this.props.logout}>Logout</NavLink>
+                </div>)}
+
+              {api.isLoggedIn() && (
+                <div className="item">
+                  <NavLink className="item" to="/profile">My Profile</NavLink>
+                </div>
+              )}
+              <div className="item">
+                <NavLink className="item" to="/login">Log In</NavLink>
+              </div>
+
+              <div className="item">
+                <NavLink className="item" to="/signup">Sign Up</NavLink>
+              </div>
+
+            </div>
           </div>
         </div>
       </nav>
@@ -37,11 +42,14 @@ class MainNavbar extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
-  return { currentUserId: state.auth.userId }
+const mapState = state => {
+  return {
+    currentUser: state.authentication.user
+  }
 }
 
-export default connect(
-  mapStateToProps,
-  {}
-)(withRouter(MainNavbar))
+const actionCreators = {
+  logout: authActions.logout
+};
+
+export default connect(mapState, actionCreators)(withRouter(MainNavbar))

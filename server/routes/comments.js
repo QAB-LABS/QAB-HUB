@@ -3,6 +3,8 @@ const { isLoggedIn } = require('../middlewares')
 const Comment = require('../models/Comment')
 const router = express.Router()
 
+const populatable_virtuals = 'author post'
+
 /** 
  * Get all comments with the given search parameters 
  * Only supports limit currently.
@@ -28,8 +30,7 @@ router.get('/search', async(req, res, next) => {
  * */
 router.get('/', async(req, res, next) => {
     res.json(await Comment.find()
-        .populate('author')
-        .populate('post'))
+        .populate(populatable_virtuals))
 })
 
 /**
@@ -56,8 +57,7 @@ router.post('/', (req, res, next) => {
 router.get('/:id', async(req, res, next) => {
     try {
         const comment = await Comment.findById(req.params.id)
-            .populate('author')
-            .populate('post')
+            .populate(populatable_virtuals)
         if (!comment) throw new Error()
         res.send(comment)
     } catch (e) {

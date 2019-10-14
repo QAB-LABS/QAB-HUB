@@ -51,6 +51,8 @@ app.use('/api/games', require('./routes/games'))
 app.use('/api/prices', require('./routes/prices'))
 app.use('/api/merchants', require('./routes/merchants'))
 app.use('/api/users', require('./routes/users'))
+app.use('/api/categories', require('./routes/categories'))
+app.use('/api/likes', require('./routes/likes'))
 
 app.use('/api/*', (req, res, next) => {
     let err = new Error('Not Found')

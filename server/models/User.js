@@ -95,7 +95,7 @@ userSchema.virtual('posts', {
     justOne: false
 })
 
-userSchema.methods.toJSON = function() {
+userSchema.methods.toJSON = function () {
     const user = this
     const userObject = user.toObject()
 
@@ -106,7 +106,7 @@ userSchema.methods.toJSON = function() {
     return userObject
 }
 
-userSchema.pre('remove', async function(next) {
+userSchema.pre('remove', async function (next) {
     await Post.deleteMany({ author: this._id })
     await ChatMessage.deleteMany({ author: this._id })
     await Like.deleteMany({ user: this._id })
@@ -116,7 +116,13 @@ userSchema.pre('remove', async function(next) {
 
 userSchema.set('toObject', { virtuals: true })
 userSchema.set('toJSON', { virtuals: true })
-userSchema.index({ location: "2dsphere" })
+
+userSchema.pre('remove', async function (next) {
+    await Like.deleteMany({ user: this._id })
+    next()
+})
+
+userSchema.index({ location: "2dsphere" });
 userSchema.index({ name: "text", description: "text" })
 
 const User = mongoose.model('User', userSchema)

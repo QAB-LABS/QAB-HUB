@@ -14,6 +14,8 @@ const mechanicSchema = new Schema({
     },
 })
 
+mechanicSchema.index({ name: 1, bga_id: 1 }, { unique: true })
+
 const Mechanic = mongoose.model('Mechanic', mechanicSchema)
 
 module.exports = Mechanic

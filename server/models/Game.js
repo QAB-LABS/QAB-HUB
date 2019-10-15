@@ -11,7 +11,10 @@ const gameSchema = new mongoose.Schema({
         required: true,
         unique: true,
     },
-    bga_id: String,
+    bga_id: {
+        type: String,
+        unique: true,
+    },
     description: String,
     price: Number,
     image: String,
@@ -31,6 +34,8 @@ const gameSchema = new mongoose.Schema({
     //     ref: "Category"
     // }]
 })
+
+gameSchema.index({ name: 1, bga_id: 1 }, { unique: true })
 
 gameSchema.virtual('likes', {
     ref: 'Like',

@@ -1,11 +1,13 @@
-import { CREATE_GAME, FETCH_GAMES } from '../actions/types'
+import * as types from '../actions/types'
 
 export default (state = [], action) => {
     switch (action.type) {
-        case FETCH_GAMES:
-            return action.payload
-        case CREATE_GAME:
-            return { game: action.payload }
+        case types.FETCH_GAMES:
+            return {...state, games: action.payload }
+        case types.CREATE_GAME:
+            return {...state, game: action.payload }
+        case types.FETCH_GAMES_COUNT:
+            return {...state, count: action.payload }
         default:
             return state
     }

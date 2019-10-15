@@ -24,22 +24,21 @@ const fields = [
     "categories"
 ]
 
+const populateFields = 'categories likes'
+
 /** 
  * Get all games with the given search parameters 
  * Only supports limit currently.
  * @example
  * GET /api/games/search?limit=50
  * */
-router.get('/search', async (req, res, next) => {
+router.get('/search', async(req, res, next) => {
     const limit = Number(req.query.limit) || 50
-    const terms = req.query.terms || ''
+    const skip = Number(req.query.skip) || 0
 
-    Game.find({ $text: { $search: terms } })
-        .limit(limit)
-        .populate('likes')
-        .then(games => {
-            res.json(games)
-        })
+    Game.find({}, null, {limit, skip})
+        .populate(populateFields)
+        .then(games => res.json(games))
         .catch(err => next(err))
 })
 
@@ -48,8 +47,8 @@ router.get('/search', async (req, res, next) => {
  * @example
  * GET /api/games/
  * */
-router.get('/', async (req, res, next) => {
-    res.json(await Game.find().populate('categories likes'))
+router.get('/', async(req, res, next) => {
+    res.json(await Game.find().populate(populateFields))
 })
 
 /**
@@ -71,14 +70,27 @@ router.post('/', isLoggedIn, (req, res, next) => {
 })
 
 /**
+ * Get the total number of games
+ * @example 
+ * GET /api/games/count
+ */
+router.get('/count', async(req, res, next) => {
+    try {
+        res.json({ count: await Game.count() })
+    } catch (e) {
+        res.status(404).send()
+    }
+})
+
+/**
  * Get a specific game 
  * @example 
  * GET /api/games/:id
  */
-router.get('/:id', async (req, res, next) => {
+router.get('/:id', async(req, res, next) => {
     try {
         const game = await Game.findById(req.params.id)
-            .populate('categories likes')
+            .populate(populateFields)
         if (!game) throw new Error()
         res.send(game)
     } catch (e) {
@@ -91,7 +103,7 @@ router.get('/:id', async (req, res, next) => {
  * @example 
  * DELETE /api/games/:id
  */
-router.delete('/:id', isLoggedIn, async (req, res) => {
+router.delete('/:id', isLoggedIn, async(req, res) => {
     try {
         const game = await Game.findById(req.params.id)
         if (!game) throw new Error()
@@ -108,7 +120,7 @@ router.delete('/:id', isLoggedIn, async (req, res) => {
  * @example 
  * PATCH /api/games/:id
  */
-router.patch(`/:id`, isLoggedIn, async (req, res) => {
+router.patch(`/:id`, isLoggedIn, async(req, res) => {
     if (req.user.role !== "admin") res.status(403).send('You do not have permission to update this resource.')
 
     const updates = Object.keys(req.body)

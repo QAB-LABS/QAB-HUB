@@ -10,6 +10,7 @@ import merchantsReducer from './merchantsReducer'
 import pricesReducer from './pricesReducer'
 import authReducer from './authReducer'
 import registrationReducer from './registrationReducer'
+import filtersReducer from './filtersReducer'
 
 export default combineReducers({
     alert: alertReducer,
@@ -23,4 +24,5 @@ export default combineReducers({
     registration: registrationReducer,
     reviews: reviewsReducer,
     users: usersReducer,
+    filters: filtersReducer,
 })

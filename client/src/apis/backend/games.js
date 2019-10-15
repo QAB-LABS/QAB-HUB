@@ -22,6 +22,13 @@ export default {
             .catch(errHandler)
     },
 
+    getGamesCount() {
+        return service
+            .get('/count')
+            .then(res => res.data)
+            .catch(errHandler)
+    },
+
     addGame(body) {
         return service
             .post('/', body)

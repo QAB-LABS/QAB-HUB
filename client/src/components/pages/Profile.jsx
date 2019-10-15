@@ -10,7 +10,6 @@ class UserProfile extends React.Component {
   }
 
   render() {
-    console.log('user Profile:', this.props)
     return (
       <div className="ui segments">
         <div className="ui segment">

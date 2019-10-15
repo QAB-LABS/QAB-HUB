@@ -49,7 +49,7 @@ router.get('/search', async (req, res, next) => {
  * GET /api/games/
  * */
 router.get('/', async (req, res, next) => {
-    res.json(await Game.find().populate('categories likes'))
+    res.json(await Game.find().populate(' likes'))
 })
 
 /**
@@ -78,7 +78,7 @@ router.post('/', isLoggedIn, (req, res, next) => {
 router.get('/:id', async (req, res, next) => {
     try {
         const game = await Game.findById(req.params.id)
-            .populate('categories likes')
+            .populate(' likes')
         if (!game) throw new Error()
         res.send(game)
     } catch (e) {

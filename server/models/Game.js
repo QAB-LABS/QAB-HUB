@@ -9,6 +9,7 @@ const gameSchema = new mongoose.Schema({
         required: true,
         unique: true,
     },
+    bga_id: String,
     description: String,
     price: Number,
     image: String,
@@ -21,11 +22,12 @@ const gameSchema = new mongoose.Schema({
     mechanics: [String],
     designers: [String],
     artists: [String],
-    publisher: String,
-    categories: [{
-        type: Schema.Types.ObjectId,
-        ref: "Category"
-    }]
+    publishers: [String],
+    categories: [String],
+    // categories: [{
+    //     type: Schema.Types.ObjectId,
+    //     ref: "Category"
+    // }]
 })
 
 gameSchema.virtual('likes', {

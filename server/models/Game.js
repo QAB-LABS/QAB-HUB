@@ -1,6 +1,8 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const Like = require('../models/Like');
+const Review = require('../models/Review');
+const Rating = require('../models/Rating');
 
 
 const gameSchema = new mongoose.Schema({
@@ -35,11 +37,27 @@ gameSchema.virtual('likes', {
     justOne: false
 })
 
+gameSchema.virtual('reviews', {
+    ref: 'Review',
+    localField: '_id',
+    foreignField: 'game',
+    justOne: false
+})
+
+gameSchema.virtual('ratings', {
+    ref: 'Rating',
+    localField: '_id',
+    foreignField: 'game',
+    justOne: false
+})
+
 gameSchema.set('toObject', { virtuals: true })
 gameSchema.set('toJSON', { virtuals: true })
 
 gameSchema.pre('remove', async function(next) {
     await Like.deleteMany({ game: this._id })
+    await Review.deleteMany({ game: this._id })
+    await Rating.deleteMany({ game: this._id })
     next()
 })
 

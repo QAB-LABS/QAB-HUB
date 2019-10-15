@@ -24,7 +24,7 @@ const fields = [
     "categories"
 ]
 
-const populateFields = 'categories likes'
+const populateFields = 'categories likes reviews ratings'
 
 /** 
  * Get all games with the given search parameters 

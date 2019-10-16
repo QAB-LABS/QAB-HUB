@@ -4,7 +4,7 @@
             src="https://github.com/QAB-LABS/QAB-HUB/blob/master/client/public/logo-placeholder.png?raw=true"
             alt="QAB-HUB logo">
         <br>
-        QAB HUB
+        Board Game Silo
         <br>
     </h1>
     <p style="font-size: 1.35rem; font-weight: 500; padding: 2rem; text-align: center">TBD</p>

@@ -1,6 +1,8 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const Like = require('../models/Like');
+const Category = require('../models/Category');
+const Mechanic = require('../models/Mechanic');
 
 
 const gameSchema = new mongoose.Schema({
@@ -9,7 +11,10 @@ const gameSchema = new mongoose.Schema({
         required: true,
         unique: true,
     },
-    bga_id: String,
+    bga_id: {
+        type: String,
+        unique: true,
+    },
     description: String,
     price: Number,
     image: String,
@@ -30,10 +35,26 @@ const gameSchema = new mongoose.Schema({
     // }]
 })
 
+gameSchema.index({ name: 1, bga_id: 1 }, { unique: true })
+
 gameSchema.virtual('likes', {
     ref: 'Like',
     localField: '_id',
     foreignField: 'game',
+    justOne: false
+})
+
+gameSchema.virtual('category_names', {
+    ref: 'Category',
+    localField: 'categories',
+    foreignField: 'bga_id',
+    justOne: false
+})
+
+gameSchema.virtual('mechanic_names', {
+    ref: 'Mechanic',
+    localField: 'mechanics',
+    foreignField: 'bga_id',
     justOne: false
 })
 

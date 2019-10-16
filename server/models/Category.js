@@ -14,6 +14,8 @@ const categorySchema = new Schema({
     },
 })
 
+categorySchema.index({name: 1, bga_id: 1}, {unique: true})
+
 const Category = mongoose.model('Category', categorySchema)
 
 module.exports = Category

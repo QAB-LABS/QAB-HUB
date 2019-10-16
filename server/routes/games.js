@@ -1,8 +1,10 @@
+const aqp = require('api-query-params');
 const express = require('express')
 const { isLoggedIn } = require('../middlewares')
 const Game = require('../models/Game')
-const Like = require('../models/Like')
 const router = express.Router()
+
+const populatable_virtuals = 'reviews ratings categories mechanic_names category_names likes';
 
 const fields = [
     "url",
@@ -24,8 +26,6 @@ const fields = [
     "categories"
 ]
 
-const populateFields = 'categories likes reviews ratings'
-
 /** 
  * Get all games with the given search parameters 
  * Only supports limit currently.
@@ -33,11 +33,13 @@ const populateFields = 'categories likes reviews ratings'
  * GET /api/games/search?limit=50
  * */
 router.get('/search', async(req, res, next) => {
-    const limit = Number(req.query.limit) || 50
-    const skip = Number(req.query.skip) || 0
-
-    Game.find({}, null, {limit, skip})
-        .populate(populateFields)
+    const { filter, skip, limit, sort, projection } = aqp(req.query);
+    Game.find(filter)
+        .skip(skip || 0)
+        .limit(limit || 50)
+        .sort(sort)
+        .select(projection)
+        .populate(populatable_virtuals)
         .then(games => res.json(games))
         .catch(err => next(err))
 })
@@ -48,7 +50,7 @@ router.get('/search', async(req, res, next) => {
  * GET /api/games/
  * */
 router.get('/', async(req, res, next) => {
-    res.json(await Game.find().populate(populateFields))
+    res.json(await Game.find().populate(populatable_virtuals))
 })
 
 /**
@@ -90,7 +92,7 @@ router.get('/count', async(req, res, next) => {
 router.get('/:id', async(req, res, next) => {
     try {
         const game = await Game.findById(req.params.id)
-            .populate(populateFields)
+            .populate(populatable_virtuals)
         if (!game) throw new Error()
         res.send(game)
     } catch (e) {

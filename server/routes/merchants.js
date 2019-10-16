@@ -1,8 +1,11 @@
+const aqp = require('api-query-params');
 const express = require('express')
 const { isLoggedIn } = require('../middlewares')
 const Price = require('../models/Price')
 const Merchant = require("../models/Merchant")
 const router = express.Router()
+
+const populatable_virtuals = 'prices'
 
 /** 
  * Get all merchants with the given search parameters 
@@ -11,13 +14,15 @@ const router = express.Router()
  * GET /api/merchants/search?limit=50
  * */
 router.get('/search', async(req, res, next) => {
-    const limit = Number(req.query.limit) || 50
-    Merchant.find()
-        .limit(limit)
-        .populate('prices')
-        .then(merchants => {
-            res.json(merchants)
-        })
+    const { filter, skip, limit, sort, projection } = aqp(req.query);
+
+    Merchant.find(filter)
+        .skip(skip || 0)
+        .limit(limit || 50)
+        .sort(sort)
+        .select(projection)
+        .populate(populatable_virtuals)
+        .then(merchants => res.json(merchants))
         .catch(err => next(err))
 })
 
@@ -27,7 +32,7 @@ router.get('/search', async(req, res, next) => {
  * GET /api/merchants/
  * */
 router.get('/', async(req, res, next) => {
-    res.json(await Merchant.find().populate('prices'))
+    res.json(await Merchant.find().populate(populatable_virtuals))
 })
 
 /**
@@ -60,7 +65,7 @@ router.post('/', isLoggedIn, (req, res, next) => {
 router.get('/:id', async(req, res, next) => {
     try {
         const merchant = await Merchant.findById(req.params.id)
-            .populate('prices')
+            .populate(populatable_virtuals)
         if (!merchant) throw new Error()
         res.send(merchant)
     } catch (e) {

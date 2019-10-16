@@ -1,7 +1,10 @@
+const aqp = require('api-query-params');
 const express = require('express')
 const { isLoggedIn } = require('../middlewares')
 const Review = require('../models/Review')
 const router = express.Router()
+
+const populatable_virtuals = 'author game'
 
 const fields = [
     'title',
@@ -17,15 +20,15 @@ const fields = [
  * GET /api/reviews/search?limit=50
  * */
 router.get('/search', async(req, res, next) => {
-    const limit = req.query.limit || 50
-    const terms = req.query.terms || ''
+    const { filter, skip, limit, sort, projection } = aqp(req.query);
 
-    Review.find({ $text: { $search: terms } })
-        .limit(limit)
-        .populate('author game')
-        .then(reviews => {
-            res.json(reviews)
-        })
+    Review.find(filter)
+        .skip(skip || 0)
+        .limit(limit || 50)
+        .sort(sort)
+        .select(projection)
+        .populate(populatable_virtuals)
+        .then(reviews => res.json(reviews))
         .catch(err => next(err))
 })
 
@@ -35,7 +38,7 @@ router.get('/search', async(req, res, next) => {
  * GET /api/reviews/
  * */
 router.get('/', async(req, res, next) => {
-    res.json(await Review.find().populate('author game'))
+    res.json(await Review.find().populate(populatable_virtuals))
 })
 
 /**
@@ -60,7 +63,7 @@ router.post('/', (req, res, next) => {
 router.get('/:id', async(req, res, next) => {
     try {
         const review = await Review.findById(req.params.id)
-            .populate('author game')
+            .populate(populatable_virtuals)
         if (!review) throw new Error()
         res.send(review)
     } catch (e) {
@@ -91,8 +94,7 @@ router.delete(`/:id`, isLoggedIn, async(req, res) => {
  */
 router.patch(`/:id`, async(req, res) => {
     const updates = Object.keys(req.body)
-    const allowedUpdates = ['title', 'content', 'image']
-    const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
+    const isValidOperation = updates.every((update) => fields.includes(update))
 
     if (!isValidOperation) return res.status(400).send({ error: 'Invalid updates!' })
 

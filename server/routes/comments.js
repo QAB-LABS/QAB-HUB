@@ -1,3 +1,4 @@
+const aqp = require('api-query-params');
 const express = require('express')
 const { isLoggedIn } = require('../middlewares')
 const Comment = require('../models/Comment')
@@ -12,14 +13,14 @@ const populatable_virtuals = 'author post'
  * GET /api/comments/search?limit=50
  * */
 router.get('/search', async(req, res, next) => {
-    const limit = req.query.limit || 50
-    Comment.find()
-        .limit(limit)
-        .populate('author')
-        .populate('post')
-        .then(comments => {
-            res.json(comments)
-        })
+    const { filter, skip, limit, sort, projection } = aqp(req.query);
+    Comment.find(filter)
+        .skip(skip || 0)
+        .limit(limit || 50)
+        .sort(sort)
+        .select(projection)
+        .populate(populatable_virtuals)
+        .then(comments => res.json(comments))
         .catch(err => next(err))
 })
 

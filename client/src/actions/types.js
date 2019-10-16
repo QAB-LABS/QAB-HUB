@@ -16,6 +16,7 @@ export const FETCH_GAME = 'FETCH_GAME'
 export const CREATE_GAME = 'CREATE_GAME'
 export const UPDATE_GAME = 'UPDATE_GAME'
 export const DELETE_GAME = 'DELETE_GAME'
+export const FILTER_GAMES = 'FILTER_GAMES'
 
 export const FETCH_MERCHANTS = 'FETCH_MERCHANTS'
 export const FETCH_MERCHANT = 'FETCH_MERCHANT'

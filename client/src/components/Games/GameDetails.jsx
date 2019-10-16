@@ -1,51 +1,32 @@
 import React from 'react';
-import { NavLink } from 'react-dom'
+import { NavLink } from 'react-router-dom'
 
 
 const GameDetails = props => {
-  const { name, price, description, likes, reviews, categories, image, year_published } = this.props.game
-  console.log(game)
+  const { name, likes, categories, ratings, year_published } = props.game
 
   return (
-    <div class="ui card">
-      <div class="image">
-        <img src={image} />
-      </div>
-      <div class="content">
-        <a class="header">{name}</a>
-        <div class="meta">
-          <span class="date">{year_published}</span>
-        </div>
-        <div class="description">
-          {}
-    </div>
-      </div>
-      <div class="extra content">
-        <a><i class="star outline icon"></i>{`${reviews.length}`} </a>
-        <a><i class="heart outline icon"></i>{`${likes.length}`} </a>
-      </div>
-    </div>
-
-
     <div className={props.card ? "ui card" : "segment"}>
-      <div className="content">
-        <NavLink to={`/post/${_id}`}><p className="header">{title}</p></NavLink>
-        <div className="meta">
-          <span className="date">{created_at}</span>
-        </div>
-        <div className="description">
-          {content}
-        </div>
+      <div className="image">
+        <img alt={`Banner for ${name}`} src={'https://place-hold.it/200x150/666/fff/000'} />
       </div>
-
+      <div className="content">
+        <div className="header">{name}</div>
+        <div className="meta">
+          <NavLink to={`/categories/${categories[0] ? categories[0]._id : ''}`}>{(categories[0] ? categories[0].name : 'No Category').toUpperCase()}</NavLink>
+          <br />
+          <span className="date">{year_published}</span>
+        </div>
+        {/* <div style={{ maxWidth: "100%", overflow: "hidden", textOverflow: "ellipsis" }} className="description">
+          <span style={{ whiteSpace: "nowrap" }}>{description}</span>
+        </div> */}
+      </div>
       <div className="extra content">
-        <NavLink to={`/profile/${author._id}`}>
-          <i className="user icon" />
-          {author.username}
-        </NavLink>
+        <div><i className="star outline icon"></i>{`${ratings.length ? (ratings.reduce((t, r) => t + r, 0) / ratings.length).toFixed(2) : 0}/5`} </div>
+        <div><i className="heart outline icon"></i>{`${likes.length}`} </div>
       </div>
     </div>
-      )
+  )
 }
 
 export default GameDetails;

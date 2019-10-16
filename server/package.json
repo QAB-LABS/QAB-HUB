@@ -8,6 +8,7 @@
         "seed": "cd bin && node seeds.js"
     },
     "dependencies": {
+        "api-query-params": "^4.14.0",
         "axios": "^0.19.0",
         "bcrypt": "^3.0.4",
         "body-parser": "^1.18.3",
@@ -27,6 +28,7 @@
         "passport": "^0.4.0",
         "passport-local": "^1.0.0",
         "serve-favicon": "^2.5.0",
+        "set-interval-async": "^1.0.29",
         "validator": "^11.1.0"
     },
     "devDependencies": {

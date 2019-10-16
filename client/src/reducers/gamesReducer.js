@@ -8,6 +8,10 @@ export default (state = [], action) => {
             return {...state, game: action.payload }
         case types.FETCH_GAMES_COUNT:
             return {...state, count: action.payload }
+        case types.FILTER_GAMES:
+            const {start, end} = action.payload
+            console.log(state)
+            return {...state, filteredGames: state.games.slice(start, end)}
         default:
             return state
     }

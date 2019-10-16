@@ -66,3 +66,9 @@ export const deleteGame = (id) => {
         }
     }
 }
+
+export const setFilteredGames = (start, end) => {
+    return dispatch => {
+        return dispatch({ type: types.FILTER_GAMES, payload: {start, end}})
+    }
+}

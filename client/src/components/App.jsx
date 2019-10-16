@@ -19,12 +19,30 @@ class App extends React.Component {
     const { alert } = this.props;
     return (
       <div className="App">
-        <SideBar />
-        <div className="pusher">
+        
+        <MainNavbar />
+        <div className="hero carousel">
+          This is where the carousel goes.
+        </div>
+        <div className="container main">
+          <div className="row">
+            <div className="col-4">
+              One
+            </div>
+            <div className="col-4">
+              Two
+            </div>
+            <div className="col-4">
+              Three
+            </div>
+            <div className="col-4">
+              Four
+            </div>
+          </div>
+        </div>
           {alert.message &&
             <div className={`ui message ${alert.type}`}>{alert.message}</div>
           }
-          <MainNavbar />
           <Switch>
             <Route path="/" exact component={Home} />
             <Route path="/games" component={Games} />
@@ -38,7 +56,6 @@ class App extends React.Component {
             <Route path="/login" component={Login} />
             <Route render={() => <h2>404</h2>} />
           </Switch>
-        </div>
       </div>
     )
   }

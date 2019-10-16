@@ -37,6 +37,7 @@ class Home extends React.Component {
 
   render() {
     return (
+      <React.Fragment>
       <div className="Home">
         <div className="ui segments">
 
@@ -80,6 +81,7 @@ class Home extends React.Component {
           </div>
         </div>
       </div>
+      </React.Fragment>
     )
   }
 }

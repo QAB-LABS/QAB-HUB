@@ -1,4 +1,6 @@
-@import './styles/normalize';
+@import "./styles/normalize/import-now";
 @import './styles/variables';
+@import './styles/global';
 @import './styles/nav';
 @import './styles/grid';
+@import './styles/components/carousel';

@@ -1,40 +1,49 @@
 .topNav {
+  .primary {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+  }
 
-    .primary {
-        display: flex;  
-        align-items: center;
-        justify-content: left;
+  .secondary {
+    text-align: right;
+    justify-self: right;
+  }
+
+  .logo {
+    font-weight: 700;
+    font-size: 1rem;
+    line-height: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .item {
+      color: $darkGrey;
+    font-size: 0.9rem;
+    line-height: .9rem;
+    text-transform: uppercase;
+  }
+
+  .menu {
+    margin-left: $large;
+
+    ul {
+      display: flex;
+      justify-content: left;
+
+      li {
+        margin-left: $medium;
+
+        a {
+        }
+      }
     }
+  }
 
-    .secondary {
-        text-align: right;
-        justify-self: right;
-    }
-
-    .logo {
-        font-weight: 700;
-        font-size: 1.2rem;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-    }
-
+  .dropdown {
     .menu {
-        margin-left: $xlarge;
-
-        ul {
-            display: flex;
-            justify-content: left;
-
-            li {
-
-            }
-        }
+      display: none;
     }
-
-    .dropdown {
-
-        .menu {
-            display: none;
-        }
-    }
+  }
 }

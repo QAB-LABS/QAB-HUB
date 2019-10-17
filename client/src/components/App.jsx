@@ -11,7 +11,6 @@ import Profile from './pages/Profile'
 import Post from './pages/Post'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
-import Carousel from './Carousel/Carousel'
 import Footer from './Footer/Footer'
 
 
@@ -26,9 +25,6 @@ class App extends React.Component {
         <Carousel />
         <div className="container main">
           <div className="row">
-        {alert.message &&
-            <div className={`ui message ${alert.type}`}>{alert.message}</div>
-          }
           <Switch>
             <Route path="/" exact component={Home} />
             <Route path="/games" component={Games} />
@@ -41,16 +37,16 @@ class App extends React.Component {
             <Route path="/signup" component={Signup} />
             <Route path="/login" component={Login} />
             <Route render={() => <h2>404</h2>} />
-<<<<<<< HEAD
           </Switch> 
           </div>
         </div>
 
-=======
-          </Switch>
+        <Footer />
+        
+        {alert.message &&
+          <div className={`alert message ${alert.type}`}>{alert.message}</div>
+        }
 
-          <Footer />
->>>>>>> 2031e94514dfebdcd873190f4e6773fd17c56897
       </div>
     )
   }

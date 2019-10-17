@@ -1,12 +1,20 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const Like = require('../models/Like');
+const Review = require('../models/Review');
+const Rating = require('../models/Rating');
+const Category = require('../models/Category');
+const Mechanic = require('../models/Mechanic');
 
 
 const gameSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
+        unique: true,
+    },
+    bga_id: {
+        type: String,
         unique: true,
     },
     description: String,
@@ -21,12 +29,14 @@ const gameSchema = new mongoose.Schema({
     mechanics: [String],
     designers: [String],
     artists: [String],
-    publisher: String,
+    publishers: [String],
     categories: [{
         type: Schema.Types.ObjectId,
         ref: "Category"
     }]
 })
+
+gameSchema.index({ name: 1, bga_id: 1 }, { unique: true })
 
 gameSchema.virtual('likes', {
     ref: 'Like',
@@ -35,12 +45,40 @@ gameSchema.virtual('likes', {
     justOne: false
 })
 
+gameSchema.virtual('reviews', {
+    ref: 'Review',
+    localField: '_id',
+    foreignField: 'game',
+    justOne: false
+})
+
+gameSchema.virtual('ratings', {
+    ref: 'Rating',
+    localField: '_id',
+    foreignField: 'game'
+})
+
+gameSchema.virtual('category_names', {
+    ref: 'Category',
+    localField: 'categories',
+    foreignField: 'bga_id',
+    justOne: false
+})
+
+gameSchema.virtual('mechanic_names', {
+    ref: 'Mechanic',
+    localField: 'mechanics',
+    foreignField: 'bga_id',
+    justOne: false
+})
+
 gameSchema.set('toObject', { virtuals: true })
 gameSchema.set('toJSON', { virtuals: true })
-gameSchema.index({ name: "text", description: "text" })
 
-gameSchema.pre('remove', async function (next) {
+gameSchema.pre('remove', async function(next) {
     await Like.deleteMany({ game: this._id })
+    await Review.deleteMany({ game: this._id })
+    await Rating.deleteMany({ game: this._id })
     next()
 })
 

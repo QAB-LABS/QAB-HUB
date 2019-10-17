@@ -1,2 +1,22 @@
+$fontFamily: 'Roboto', Helvetica, 'Open Sans', Arial, sans-serif;
+
+$white: #ffffff;
+$black: #000000;
+$darkGrey: #222222;
+$grey: #999999;
+$lightGrey: #eeeeee;
+
+$purple: #65309b;
+$darkPurple: #2d223b;
+$lightPurple: #b2b1d3;
+
+// Used to calculate the column classes in _grid.scss
 $columnNumber: 12;
 $columnWidth: (1 / $columnNumber);
+
+// Helper spacing classes
+$tiny: 3px;
+$small: 7px;
+$medium: 15px;
+$large: 27px;
+$xlarge: 42px;

@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux'
+import alertReducer from './alertReducer'
 import usersReducer from './usersReducer'
 import postsReducer from './postsReducer'
 import commentsReducer from './commentsReducer'
@@ -8,15 +9,20 @@ import reviewsReducer from './reviewsReducer'
 import merchantsReducer from './merchantsReducer'
 import pricesReducer from './pricesReducer'
 import authReducer from './authReducer'
+import registrationReducer from './registrationReducer'
+import filtersReducer from './filtersReducer'
 
 export default combineReducers({
-    posts: postsReducer,
-    users: usersReducer,
-    games: gamesReducer,
-    prices: pricesReducer,
-    reviews: reviewsReducer,
-    likes: likesReducer,
+    alert: alertReducer,
+    authentication: authReducer,
     comments: commentsReducer,
+    games: gamesReducer,
+    likes: likesReducer,
     merchants: merchantsReducer,
-    auth: authReducer
+    posts: postsReducer,
+    prices: pricesReducer,
+    registration: registrationReducer,
+    reviews: reviewsReducer,
+    users: usersReducer,
+    filters: filtersReducer,
 })

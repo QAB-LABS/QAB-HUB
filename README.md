@@ -24,6 +24,9 @@
     <a align=center href="https://www.gnu.org/licenses/gpl-3.0">
         <img src="https://img.shields.io/badge/License-GPLv3-blue.svg" />
     </a>
+    <a align=center href="https://dev.azure.com/QAB-LABS/BoardGameSiloAPI">
+        <img src="https://dev.azure.com/QAB-LABS/BoardGameSiloAPI/_apis/build/status/boardgamesiloapilinux%20-%20CI?branchName=master" />
+    </a>
 </div>
 
 # Setup
@@ -42,7 +45,7 @@
 *   Create a [Mongo DB Cluster](https://cloud.mongodb.com/)
 *   Create a [Heroku App]('https://heroku.com')
 *   Create a [Cloudinary API Key](https://cloudinary.com/?utm_source=google&utm_medium=cpc&utm_campaign=brand&utm_content=300704534040&utm_term=cloudinary&gclid=Cj0KCQjw_absBRD1ARIsAO4_D3tfpMaU3ai8tA7FoE0DdxrbsK5xSMaShens1Tn-QYQD7z9-d2mgc_kaApegEALw_wcB)
-*   Create a [BoardGameAtlas API Key](https://www.boardgameatlas.com)
+*   Create a [BoardGameAtlas API Key](https://www.boardgameatlas.com/api/docs/apps)
 *   Set the following environment variables on | [mac](https://stackoverflow.com/questions/7501678/set-environment-variables-on-mac-os-x-lion) | [windows](https://superuser.com/questions/1334129/setting-an-environment-variable-in-windows-10-gpodder) | [linux](https://stackoverflow.com/questions/45502996/how-to-set-environment-variable-in-linux-permanently) |
 *   ^ Or just use a .env file in the server directory
 
@@ -50,8 +53,6 @@
 | ---------------------------- |:--------------------------------------------------- |
 | PORT                         | Port for the backend express server                 |
 | MONGODB_URI                  | URI to log into mongodb                             |
-| GOOGLEMAPS_API_KEY           | API Key for google maps.|
-| BOARDGAMEATLAS_API_KEY       | BoardGameAtlas API KEY                              |
 | BOARDGAMEATLAS_API_SECRET    | BoardGameAtlas API SECRET                           |
 | CLOUDINARY_API_NAME          | Cloudinary API cloud name                           |
 | CLOUDINARY_API_KEY           | Cloudinary API Key                                  |

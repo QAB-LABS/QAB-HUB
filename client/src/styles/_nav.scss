@@ -1,0 +1,49 @@
+.topNav {
+  .primary {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+  }
+
+  .secondary {
+    text-align: right;
+    justify-self: right;
+  }
+
+  .logo {
+    font-weight: 700;
+    font-size: 1rem;
+    line-height: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .item {
+      color: $darkGrey;
+    font-size: 0.9rem;
+    line-height: .9rem;
+    text-transform: uppercase;
+  }
+
+  .menu {
+    margin-left: $large;
+
+    ul {
+      display: flex;
+      justify-content: left;
+
+      li {
+        margin-left: $medium;
+
+        a {
+        }
+      }
+    }
+  }
+
+  .dropdown {
+    .menu {
+      display: none;
+    }
+  }
+}

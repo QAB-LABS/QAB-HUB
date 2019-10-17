@@ -1,6 +1,17 @@
 import * as types from './types'
 import api from '../apis/backend'
 
+export const getGamesCount = () => {
+    return async dispatch => {
+        try {
+            const response = await api.getGamesCount()
+            return dispatch({ type: types.FETCH_GAMES_COUNT, payload: response });
+        } catch (error) {
+            return dispatch({ type: types.ERROR, error });
+        }
+    }
+}
+
 export const getGames = () => {
     return async dispatch => {
         try {
@@ -53,5 +64,11 @@ export const deleteGame = (id) => {
         } catch (error) {
             return dispatch({ type: types.ERROR, error });
         }
+    }
+}
+
+export const setFilteredGames = (start, end) => {
+    return dispatch => {
+        return dispatch({ type: types.FILTER_GAMES, payload: {start, end}})
     }
 }

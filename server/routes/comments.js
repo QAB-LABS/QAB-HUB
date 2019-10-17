@@ -1,7 +1,10 @@
+const aqp = require('api-query-params');
 const express = require('express')
 const { isLoggedIn } = require('../middlewares')
 const Comment = require('../models/Comment')
 const router = express.Router()
+
+const populatable_virtuals = 'author post'
 
 /** 
  * Get all comments with the given search parameters 
@@ -10,14 +13,14 @@ const router = express.Router()
  * GET /api/comments/search?limit=50
  * */
 router.get('/search', async(req, res, next) => {
-    const limit = req.query.limit || 50
-    Comment.find()
-        .limit(limit)
-        .populate('author')
-        .populate('post')
-        .then(comments => {
-            res.json(comments)
-        })
+    const { filter, skip, limit, sort, projection } = aqp(req.query);
+    Comment.find(filter)
+        .skip(skip || 0)
+        .limit(limit || 50)
+        .sort(sort)
+        .select(projection)
+        .populate(populatable_virtuals)
+        .then(comments => res.json(comments))
         .catch(err => next(err))
 })
 
@@ -28,8 +31,7 @@ router.get('/search', async(req, res, next) => {
  * */
 router.get('/', async(req, res, next) => {
     res.json(await Comment.find()
-        .populate('author')
-        .populate('post'))
+        .populate(populatable_virtuals))
 })
 
 /**
@@ -56,8 +58,7 @@ router.post('/', (req, res, next) => {
 router.get('/:id', async(req, res, next) => {
     try {
         const comment = await Comment.findById(req.params.id)
-            .populate('author')
-            .populate('post')
+            .populate(populatable_virtuals)
         if (!comment) throw new Error()
         res.send(comment)
     } catch (e) {
@@ -83,7 +84,8 @@ router.delete(`/:id`, isLoggedIn, async(req, res) => {
 
 /**
  * Update a specific comment
- * @example POST /api/comments/:id
+ * @example 
+ * PATCH /api/comments/:id
  */
 router.patch(`/:id`, async(req, res) => {
     const updates = Object.keys(req.body)

@@ -1,7 +1,10 @@
+const aqp = require('api-query-params');
 const express = require('express')
 const { isLoggedIn } = require('../middlewares')
 const User = require('../models/User')
 const router = express.Router()
+
+const populatable_virtuals = 'reviews likes posts'
 
 const fields = [
     'username',
@@ -19,12 +22,14 @@ const fields = [
  * GET /api/users/search?limit=50
  * */
 router.get('/search', async(req, res, next) => {
-    const limit = req.query.limit || 50
-    const terms = req.query.terms || ''
+    const { filter, skip, limit, sort, projection } = aqp(req.query);
 
-    User.find({ $text: { $search: terms } })
-        .limit(limit)
-        .populate('reviews likes posts')
+    User.find(filter)
+        .skip(skip || 0)
+        .limit(limit || 50)
+        .sort(sort)
+        .select(projection)
+        .populate(populatable_virtuals)
         .then(users => res.json(users))
         .catch(err => next(err))
 })
@@ -35,7 +40,7 @@ router.get('/search', async(req, res, next) => {
  * GET /api/users/
  * */
 router.get('/', async(req, res, next) => {
-    res.json(await User.find().populate('reviews likes posts'))
+    res.json(await User.find().populate(populatable_virtuals))
 })
 
 /**
@@ -62,7 +67,7 @@ router.post('/', (req, res, next) => {
 router.get('/:id', async(req, res, next) => {
     try {
         const user = await User.findById(req.params.id)
-            .populate('reviews likes posts')
+            .populate(populatable_virtuals)
         if (!user) throw new Error()
         res.send(user)
     } catch (e) {

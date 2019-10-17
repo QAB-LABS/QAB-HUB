@@ -3,7 +3,7 @@ const passport = require('passport')
 const router = express.Router()
 const User = require('../models/User')
 
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs')
 const bcryptSalt = 10
 
 router.post('/signup', (req, res, next) => {

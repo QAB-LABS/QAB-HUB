@@ -1,32 +1,22 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { getGames } from '../../actions/games'
-import GameDetailsRow from './GameDetailsRow'
+import GameDetails from './GameDetails'
+import './GamesList.scss'
 
-class GameList extends React.Component {
-  componentDidMount() {
-    this.props.getGames()
-  }
 
-  renderGames() {
-    return this.props.games.map(game => (
-      <GameDetailsRow key={game.id} game={game} />
-    ))
-  }
+const GameList = ({ games }) => {
 
-  render() {
-    const { games } = this.props
-    return !games ? null : this.renderGames()
+  const renderGames = (games) => {
+    return (
+      <div className="ui four cards">
+        {games.map(game => <GameDetails card={true} key={game.id} game={game} />)}
+      </div>
+    )
   }
+  
+  return (
+    <React.Fragment>{games ? renderGames(games) : null}</React.Fragment>
+  )
 }
 
-const mapStateToProps = state => {
-  return {
-    games: state.games,
-  }
-}
 
-export default connect(
-  mapStateToProps,
-  { getGames }
-)(GameList)
+export default GameList;

@@ -1,10 +1,10 @@
+const aqp = require('api-query-params');
 const express = require('express')
 const { isLoggedIn } = require('../middlewares')
 const Game = require('../models/Game')
-const Like = require('../models/Like')
 const router = express.Router()
 
-const populatable_virtuals = 'ratings mechanic_names category_names likes';
+const populatable_virtuals = 'reviews ratings categories mechanic_names category_names likes';
 
 const fields = [
     "url",
@@ -32,16 +32,15 @@ const fields = [
  * @example
  * GET /api/games/search?limit=50
  * */
-router.get('/search', async (req, res, next) => {
-    const limit = Number(req.query.limit) || 50
-    const terms = req.query.terms || ''
-
-    Game.find({ $text: { $search: terms } })
-        .limit(limit)
+router.get('/search', async(req, res, next) => {
+    const { filter, skip, limit, sort, projection } = aqp(req.query);
+    Game.find(filter)
+        .skip(skip || 0)
+        .limit(limit || 50)
+        .sort(sort)
+        .select(projection)
         .populate(populatable_virtuals)
-        .then(games => {
-            res.json(games)
-        })
+        .then(games => res.json(games))
         .catch(err => next(err))
 })
 
@@ -50,7 +49,7 @@ router.get('/search', async (req, res, next) => {
  * @example
  * GET /api/games/
  * */
-router.get('/', async (req, res, next) => {
+router.get('/', async(req, res, next) => {
     res.json(await Game.find().populate(populatable_virtuals))
 })
 
@@ -73,11 +72,24 @@ router.post('/', isLoggedIn, (req, res, next) => {
 })
 
 /**
+ * Get the total number of games
+ * @example 
+ * GET /api/games/count
+ */
+router.get('/count', async(req, res, next) => {
+    try {
+        res.json({ count: await Game.count() })
+    } catch (e) {
+        res.status(404).send()
+    }
+})
+
+/**
  * Get a specific game 
  * @example 
  * GET /api/games/:id
  */
-router.get('/:id', async (req, res, next) => {
+router.get('/:id', async(req, res, next) => {
     try {
         const game = await Game.findById(req.params.id)
             .populate(populatable_virtuals)
@@ -93,7 +105,7 @@ router.get('/:id', async (req, res, next) => {
  * @example 
  * DELETE /api/games/:id
  */
-router.delete('/:id', isLoggedIn, async (req, res) => {
+router.delete('/:id', isLoggedIn, async(req, res) => {
     try {
         const game = await Game.findById(req.params.id)
         if (!game) throw new Error()
@@ -110,7 +122,7 @@ router.delete('/:id', isLoggedIn, async (req, res) => {
  * @example 
  * PATCH /api/games/:id
  */
-router.patch(`/:id`, isLoggedIn, async (req, res) => {
+router.patch(`/:id`, isLoggedIn, async(req, res) => {
     if (req.user.role !== "admin") res.status(403).send('You do not have permission to update this resource.')
 
     const updates = Object.keys(req.body)

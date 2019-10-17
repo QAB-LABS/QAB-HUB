@@ -1,3 +1,4 @@
+const aqp = require('api-query-params');
 const express = require('express')
 const { isLoggedIn } = require('../middlewares')
 const uploadCloud = require('../configs/cloudinary')
@@ -13,13 +14,15 @@ const populatable_virtuals = 'author comments'
  * GET /api/posts/search?limit=50
  * */
 router.get('/search', async(req, res, next) => {
-    const limit = Number(req.query.limit) || 50
-    Post.find()
-        .limit(limit)
+    const { filter, skip, limit, sort, projection } = aqp(req.query);
+
+    Post.find(filter)
+        .skip(skip || 0)
+        .limit(limit || 50)
+        .sort(sort)
+        .select(projection)
         .populate(populatable_virtuals)
-        .then(posts => {
-            res.json(posts)
-        })
+        .then(posts => res.json(posts))
         .catch(err => next(err))
 })
 

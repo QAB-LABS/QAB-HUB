@@ -7,7 +7,7 @@
         QAB HUB
         <br>
     </h1>
-    <p style="font-size: 1.35rem; font-weight: 500; padding: 2rem; text-align: center">TBD</p>
+    <p style="font-size: 1.35rem; font-weight: 500; padding: 2rem; text-align: center">Board Game Silo is an online social networking service that fosters its community for tabletop gamers to express their views, share their collections, and organize gaming groups for meetups.</p>
     <br>
     <a align=center href="https://heroku.com/deploy?template=https://github.com/QAB-LABS/QAB-HUB/">
         <img alt="deploy" src="https://www.herokucdn.com/deploy/button.png">
@@ -21,6 +21,9 @@
     </a>
     <a align=center href="https://www.gnu.org/licenses/gpl-3.0">
         <img src="https://img.shields.io/badge/License-GPLv3-blue.svg" />
+    </a>
+    <a align=center href="https://dev.azure.com/QAB-LABS/BoardGameSiloAPI">
+        <img src="https://dev.azure.com/QAB-LABS/BoardGameSiloAPI/_apis/build/status/boardgamesiloapilinux%20-%20CI?branchName=master" />
     </a>
 </div>
 

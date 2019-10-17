@@ -6,12 +6,15 @@ const categorySchema = new Schema({
         type: String,
         required: true
     },
+    bga_id: String,
 }, {
     timestamps: {
         createdAt: 'created_at',
         updatedAt: 'updated_at',
     },
 })
+
+categorySchema.index({name: 1, bga_id: 1}, {unique: true})
 
 const Category = mongoose.model('Category', categorySchema)
 

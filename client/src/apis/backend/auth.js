@@ -1,10 +1,7 @@
-import axios from 'axios'
 import errHandler from './error'
+import getService from './config'
 
-const service = axios.create({
-    baseURL: process.env.NODE_ENV === 'production' ? '/api' : `http://${window.location.hostname}:5000/api`,
-    withCredentials: true,
-})
+const service = getService('')
 
 export default {
     isLoggedIn() {

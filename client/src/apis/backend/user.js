@@ -1,9 +1,7 @@
-import axios from 'axios'
 
-const service = axios.create({
-    baseURL: process.env.NODE_ENV === 'production' ? '/api/users' : `http://${window.location.hostname}:5000/api/users`,
-    withCredentials: true,
-})
+import getService from './config'
+
+const service = getService('users')
 
 export const userService = {
     getUsers,

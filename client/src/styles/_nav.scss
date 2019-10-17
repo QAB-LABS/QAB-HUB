@@ -1,0 +1,40 @@
+.topNav {
+
+    .primary {
+        display: flex;  
+        align-items: center;
+        justify-content: left;
+    }
+
+    .secondary {
+        text-align: right;
+        justify-self: right;
+    }
+
+    .logo {
+        font-weight: 700;
+        font-size: 1.2rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .menu {
+        margin-left: $xlarge;
+
+        ul {
+            display: flex;
+            justify-content: left;
+
+            li {
+
+            }
+        }
+    }
+
+    .dropdown {
+
+        .menu {
+            display: none;
+        }
+    }
+}

@@ -7,49 +7,67 @@ import api from '../../apis/backend'
 class MainNavbar extends React.Component {
   render() {
     return (
-      <nav className="App-header">
-        <div className="ui secondary pointing menu">
-          <div className="ui simple dropdown">
-            <div className="item">
-              <i className="user icon" />
-              Account
+      <header className="topNav">
+        <div className="container">
+        <div className="row">
+            <div className="col-9 primary">
+              <div className="logo">
+                <NavLink className="item" to="/">Board Game Silo</NavLink>
+              </div>
+              <div className="menu">
+                <ul>
+                  <li><NavLink className="item" to="/games">Board Games</NavLink></li>
+                  <li><NavLink className="item" to="/games">Events</NavLink></li>
+                  <li><NavLink className="item" to="/games">Groups</NavLink></li>
+                </ul>
+              </div>
             </div>
-            <div className="menu">
-
-              {api.isLoggedIn() && (
+            <div className="col-3 secondary">
+            <div className="dropdown">
                 <div className="item">
-                  <NavLink className="item" to="/" onClick={this.props.logout}>Logout</NavLink>
-                </div>)}
-
-              {api.isLoggedIn() && (
-                <div className="item">
-                  <NavLink className="item" to="/profile">My Profile</NavLink>
+                  <i className="user icon" />
+                  Account
                 </div>
-              )}
-              <div className="item">
-                <NavLink className="item" to="/login">Log In</NavLink>
-              </div>
+                <ul className="menu">
+                  {api.isLoggedIn() && (
+                    <li className="item">
+                      <NavLink className="item" to="/" onClick={this.props.logout}>Logout</NavLink>
+                    </li>
+                  )}
 
-              <div className="item">
-                <NavLink className="item" to="/signup">Sign Up</NavLink>
-              </div>
+                  {api.isLoggedIn() && (
+                    <li className="item">
+                      <NavLink className="item" to="/profile">My Profile</NavLink>
+                    </li>
+                  )}
+                  <li className="item">
+                    <NavLink className="item" to="/login">Log In</NavLink>
+                  </li>
 
+                  <li className="item">
+                    <NavLink className="item" to="/signup">Sign Up</NavLink>
+                  </li>
+                </ul>
+              </div>
             </div>
-          </div>
         </div>
-      </nav>
+        </div>
+      </header>
     )
   }
 }
 
 const mapState = state => {
   return {
-    currentUser: state.authentication.user
+    currentUser: state.authentication.user,
   }
 }
 
 const actionCreators = {
-  logout: authActions.logout
-};
+  logout: authActions.logout,
+}
 
-export default connect(mapState, actionCreators)(withRouter(MainNavbar))
+export default connect(
+  mapState,
+  actionCreators
+)(withRouter(MainNavbar))

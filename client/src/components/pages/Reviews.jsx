@@ -3,22 +3,39 @@ import { getReview, getReviews } from '../../actions/reviews'
 import { connect } from 'react-redux'
 import ReviewsList from '../Reviews/ReviewsList'
 import ReviewDetails from '../Reviews/ReviewDetails'
+import GameDetails from './GameDetails'
 
 class Reviews extends React.Component {
   componentDidMount() {
-    if (this.props.match.params.id) this.props.getReview(this.props.match.params.id)
+    if (this.props.match.params.id){
+      this.props.getReview(this.props.match.params.id)
+    }
     else {
       console.log('getting all reviews')
       this.props.getReviews()
     }
   }
 
+  renderDetailsPage = (review) => {
+    return(
+      <>
+        {review ? 
+          <>
+            <ReviewDetails review={review} />
+            <GameDetails game = {review.game}/>
+          </>
+          : null
+        }
+      </>
+    )
+  }
+
   render() {
-    const { review, reviews } = this.props
+    const { review, reviews, game } = this.props
     return (
       <div className="ui segment">
         {this.props.match.params.id ?
-          <ReviewDetails review={review} /> :
+          this.renderDetailsPage(review, game):
           <ReviewsList reviews={reviews} />
         }
       </div>
@@ -35,7 +52,7 @@ function mapState(state) {
 
 const actionCreators = {
   getReviews,
-  getReview
+  getReview,
 };
 
 export default connect(mapState, actionCreators)(Reviews)

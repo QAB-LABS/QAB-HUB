@@ -33,7 +33,7 @@ const ReviewDetails = props => {
     return (
         <>
             {/* Somehow the author variable doesn't populate at the same
-            time the rest of the variables do.  So we have to make sure it's populated before populating the rest of the info on the card. () */}
+            time the rest of the variables do.  So we have to make sure it's populated before populating the rest of the info on the card.*/}
             {author ? renderContent() : null}
         </>
     )

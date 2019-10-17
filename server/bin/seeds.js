@@ -15,6 +15,7 @@ const Price = require('../models/Price')
 const Review = require('../models/Review')
 const Category = require('../models/Category')
 const Like = require('../models/Like')
+const Rating = require('../models/Rating')
 
 
 faker.seed(123);
@@ -27,6 +28,7 @@ var databaseEntries = {
     games: [],
     categories: [],
     merchants: [],
+    ratings: [],
 }
 
 const getRandomElement = (arr) => {
@@ -101,7 +103,15 @@ async function createDBEntries() {
         }
     }))
 
-    await submitDocuments('likes', Like, Array.from({ length: 2000 }).map(e => {
+    await submitDocuments('ratings', Rating, Array.from({ length: 500 }).map(e => {
+        return {
+            value: faker.random.number({ min: 20, max: 100 }),
+            game: getRandomElement(databaseEntries.games)._id,
+            author: getRandomElement(databaseEntries.users)._id
+        }
+    }))
+
+    await submitDocuments('likes', Like, Array.from({ length: 500 }).map(e => {
         return {
             game: getRandomElement(databaseEntries.games)._id,
             user: getRandomElement(databaseEntries.users)._id

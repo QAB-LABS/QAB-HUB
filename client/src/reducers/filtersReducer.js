@@ -1,32 +1,24 @@
 import * as types from '../actions/types';
 
-let initialState = {
-    priceFilter: [],
-    locationFilter: [],
-    takeoutFilter: false,
-}
+let initialState = {}
 
 const visibilityFilter = (state = initialState, action) => {
+    var filterKey, filterValue
+    if (action.payload) {
+        filterKey = action.payload.filterKey
+        filterValue = action.payload.filterValue
+    }
+
     switch (action.type) {
-        case types.ADD_PRICE_FILTER:
-            return Object.assign({}, state, { priceFilter: [...state.priceFilter, action.priceType], locationFilter: [...state.locationFilter], takeoutFilter: state.takeoutFilter })
 
-        case types.REMOVE_PRICE_FILTER:
-            const newPriceFilter = state.priceFilter.filter((item) => item !== action.priceType)
-            return { priceFilter: newPriceFilter, locationFilter: [...state.locationFilter], takeoutFilter: state.takeoutFilter }
+        case types.ADD_FILTER:
+            if (!state[filterKey]) state[filterKey] = []
+            const newFilters = [...state[filterKey], filterValue]
+            return {...state, [filterKey]: newFilters }
 
-        case types.ADD_LOCATION_FILTER:
-            return Object.assign({}, state, { priceFilter: [...state.priceFilter], locationFilter: [...state.locationFilter, action.zip_code], takeoutFilter: state.takeoutFilter })
-
-        case types.REMOVE_LOCATION_FILTER:
-            const newLocationFilter = state.locationFilter.filter((item) => item !== action.zip_code)
-            return { priceFilter: [...state.priceFilter], locationFilter: newLocationFilter, takeoutFilter: state.takeoutFilter }
-
-        case types.ADD_TAKEOUT_FILTER:
-            return { priceFilter: [...state.priceFilter], locationFilter: [...state.locationFilter], takeoutFilter: true }
-
-        case types.REMOVE_TAKEOUT_FILTER:
-            return { priceFilter: [...state.priceFilter], locationFilter: [...state.locationFilter], takeoutFilter: false }
+        case types.REMOVE_FILTER:
+            const newFilter = state[filterKey].filter(item => item !== filterValue)
+            return {...state, [filterKey]: newFilter }
 
         default:
             return state

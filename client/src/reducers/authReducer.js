@@ -19,7 +19,7 @@ export default (state = initialState, action) => {
             };
         case types.LOGIN_FAILURE:
             return state;
-        case types.LOGOUT:
+        case types.SIGN_OUT:
             return state;
         default:
             return state

@@ -3,7 +3,6 @@ import { Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { alertActions } from '../actions/alert'
 import MainNavbar from './MainNavbar/MainNavbar'
-import SideBar from './SideBar/SideBar'
 import Home from './pages/Home'
 import Games from './pages/Games'
 import Reviews from './pages/Reviews'
@@ -21,7 +20,7 @@ class App extends React.Component {
     const { alert } = this.props;
     return (
       <div className="App">
-        
+
         <MainNavbar />
         <Carousel />
         <div className="container main">
@@ -39,10 +38,24 @@ class App extends React.Component {
               Four
             </div>
           </div>
+          <div className="row">
+            <Switch>
+              <Route path="/" exact component={Home} />
+              <Route path="/games" component={Games} />
+              <Route path="/post/:id" component={Post} />
+              <Route path="/reviews" exact component={Reviews} />
+              <Route path="/reviews/:id" component={Reviews} />
+              <Route path="/me" component={Profile} />
+              <Route path="/profile" exact component={Profile} />
+              <Route path="/profile/:id" component={Profile} />
+              <Route path="/signup" component={Signup} />
+              <Route path="/login" component={Login} />
+              <Route render={() => <h2>404</h2>} />
+            </Switch>
+          </div>
         </div>
-          {alert.message &&
-            <div className={`ui message ${alert.type}`}>{alert.message}</div>
-          }
+          {alert.message && <div className={`ui message ${alert.type}`}>{alert.message}</div>}
+        
           <Switch>
             <Route path="/" exact component={Home} />
             <Route path="/games" component={Games} />

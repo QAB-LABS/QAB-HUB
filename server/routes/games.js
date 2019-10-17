@@ -33,13 +33,14 @@ const fields = [
  * GET /api/games/search?limit=50
  * */
 router.get('/search', async(req, res, next) => {
-    const { filter, skip, limit, sort, projection } = aqp(req.query);
+    const { filter, skip, limit, sort, projection, population } = aqp(req.query);
     Game.find(filter)
-        .skip(skip || 0)
+        .lean()
+        .skip(skip)
         .limit(limit || 50)
         .sort(sort)
         .select(projection)
-        .populate(populatable_virtuals)
+        .populate(population)
         .then(games => res.json(games))
         .catch(err => next(err))
 })
@@ -50,7 +51,13 @@ router.get('/search', async(req, res, next) => {
  * GET /api/games/
  * */
 router.get('/', async(req, res, next) => {
-    res.json(await Game.find().populate(populatable_virtuals))
+    const { skip, limit, population } = aqp(req.query);
+    res.json(await Game
+        .find()
+        .lean()
+        .skip(skip)
+        .limit(limit)
+        .populate(population))
 })
 
 /**
@@ -78,7 +85,7 @@ router.post('/', isLoggedIn, (req, res, next) => {
  */
 router.get('/count', async(req, res, next) => {
     try {
-        res.json({ count: await Game.count() })
+        res.json({ count: await Game.countDocuments() })
     } catch (e) {
         res.status(404).send()
     }

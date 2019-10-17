@@ -1,6 +1,12 @@
 import * as types from './types'
 import api from '../apis/backend'
 
+
+export const fetchGames = name => ({
+    type: types.FETCH_GAMES,
+    name
+})
+
 export const getGamesCount = () => {
     return async dispatch => {
         try {
@@ -12,11 +18,24 @@ export const getGamesCount = () => {
     }
 }
 
-export const getGames = () => {
+export const getSearch = (filter, skip, limit, sort, population) => {
     return async dispatch => {
+        dispatch(fetchGames())
         try {
-            const response = await api.getGames()
-            return dispatch({ type: types.FETCH_GAMES, payload: response });
+            const response = await api.getGames(filter, skip, limit, sort, population)
+            return dispatch({ type: types.RECEIVE_GAMES, payload: response });
+        } catch (error) {
+            return dispatch({ type: types.ERROR, error });
+        }
+    }
+}
+
+export const getGames = (skip, limit, population) => {
+    return async dispatch => {
+        dispatch(fetchGames())
+        try {
+            const response = await api.getGames(skip, limit, population)
+            return dispatch({ type: types.RECEIVE_GAMES, payload: response });
         } catch (error) {
             return dispatch({ type: types.ERROR, error });
         }
@@ -28,6 +47,18 @@ export const getGame = (id) => {
         try {
             const response = await api.getGame(id)
             return dispatch({ type: types.FETCH_GAME, payload: response });
+        } catch (error) {
+            return dispatch({ type: types.ERROR, error });
+        }
+    }
+}
+
+export const setPaginatedGames = (filter, skip, limit, sort, population) => {
+    return async dispatch => {
+        dispatch(fetchGames())
+        try {
+            const response = await api.searchGames(filter, skip, limit, sort, population)
+            return dispatch({ type: types.PAGINATE_GAMES, payload: response })
         } catch (error) {
             return dispatch({ type: types.ERROR, error });
         }
@@ -69,6 +100,6 @@ export const deleteGame = (id) => {
 
 export const setFilteredGames = (start, end) => {
     return dispatch => {
-        return dispatch({ type: types.FILTER_GAMES, payload: {start, end}})
+        return dispatch({ type: types.FILTER_GAMES, payload: { start, end } })
     }
 }

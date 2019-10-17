@@ -5,16 +5,30 @@ const service = getService('posts')
 
 
 export default {
-    searchPosts() {
+    searchPosts(filter, skip, limit, sort, populate) {
         return service
-            .get('/search')
+            .get('/search', {
+                params: {
+                    filter: new RegExp(filter, "gi"),
+                    skip,
+                    limit,
+                    sort,
+                    populate
+                }
+            })
             .then(res => res.data)
             .catch(errHandler)
     },
 
-    getPosts() {
+    getPosts(skip, limit, populate) {
         return service
-            .get('/')
+            .get('/', {
+                params: {
+                    skip,
+                    limit,
+                    populate
+                }
+            })
             .then(res => res.data)
             .catch(errHandler)
     },

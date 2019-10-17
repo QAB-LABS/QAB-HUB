@@ -10,7 +10,7 @@ export default (state = {}, action) => {
     case types.ERROR:
       return {
         type: 'alert-danger',
-        message: action.message
+        message: action.error.message
       };
     case types.CLEAR:
       return {};

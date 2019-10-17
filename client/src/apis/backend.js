@@ -7,6 +7,7 @@ import merchants from './backend/merchants'
 import prices from './backend/prices'
 import reviews from './backend/reviews'
 import likes from './backend/likes'
+import categories from './backend/categories'
 
 export default {
     ...userService,
@@ -17,5 +18,6 @@ export default {
     ...prices,
     ...reviews,
     ...likes,
-    ...auth
+    ...auth,
+    ...categories
 }

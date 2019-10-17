@@ -3,6 +3,7 @@ import alertReducer from './alertReducer'
 import usersReducer from './usersReducer'
 import postsReducer from './postsReducer'
 import commentsReducer from './commentsReducer'
+import categoriesReducer from './categoriesReducer'
 import gamesReducer from './gamesReducer'
 import likesReducer from './likesReducer'
 import reviewsReducer from './reviewsReducer'
@@ -15,6 +16,7 @@ import filtersReducer from './filtersReducer'
 export default combineReducers({
     alert: alertReducer,
     authentication: authReducer,
+    categories: categoriesReducer,
     comments: commentsReducer,
     games: gamesReducer,
     likes: likesReducer,

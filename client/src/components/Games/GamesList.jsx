@@ -7,12 +7,14 @@ const GameList = ({ games }) => {
 
   const renderGames = (games) => {
     return (
-      <div className="ui four cards">
-        {games.map(game => <GameDetails card={true} key={game.id} game={game} />)}
+      <div className="row">
+        <div className="container">
+          {games.map(game => <GameDetails card={true} key={game._id} game={game} />)}
+        </div>
       </div>
     )
   }
-  
+
   return (
     <React.Fragment>{games ? renderGames(games) : null}</React.Fragment>
   )

@@ -14,14 +14,14 @@ const populatable_virtuals = 'author comments'
  * GET /api/posts/search?limit=50
  * */
 router.get('/search', async(req, res, next) => {
-    const { filter, skip, limit, sort, projection } = aqp(req.query);
-
+    const { filter, skip, limit, sort, projection, population } = aqp(req.query);
     Post.find(filter)
+        .lean()
         .skip(skip || 0)
         .limit(limit || 50)
         .sort(sort)
         .select(projection)
-        .populate(populatable_virtuals)
+        .populate(population)
         .then(posts => res.json(posts))
         .catch(err => next(err))
 })
@@ -32,7 +32,14 @@ router.get('/search', async(req, res, next) => {
  * GET /api/posts/
  * */
 router.get('/', async(req, res, next) => {
-    res.json(await Post.find().populate(populatable_virtuals))
+    const { skip, limit, population } = aqp(req.query);
+
+    res.json(await Post
+        .find()
+        .skip(skip)
+        .limit(limit)
+        .lean()
+        .populate(population))
 })
 
 /**

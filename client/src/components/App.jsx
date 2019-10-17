@@ -20,7 +20,7 @@ class App extends React.Component {
     const { alert } = this.props;
     return (
       <div className="App">
-        
+
         <MainNavbar />
         <Carousel />
         <div className="container main">

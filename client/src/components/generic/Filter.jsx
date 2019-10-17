@@ -1,42 +1,33 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { addPriceFilter, removePriceFilter, addLocationFilter, removeLocationFilter, addTakeoutFilter, removeTakeoutFilter } from '../../actions/filters';
+import CollapsibleList from '../generic/CollapsibleList'
+import { addFilter, removeFilter } from '../../actions/filters';
 
 
 class Filter extends Component {
-  handlePriceFilter(e) {
-    let priceType = e.target.value
-    if (e.target.checked) {
-      this.props.dispatch(addPriceFilter(priceType));
-    } else {
-      this.props.dispatch(removePriceFilter(priceType));
-    }
+
+  handleFilterChange(e, filterKey) {
+    const { dispatch } = this.props
+    let filterType = e.target.value
+    dispatch((e.target.checked) ? addFilter(filterKey, filterType) : removeFilter(filterKey, filterType))
   }
 
-  handleLocationFilter(e) {
-    let zip_code = e.target.value;
-    if (e.target.checked) {
-      this.props.dispatch(addLocationFilter(zip_code));
-    } else {
-      this.props.dispatch(removeLocationFilter(zip_code));
-    }
-  }
-
-  handleTakeoutFilter(e) {
-    if (e.target.checked) {
-      this.props.dispatch(addTakeoutFilter());
-    } else {
-      this.props.dispatch(removeTakeoutFilter());
-    }
+  renderFilterList = (filter) => {
+    const { heading, values } = filter
+    return values.map((value, i) => (
+      <React.Fragment key={i}>
+        <input type="checkbox" id={value + i} value={value} onClick={e => this.handleFilterChange(e, heading.toLowerCase())} />
+        <label htmlFor={value + i}>{value}</label>
+      </React.Fragment>
+    ))
   }
 
   renderFilters = () => {
+    const { cutoff } = this.props
     return this.props.filters.map((filter, i) => {
+      const { heading } = filter
       return (
-        <div key={i} className="filter">
-          <h4>{filter.heading}</h4>
-          {filter.values.map((value, i) => <div key={i}><input type="checkbox" value={value} onClick={e => this[filter.handler](e)} /> {value} <br /></div>)}
-        </div>
+        <CollapsibleList key={i} cutoff={cutoff} title={heading} items={this.renderFilterList(filter)} />
       )
     })
   }

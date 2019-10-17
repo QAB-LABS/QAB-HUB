@@ -1,42 +1,17 @@
 import * as types from './types';
 
 
-export const addPriceFilter = (priceType) => {
+
+export const addFilter = (filterKey, filterValue) => {
     return {
-        type: types.ADD_PRICE_FILTER,
-        priceType
+        type: types.ADD_FILTER,
+        payload: { filterKey, filterValue }
     }
 }
 
-export const removePriceFilter = (priceType) => {
+export const removeFilter = (filterKey, filterValue) => {
     return {
-        type: types.REMOVE_PRICE_FILTER,
-        priceType
-    }
-}
-
-export const addLocationFilter = (zip_code) => {
-    return {
-        type: types.ADD_LOCATION_FILTER,
-        zip_code
-    }
-}
-
-export const removeLocationFilter = (zip_code) => {
-    return {
-        type: types.REMOVE_LOCATION_FILTER,
-        zip_code
-    }
-}
-
-export const addTakeoutFilter = () => {
-    return {
-        type: types.ADD_TAKEOUT_FILTER
-    }
-}
-
-export const removeTakeoutFilter = () => {
-    return {
-        type: types.REMOVE_TAKEOUT_FILTER
+        type: types.REMOVE_FILTER,
+        payload: { filterKey, filterValue }
     }
 }

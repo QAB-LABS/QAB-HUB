@@ -7,7 +7,7 @@
         QAB HUB
         <br>
     </h1>
-    <p style="font-size: 1.35rem; font-weight: 500; padding: 2rem; text-align: center">TBD</p>
+    <p style="font-size: 1.35rem; font-weight: 500; padding: 2rem; text-align: center">Board Game Silo is an online social networking service that fosters its community for tabletop gamers to express their views, share their collections, and organize gaming groups for meetups.</p>
     <br>
     <a align=center href="https://heroku.com/deploy?template=https://github.com/QAB-LABS/QAB-HUB/">
         <img alt="deploy" src="https://www.herokucdn.com/deploy/button.png">

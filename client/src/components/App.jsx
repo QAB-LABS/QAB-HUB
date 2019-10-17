@@ -10,6 +10,8 @@ import Profile from './pages/Profile'
 import Post from './pages/Post'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
+import Carousel from './Carousel/Carousel'
+import Footer from './Footer/Footer'
 
 
 class App extends React.Component {
@@ -20,9 +22,7 @@ class App extends React.Component {
       <div className="App">
 
         <MainNavbar />
-        <div className="hero carousel">
-          This is where the carousel goes.
-        </div>
+        <Carousel />
         <div className="container main">
           <div className="row">
             <div className="col-4">
@@ -54,9 +54,23 @@ class App extends React.Component {
             </Switch>
           </div>
         </div>
-        {alert.message &&
-          <div className={`ui message ${alert.type}`}>{alert.message}</div>
-        }
+          {alert.message && <div className={`ui message ${alert.type}`}>{alert.message}</div>}
+        
+          <Switch>
+            <Route path="/" exact component={Home} />
+            <Route path="/games" component={Games} />
+            <Route path="/post/:id" component={Post} />
+            <Route path="/reviews" exact component={Reviews} />
+            <Route path="/reviews/:id" component={Reviews} />
+            <Route path="/me" component={Profile} />
+            <Route path="/profile" exact component={Profile} />
+            <Route path="/profile/:id" component={Profile} />
+            <Route path="/signup" component={Signup} />
+            <Route path="/login" component={Login} />
+            <Route render={() => <h2>404</h2>} />
+          </Switch>
+
+          <Footer />
       </div>
     )
   }

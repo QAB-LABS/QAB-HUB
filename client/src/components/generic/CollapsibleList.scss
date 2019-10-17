@@ -1,0 +1,20 @@
+.ease-in-out {
+    transition: height 1s ease-out;
+}
+
+.contained {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    transition: height 0.5s ease-out; // note that we're transitioning flex, not height!
+
+}
+
+.section {
+    overflow: hidden;
+    flex: 1;
+}
+
+.section.collapsed {
+    flex: 0;
+}

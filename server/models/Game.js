@@ -1,6 +1,8 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const Like = require('../models/Like');
+const Review = require('../models/Review');
+const Rating = require('../models/Rating');
 const Category = require('../models/Category');
 const Mechanic = require('../models/Mechanic');
 
@@ -28,11 +30,10 @@ const gameSchema = new mongoose.Schema({
     designers: [String],
     artists: [String],
     publishers: [String],
-    categories: [String],
-    // categories: [{
-    //     type: Schema.Types.ObjectId,
-    //     ref: "Category"
-    // }]
+    categories: [{
+        type: Schema.Types.ObjectId,
+        ref: "Category"
+    }]
 })
 
 gameSchema.index({ name: 1, bga_id: 1 }, { unique: true })
@@ -42,6 +43,19 @@ gameSchema.virtual('likes', {
     localField: '_id',
     foreignField: 'game',
     justOne: false
+})
+
+gameSchema.virtual('reviews', {
+    ref: 'Review',
+    localField: '_id',
+    foreignField: 'game',
+    justOne: false
+})
+
+gameSchema.virtual('ratings', {
+    ref: 'Rating',
+    localField: '_id',
+    foreignField: 'game'
 })
 
 gameSchema.virtual('category_names', {
@@ -60,10 +74,11 @@ gameSchema.virtual('mechanic_names', {
 
 gameSchema.set('toObject', { virtuals: true })
 gameSchema.set('toJSON', { virtuals: true })
-gameSchema.index({ name: "text", description: "text" })
 
-gameSchema.pre('remove', async function (next) {
+gameSchema.pre('remove', async function(next) {
     await Like.deleteMany({ game: this._id })
+    await Review.deleteMany({ game: this._id })
+    await Rating.deleteMany({ game: this._id })
     next()
 })
 

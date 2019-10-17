@@ -11,6 +11,8 @@ import Profile from './pages/Profile'
 import Post from './pages/Post'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
+import Carousel from './Carousel/Carousel'
+import Footer from './Footer/Footer'
 
 
 class App extends React.Component {
@@ -39,10 +41,16 @@ class App extends React.Component {
             <Route path="/signup" component={Signup} />
             <Route path="/login" component={Login} />
             <Route render={() => <h2>404</h2>} />
+<<<<<<< HEAD
           </Switch> 
           </div>
         </div>
 
+=======
+          </Switch>
+
+          <Footer />
+>>>>>>> 2031e94514dfebdcd873190f4e6773fd17c56897
       </div>
     )
   }

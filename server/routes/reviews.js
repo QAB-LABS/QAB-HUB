@@ -48,8 +48,8 @@ router.get('/', async(req, res, next) => {
 router.post('/', (req, res, next) => {
     reviewData = {}
     fields.forEach(field => { if (req.body[field]) reviewData[field] = req.body[field] })
-    review.author = review.author._id
-    review.game = review.game._id
+    reviewData.author = reviewData.author._id
+    reviewData.game = reviewData.game._id
 
     Review.create(reviewData)
         .then((review) => res.json(review))

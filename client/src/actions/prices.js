@@ -1,55 +1,55 @@
 import * as types from './types'
 import api from '../apis/backend'
 
-export const getReviews = () => {
+export const getPrices = () => {
     return async dispatch => {
         try {
-            const response = await api.getReviews()
-            return dispatch({ type: types.FETCH_REVIEWS, payload: response });
+            const response = await api.getPrices()
+            return dispatch({ type: types.FETCH_PRICES, payload: response });
         } catch (error) {
             return dispatch({ type: types.ERROR, error });
         }
     }
 }
 
-export const getReview = (id) => {
+export const getPrice = (id) => {
     return async dispatch => {
         try {
-            const response = await api.getReview(id)
-            return dispatch({ type: types.FETCH_REVIEW, payload: response });
+            const response = await api.getPrice(id)
+            return dispatch({ type: types.FETCH_PRICE, payload: response });
         } catch (error) {
             return dispatch({ type: types.ERROR, error });
         }
     }
 }
 
-export const addReview = (body) => {
+export const addPrice = (body) => {
     return async dispatch => {
         try {
-            const response = await api.addReview(body)
-            return dispatch({ type: types.CREATE_REVIEW, payload: response });
+            const response = await api.addPrice(body)
+            return dispatch({ type: types.CREATE_PRICE, payload: response });
         } catch (error) {
             return dispatch({ type: types.ERROR, error });
         }
     }
 }
 
-export const updateReview = (id, body) => {
+export const updatePrice = (id, body) => {
     return async dispatch => {
         try {
-            const response = await api.updateReview(id, body)
-            return dispatch({ type: types.UPDATE_REVIEW, payload: response });
+            const response = await api.updatePrice(id, body)
+            return dispatch({ type: types.UPDATE_PRICE, payload: response });
         } catch (error) {
             return dispatch({ type: types.ERROR, error });
         }
     }
 }
 
-export const deleteReview = (id) => {
+export const deletePrice = (id) => {
     return async dispatch => {
         try {
-            const response = await api.deleteReview(id)
-            return dispatch({ type: types.DELETE_REVIEW, payload: response });
+            const response = await api.deletePrice(id)
+            return dispatch({ type: types.DELETE_PRICE, payload: response });
         } catch (error) {
             return dispatch({ type: types.ERROR, error });
         }

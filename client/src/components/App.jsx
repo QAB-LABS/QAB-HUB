@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { alertActions } from '../actions/alert'
 import MainNavbar from './MainNavbar/MainNavbar'
-import SideBar from './SideBar/SideBar'
+import Carousel from './Carousel/Carousel'
 import Home from './pages/Home'
 import Games from './pages/Games'
 import Reviews from './pages/Reviews'
@@ -21,26 +21,10 @@ class App extends React.Component {
       <div className="App">
         
         <MainNavbar />
-        <div className="hero carousel">
-          This is where the carousel goes.
-        </div>
+        <Carousel />
         <div className="container main">
           <div className="row">
-            <div className="col-4">
-              One
-            </div>
-            <div className="col-4">
-              Two
-            </div>
-            <div className="col-4">
-              Three
-            </div>
-            <div className="col-4">
-              Four
-            </div>
-          </div>
-        </div>
-          {alert.message &&
+        {alert.message &&
             <div className={`ui message ${alert.type}`}>{alert.message}</div>
           }
           <Switch>
@@ -55,7 +39,10 @@ class App extends React.Component {
             <Route path="/signup" component={Signup} />
             <Route path="/login" component={Login} />
             <Route render={() => <h2>404</h2>} />
-          </Switch>
+          </Switch> 
+          </div>
+        </div>
+
       </div>
     )
   }

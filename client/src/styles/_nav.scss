@@ -1,4 +1,10 @@
 .topNav {
+
+  &.container {
+    width: 80%;
+    margin: 0 auto;
+  }
+
   .primary {
     display: flex;
     align-items: center;

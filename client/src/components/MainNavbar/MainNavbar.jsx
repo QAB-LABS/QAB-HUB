@@ -7,8 +7,7 @@ import api from '../../apis/backend'
 class MainNavbar extends React.Component {
   render() {
     return (
-      <header className="topNav">
-        <div className="container">
+      <header className="container topNav">
         <div className="row">
             <div className="col-9 primary">
               <div className="logo">
@@ -50,7 +49,6 @@ class MainNavbar extends React.Component {
                 </ul>
               </div>
             </div>
-        </div>
         </div>
       </header>
     )

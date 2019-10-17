@@ -1,66 +1,69 @@
 .container {
-  width: 80%;
+  width: 100%;
   background-color: $white;
   margin: 0 auto;
 
   &.main {
-    border-radius: $small;
     margin-top: -4rem;
-    height: 50vh;
+    width: 80%;
+    height: 10vh;
+    min-height: 4rem;
+    border-radius: $small;
   }
-}
 
-.row {
-  width: 100%;
-  display: flex;
-  justify-content: space-evenly;
-  padding: $medium;
-}
+  > .row {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    padding: $medium;
 
-.col-1 {
-  width: percentage($columnWidth);
-}
-
-.col-2 {
-  width: percentage($columnWidth * 2);
-}
-
-.col-3 {
-  width: percentage($columnWidth * 3);
-}
-
-.col-4 {
-  width: percentage($columnWidth * 4);
-}
-
-.col-5 {
-  width: percentage($columnWidth * 5);
-}
-
-.col-6 {
-  width: percentage($columnWidth * 6);
-}
-
-.col-7 {
-  width: percentage($columnWidth * 7);
-}
-
-.col-8 {
-  width: percentage($columnWidth * 8);
-}
-
-.col-9 {
-  width: percentage($columnWidth * 9);
-}
-
-.col-10 {
-  width: percentage($columnWidth * 10);
-}
-
-.col-11 {
-  width: percentage($columnWidth * 11);
-}
-
-.col-12 {
-  width: percentage($columnWidth * 12);
+    > .col-1 {
+      width: percentage($columnWidth);
+    }
+    
+    > .col-2 {
+      width: percentage($columnWidth * 2);
+    }
+    
+    > .col-3 {
+      width: percentage($columnWidth * 3);
+    }
+    
+    > .col-4 {
+      width: percentage($columnWidth * 4);
+    }
+    
+    > .col-5 {
+      width: percentage($columnWidth * 5);
+    }
+    
+    > .col-6 {
+      width: percentage($columnWidth * 6);
+    }
+    
+    > .col-7 {
+      width: percentage($columnWidth * 7);
+    }
+    
+    > .col-8 {
+      width: percentage($columnWidth * 8);
+    }
+    
+    > .col-9 {
+      width: percentage($columnWidth * 9);
+    }
+    
+    > .col-10 {
+      width: percentage($columnWidth * 10);
+    }
+    
+    > .col-11 {
+      width: percentage($columnWidth * 11);
+    }
+    
+    > .col-12 {
+      width: percentage($columnWidth * 12);
+    }
+  }
 }

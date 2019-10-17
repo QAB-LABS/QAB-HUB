@@ -4,10 +4,12 @@
             src="https://github.com/QAB-LABS/QAB-HUB/blob/master/client/public/logo-placeholder.png?raw=true"
             alt="QAB-HUB logo">
         <br>
-        QAB HUB
+        Board Game Silo
         <br>
     </h1>
-    <p style="font-size: 1.35rem; font-weight: 500; padding: 2rem; text-align: center">Board Game Silo is an online social networking service that fosters its community for tabletop gamers to express their views, share their collections, and organize gaming groups for meetups.</p>
+    <p style="font-size: 1.35rem; font-weight: 500; padding: 2rem; text-align: center">
+    Board Game Silo is an online social networking service that fosters its community for tabletop gamers to express their views, share their collections, and organize gaming groups for meetups.
+    </p>
     <br>
     <a align=center href="https://heroku.com/deploy?template=https://github.com/QAB-LABS/QAB-HUB/">
         <img alt="deploy" src="https://www.herokucdn.com/deploy/button.png">
@@ -43,7 +45,7 @@
 *   Create a [Mongo DB Cluster](https://cloud.mongodb.com/)
 *   Create a [Heroku App]('https://heroku.com')
 *   Create a [Cloudinary API Key](https://cloudinary.com/?utm_source=google&utm_medium=cpc&utm_campaign=brand&utm_content=300704534040&utm_term=cloudinary&gclid=Cj0KCQjw_absBRD1ARIsAO4_D3tfpMaU3ai8tA7FoE0DdxrbsK5xSMaShens1Tn-QYQD7z9-d2mgc_kaApegEALw_wcB)
-*   Create a [BoardGameAtlas API Key](https://www.boardgameatlas.com)
+*   Create a [BoardGameAtlas API Key](https://www.boardgameatlas.com/api/docs/apps)
 *   Set the following environment variables on | [mac](https://stackoverflow.com/questions/7501678/set-environment-variables-on-mac-os-x-lion) | [windows](https://superuser.com/questions/1334129/setting-an-environment-variable-in-windows-10-gpodder) | [linux](https://stackoverflow.com/questions/45502996/how-to-set-environment-variable-in-linux-permanently) |
 *   ^ Or just use a .env file in the server directory
 
@@ -51,8 +53,6 @@
 | ---------------------------- |:--------------------------------------------------- |
 | PORT                         | Port for the backend express server                 |
 | MONGODB_URI                  | URI to log into mongodb                             |
-| GOOGLEMAPS_API_KEY           | API Key for google maps.|
-| BOARDGAMEATLAS_API_KEY       | BoardGameAtlas API KEY                              |
 | BOARDGAMEATLAS_API_SECRET    | BoardGameAtlas API SECRET                           |
 | CLOUDINARY_API_NAME          | Cloudinary API cloud name                           |
 | CLOUDINARY_API_KEY           | Cloudinary API Key                                  |

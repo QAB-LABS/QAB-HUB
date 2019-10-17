@@ -1,11 +1,7 @@
-import axios from 'axios'
 import errHandler from './error'
+import getService from './config'
 
-const service = axios.create({
-    baseURL: process.env.NODE_ENV === 'production' ?
-        '/api/likes' : `http://${window.location.hostname}:5000/api/likes`,
-    withCredentials: true,
-})
+const service = getService('likes')
 
 export default {
     searchLikes() {

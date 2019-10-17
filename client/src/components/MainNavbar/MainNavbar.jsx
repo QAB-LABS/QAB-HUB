@@ -4,7 +4,11 @@ import { NavLink } from 'react-router-dom'
 import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
 import api from '../../apis/backend'
+
+
+
 class MainNavbar extends React.Component {
+
   render() {
     return (
       <header className="topNav">
@@ -12,7 +16,7 @@ class MainNavbar extends React.Component {
         <div className="row">
             <div className="col-9 primary">
               <div className="logo">
-                <NavLink className="item" to="/">Board Game Silo</NavLink>
+                <NavLink to="/">Board Game Silo</NavLink>
               </div>
               <div className="menu">
                 <ul>

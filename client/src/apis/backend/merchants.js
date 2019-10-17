@@ -1,11 +1,7 @@
-import axios from 'axios'
 import errHandler from './error'
+import getService from './config'
 
-const service = axios.create({
-    baseURL: process.env.NODE_ENV === 'production' ?
-        '/api/merchants' : `http://${window.location.hostname}:5000/api/merchants`,
-    withCredentials: true,
-})
+const service = getService('merchants')
 
 export default {
     searchMerchants() {

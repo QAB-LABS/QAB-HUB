@@ -27,6 +27,7 @@
         "passport": "^0.4.0",
         "passport-local": "^1.0.0",
         "serve-favicon": "^2.5.0",
+        "set-interval-async": "^1.0.29",
         "validator": "^11.1.0"
     },
     "devDependencies": {

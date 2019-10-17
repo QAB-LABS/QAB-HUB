@@ -4,6 +4,8 @@ const Game = require('../models/Game')
 const Like = require('../models/Like')
 const router = express.Router()
 
+const populatable_virtuals = 'ratings mechanic_names category_names likes';
+
 const fields = [
     "url",
     "name",
@@ -36,7 +38,7 @@ router.get('/search', async (req, res, next) => {
 
     Game.find({ $text: { $search: terms } })
         .limit(limit)
-        .populate('likes')
+        .populate(populatable_virtuals)
         .then(games => {
             res.json(games)
         })
@@ -49,7 +51,7 @@ router.get('/search', async (req, res, next) => {
  * GET /api/games/
  * */
 router.get('/', async (req, res, next) => {
-    res.json(await Game.find().populate('categories likes'))
+    res.json(await Game.find().populate(populatable_virtuals))
 })
 
 /**
@@ -78,7 +80,7 @@ router.post('/', isLoggedIn, (req, res, next) => {
 router.get('/:id', async (req, res, next) => {
     try {
         const game = await Game.findById(req.params.id)
-            .populate('categories likes')
+            .populate(populatable_virtuals)
         if (!game) throw new Error()
         res.send(game)
     } catch (e) {

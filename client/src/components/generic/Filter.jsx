@@ -2,14 +2,20 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import CollapsibleList from '../generic/CollapsibleList'
 import { addFilter, removeFilter } from '../../actions/filters';
-
+import { setPaginatedGames } from '../../actions/games'
 
 class Filter extends Component {
 
   handleFilterChange(e, filterKey) {
-    const { dispatch } = this.props
+    const { query, skip, limit, removeFilter, addFilter } = this.props
     let filterType = e.target.value
-    dispatch((e.target.checked) ? addFilter(filterKey, filterType) : removeFilter(filterKey, filterType))
+
+    new Promise((resolve) => resolve(e.target.checked ? addFilter(filterKey, filterType) : removeFilter(filterKey, filterType)))
+      .then(() => {
+        if (this.props.newFilters) {
+          this.props.setPaginatedGames(null, skip, limit, null, "ratings,categories,likes", query)
+        }
+      })
   }
 
   renderFilterList = (filter) => {
@@ -45,7 +51,9 @@ class Filter extends Component {
 const mapStateToProps = (state) => {
   return {
     restaurantFilters: state.restaurantFilters,
+    query: state.filters.query,
+    newFilters: state.filters.newFilters
   }
 }
 
-export default connect(mapStateToProps)(Filter)
+export default connect(mapStateToProps, { addFilter, removeFilter, setPaginatedGames })(Filter)

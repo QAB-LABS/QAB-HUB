@@ -8,11 +8,19 @@ export const addFilter = (filterKey, filterValue) => {
 }
 
 export const removeFilter = (filterKey, filterValue) => {
-
-    return {
-        type: types.REMOVE_FILTER,
-        payload: { filterKey, filterValue }
+    return dispatch => {
+        dispatch({ type: types.REMOVE_FILTER, payload: { filterKey, filterValue } })
+        dispatch(updateQueryUrl())
     }
 }
 
-export const updateQueryUrl = () => { return { type: types.UPDATE_QUERY_URL } }
+export const filtersUpdated = () => { return { type: types.FILTERS_UPDATED } }
+
+export const filtersApplied = () => { return { type: types.FILTERS_APPLIED } }
+
+export const updateQueryUrl = () => {
+    return dispatch => {
+        dispatch({ type: types.UPDATE_QUERY_URL })
+        dispatch(filtersUpdated())
+    }
+}

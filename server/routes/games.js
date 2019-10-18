@@ -4,7 +4,7 @@ const { isLoggedIn } = require('../middlewares')
 const Game = require('../models/Game')
 const router = express.Router()
 
-const populatable_virtuals = 'reviews ratings categories mechanic_names category_names likes';
+const populatable_virtuals = 'reviews ratings categories category_names likes';
 
 const fields = [
     "url",
@@ -25,6 +25,10 @@ const fields = [
     "family",
     "categories"
 ]
+
+// function sortHelper(a, b){
+//     a.likes > 1
+// }
 
 /** 
  * Get all games with the given search parameters 
@@ -58,6 +62,19 @@ router.get('/', async(req, res, next) => {
         .skip(skip || 0)
         .limit(limit || 20)
         .populate(population))
+})
+
+/** 
+ * Get all games and sort by number of likes.
+ * @example
+ * GET /api/games/by-likes
+ * */
+router.get('/by-likes', async(req, res, next) => {
+    const { skip, limit, population } = aqp(req.query);
+    res.json(await Game
+        .find()
+        .lean()
+        .populate(populatable_virtuals))
 })
 
 /**
@@ -103,7 +120,7 @@ router.get('/:id', async(req, res, next) => {
         if (!game) throw new Error()
         res.send(game)
     } catch (e) {
-        res.status(404).send()
+        res.status(404).send(e)
     }
 })
 

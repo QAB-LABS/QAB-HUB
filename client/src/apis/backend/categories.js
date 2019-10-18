@@ -1,13 +1,13 @@
 import errHandler from './error'
 import getService from './config'
 
-const service = getService('categories')
+const service = getService()
 
 
 export default {
     searchCategories(filter, skip, limit, sort, populate) {
         return service
-            .get('/search', {
+            .get('/categories/search', {
                 params: {
                     filter: new RegExp(filter, "gi"),
                     skip,
@@ -22,7 +22,7 @@ export default {
 
     getCategories(skip, limit, populate) {
         return service
-            .get('/', {
+            .get('/categories', {
                 params: {
                     skip,
                     limit,
@@ -35,28 +35,28 @@ export default {
 
     addCategory(body) {
         return service
-            .post('/', body)
+            .post('/categories', body)
             .then(res => res.data)
             .catch(errHandler)
     },
 
     getCategory(id) {
         return service
-            .get(`/${id}`)
+            .get(`/categories/${id}`)
             .then(res => res.data)
             .catch(errHandler)
     },
 
     updateCategory(id, body) {
         return service
-            .patch(`/${id}`, body)
+            .patch(`/categories/${id}`, body)
             .then(res => res.data)
             .catch(errHandler)
     },
 
     deleteCategory(id) {
         return service
-            .delete(`/${id}`)
+            .delete(`/categories/${id}`)
             .then(res => res.data)
             .catch(errHandler)
     },

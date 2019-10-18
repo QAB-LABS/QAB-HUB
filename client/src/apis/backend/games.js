@@ -1,13 +1,13 @@
 import errHandler from './error'
 import getService from './config'
 
-const service = getService('games')
+const service = getService('')
 
 
 export default {
     searchGames(filter, skip, limit, sort, populate, query) {
         return service
-            .get('/search' + (query || ''), {
+            .get('/games/search' + (query || ''), {
                 params: {
                     filter: new RegExp(filter, "gi"),
                     skip,
@@ -22,7 +22,7 @@ export default {
 
     getGames(skip, limit, populate) {
         return service
-            .get('/', {
+            .get('/games', {
                 params: {
                     skip,
                     limit,
@@ -35,35 +35,35 @@ export default {
 
     getGamesCount() {
         return service
-            .get('/count')
+            .get('/games/count')
             .then(res => res.data)
             .catch(errHandler)
     },
 
     addGame(body) {
         return service
-            .post('/', body)
+            .post('/games', body)
             .then(res => res.data)
             .catch(errHandler)
     },
 
     getGame(id) {
         return service
-            .get(`/${id}`)
+            .get(`/games/${id}`)
             .then(res => res.data)
             .catch(errHandler)
     },
 
     updateGame(id, body) {
         return service
-            .patch(`/${id}`, body)
+            .patch(`/games/${id}`, body)
             .then(res => res.data)
             .catch(errHandler)
     },
 
     deleteGame(id) {
         return service
-            .delete(`/${id}`)
+            .delete(`/games/${id}`)
             .then(res => res.data)
             .catch(errHandler)
     },

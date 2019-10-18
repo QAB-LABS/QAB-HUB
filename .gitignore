@@ -24,3 +24,5 @@ yarn-error.log*
 client-old
 server-old
 client/public/.well-known/pki-validation/A96DB4460CF5B06E9A3B0DDC710BF1F6.txt
+client/.egextensions/cors-apache.config
+client/.egextensions/https-instance.config

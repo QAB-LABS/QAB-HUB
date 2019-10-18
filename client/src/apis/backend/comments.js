@@ -6,42 +6,42 @@ const service = getService('')
 export default {
     searchComments() {
         return service
-            .get('/comments/search')
+            .get('/api/comments/search')
             .then(res => res.data)
             .catch(errHandler)
     },
 
     getComments() {
         return service
-            .get('/comments')
+            .get('/api/comments')
             .then(res => res.data)
             .catch(errHandler)
     },
 
     addComment(body) {
         return service
-            .post('/comments', body)
+            .post('/api/comments', body)
             .then(res => res.data)
             .catch(errHandler)
     },
 
     getComment(id) {
         return service
-            .get(`/comments/${id}`)
+            .get(`/api/comments/${id}`)
             .then(res => res.data)
             .catch(errHandler)
     },
 
     updateComment(id, body) {
         return service
-            .patch(`/comments/${id}`, body)
+            .patch(`/api/comments/${id}`, body)
             .then(res => res.data)
             .catch(errHandler)
     },
 
     deleteComment(id) {
         return service
-            .delete(`/comments/${id}`)
+            .delete(`/api/comments/${id}`)
             .then(res => res.data)
             .catch(errHandler)
     },

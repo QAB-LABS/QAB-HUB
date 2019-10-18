@@ -7,7 +7,7 @@ const service = getService()
 export default {
     searchCategories(filter, skip, limit, sort, populate) {
         return service
-            .get('/categories/search', {
+            .get('/api/categories/search', {
                 params: {
                     filter: new RegExp(filter, "gi"),
                     skip,
@@ -22,7 +22,7 @@ export default {
 
     getCategories(skip, limit, populate) {
         return service
-            .get('/categories', {
+            .get('/api/categories', {
                 params: {
                     skip,
                     limit,
@@ -35,28 +35,28 @@ export default {
 
     addCategory(body) {
         return service
-            .post('/categories', body)
+            .post('/api/categories', body)
             .then(res => res.data)
             .catch(errHandler)
     },
 
     getCategory(id) {
         return service
-            .get(`/categories/${id}`)
+            .get(`/api/categories/${id}`)
             .then(res => res.data)
             .catch(errHandler)
     },
 
     updateCategory(id, body) {
         return service
-            .patch(`/categories/${id}`, body)
+            .patch(`/api/categories/${id}`, body)
             .then(res => res.data)
             .catch(errHandler)
     },
 
     deleteCategory(id) {
         return service
-            .delete(`/categories/${id}`)
+            .delete(`/api/categories/${id}`)
             .then(res => res.data)
             .catch(errHandler)
     },

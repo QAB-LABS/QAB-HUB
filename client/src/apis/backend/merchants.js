@@ -6,42 +6,42 @@ const service = getService()
 export default {
     searchMerchants() {
         return service
-            .get('/merchants/search')
+            .get('/api/merchants/search')
             .then(res => res.data)
             .catch(errHandler)
     },
 
     getMerchants() {
         return service
-            .get('/merchants')
+            .get('/api/merchants')
             .then(res => res.data)
             .catch(errHandler)
     },
 
     addMerchant(body) {
         return service
-            .post('/merchants', body)
+            .post('/api/merchants', body)
             .then(res => res.data)
             .catch(errHandler)
     },
 
     getMerchant(id) {
         return service
-            .get(`/merchants/${id}`)
+            .get(`/api/merchants/${id}`)
             .then(res => res.data)
             .catch(errHandler)
     },
 
     updateMerchant(id, body) {
         return service
-            .patch(`/merchants/${id}`, body)
+            .patch(`/api/merchants/${id}`, body)
             .then(res => res.data)
             .catch(errHandler)
     },
 
     deleteMerchant(id) {
         return service
-            .delete(`/merchants/${id}`)
+            .delete(`/api/merchants/${id}`)
             .then(res => res.data)
             .catch(errHandler)
     },

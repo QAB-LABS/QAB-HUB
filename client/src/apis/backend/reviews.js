@@ -6,42 +6,42 @@ const service = getService()
 export default {
     searchReviews() {
         return service
-            .get('/reviews/search')
+            .get('/api/reviews/search')
             .then(res => res.data)
             .catch(errHandler)
     },
 
     getReviews() {
         return service
-            .get('/reviews')
+            .get('/api/reviews')
             .then(res => res.data)
             .catch(errHandler)
     },
 
     addReview(body) {
         return service
-            .post('/reviews', body)
+            .post('/api/reviews', body)
             .then(res => res.data)
             .catch(errHandler)
     },
 
     getReview(id) {
         return service
-            .get(`/reviews/${id}`)
+            .get(`/api/reviews/${id}`)
             .then(res => res.data)
             .catch(errHandler)
     },
 
     updateReview(id, body) {
         return service
-            .patch(`/reviews/${id}`, body)
+            .patch(`/api/reviews/${id}`, body)
             .then(res => res.data)
             .catch(errHandler)
     },
 
     deleteReview(id) {
         return service
-            .delete(`/reviews/${id}`)
+            .delete(`/api/reviews/${id}`)
             .then(res => res.data)
             .catch(errHandler)
     },

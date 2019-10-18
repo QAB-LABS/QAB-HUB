@@ -7,7 +7,7 @@ const service = getService()
 export default {
     searchPosts(filter, skip, limit, sort, populate) {
         return service
-            .get('/posts/search', {
+            .get('/api/posts/search', {
                 params: {
                     filter: new RegExp(filter, "gi"),
                     skip,
@@ -22,7 +22,7 @@ export default {
 
     getPosts(skip, limit, populate) {
         return service
-            .get('/posts', {
+            .get('/api/posts', {
                 params: {
                     skip,
                     limit,
@@ -35,28 +35,28 @@ export default {
 
     addPost(body) {
         return service
-            .post('/posts', body)
+            .post('/api/posts', body)
             .then(res => res.data)
             .catch(errHandler)
     },
 
     getPost(id, body) {
         return service
-            .get(`/posts/${id}`)
+            .get(`/api/posts/${id}`)
             .then(res => res.data)
             .catch(errHandler)
     },
 
     updatePost(id, body) {
         return service
-            .patch(`/posts/${id}`, body)
+            .patch(`/api/posts/${id}`, body)
             .then(res => res.data)
             .catch(errHandler)
     },
 
     deletePost(id) {
         return service
-            .delete(`/posts/${id}`)
+            .delete(`/api/posts/${id}`)
             .then(res => res.data)
             .catch(errHandler)
     },

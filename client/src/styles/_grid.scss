@@ -1,9 +1,10 @@
 .container {
-  width: 80%;
+  width: 100%;
   background-color: $white;
   margin: 0 auto;
 
   &.main {
+    width: 80%;
     border-radius: $small;
     margin-top: -4rem;
     height: 5vh;

@@ -2,6 +2,8 @@ import React from 'react'
 import Alert from '../generic/Alert'
 import { authActions } from '../../actions/auth'
 import { connect } from 'react-redux'
+import { NavLink } from 'react-router-dom'
+
 
 class Login extends React.Component {
   state = {
@@ -44,7 +46,7 @@ class Login extends React.Component {
             </form>
             <Alert />
             <div className="message">
-              Start your own board game silo. <a href='/signup'>Sign up</a>
+              Start your own board game silo. <NavLink to='/signup'>Sign up</NavLink>
             </div>
             {this.state.message && <div className="info info-danger">{this.state.message}</div>}
           </div>

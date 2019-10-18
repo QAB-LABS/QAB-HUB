@@ -43,7 +43,7 @@ class ReviewForm extends React.Component {
           <label htmlFor="content">Review: </label>
           <textarea id="content" name="content" onChange={this.handleChange} /> <br />
           <></>
-          <button type="submit">Submit</button>
+          <button className="button large purple" type="submit">Submit</button>
         </form>
         {this.state.message && <div className="info info-danger">{this.state.message}</div>}
       </section>

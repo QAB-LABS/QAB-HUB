@@ -23,7 +23,6 @@ class Home extends React.Component {
     this.setState({
       newGames: newestGames
     })
-    console.log(this.state.newGames)
   }
 
   getPosts = () => {

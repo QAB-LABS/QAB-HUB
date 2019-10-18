@@ -1,8 +1,6 @@
 import React from 'react'
 import { withRouter } from 'react-router'
 import { Route, Switch } from 'react-router-dom'
-import { connect } from 'react-redux'
-import { alertActions } from '../actions/alert'
 
 import MainNavbar from './MainNavbar/MainNavbar'
 import Carousel from './Carousel/Carousel'
@@ -25,9 +23,6 @@ library.add(fab, faBars, faHeart)
 
 class App extends React.Component {
   render() {
-    const { alert, clearAlerts } = this.props;
-    if (alert.message) setTimeout(() => clearAlerts(), 3000)
-
     return (
       <div className="App">
 
@@ -51,22 +46,10 @@ class App extends React.Component {
             </Switch>
           </div>
         </div>
-
         <Footer />
-
-        {alert.message && <div className={`alert message ${alert.type}`}>{alert.message}</div>}
-
       </div>
     )
   }
 }
 
-function mapState(state) {
-  return { alert: state.alert };
-}
-
-const actionCreators = {
-  clearAlerts: alertActions.clear
-};
-
-export default connect(mapState, actionCreators)(withRouter(App));
+export default withRouter(App)

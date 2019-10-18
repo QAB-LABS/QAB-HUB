@@ -2,14 +2,21 @@ import * as types from '../actions/types';
 
 let initialState = {}
 
-// 1  0 - 10
-// 2  11 - 29
-// 3  30-60
-// 4  61-100
-// 5  100+
+const filterLookup = {
+    price: {
+        '$': 'min_player<10',
+        '$$': 'min_players>11&min_player<30',
+        '$$$': 'min_players>31&min_player<60',
+        '$$$$': 'min_players>61&min_player<100',
+        '$$$$$': 'min_players>100',
+    },
+    
+}
 
 const createQueryString = (filters) => {
-    console.log(filters)
+    for (let k in filters) {
+        console.log(filters[k])
+    }
     return ''
 }
 
@@ -32,8 +39,9 @@ const visibilityFilter = (state = initialState, action) => {
             return {...state, [filterKey]: newFilter }
 
         case types.UPDATE_QUERY_URL:
-            const query = createQueryString({...state})
-            return {...state, query}  
+            console.log('updatingggg')
+            const query = createQueryString({...state })
+            return {...state, query }
 
         default:
             return state

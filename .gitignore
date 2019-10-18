@@ -15,9 +15,12 @@ yarn-error.log*
 /client/build
 /client/*.zip
 /client/.npmrc
+/client/.well-known
+/client/.ebextensions
 
 .vscode/
 
 # Temp
 client-old
 server-old
+client/public/.well-known/pki-validation/A96DB4460CF5B06E9A3B0DDC710BF1F6.txt

@@ -56,8 +56,8 @@ class Games extends React.Component {
             Showing {`${skip + 1}-${limit + skip + 1} of ${count ? count.count : 0} results for FILTERS`}
           </div>
           <div className="filterView">
+            <span className="active"><FontAwesomeIcon icon="grip-horizontal" /></span>
             <FontAwesomeIcon icon="grip-lines" /> 
-            <FontAwesomeIcon icon="grip-horizontal" />
           </div>
         </div>
         <div className="row">

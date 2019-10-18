@@ -76,6 +76,11 @@
     }
     .filterView {
         align-self: flex-end;
+
+        .active svg {
+            color: #bfbfbf;
+        }
+
         svg {
             margin-left: $medium;
             color: $purple;
@@ -87,4 +92,10 @@
             }
         }
     }
+}
+
+.imageWrapper {
+    max-height: 25vh;
+    height: 100%;
+    width: 100%;
 }

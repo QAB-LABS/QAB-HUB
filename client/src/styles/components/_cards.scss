@@ -33,6 +33,7 @@
         }
 
         .imageWrapper {
+            display: inline-table;
             padding: $small $small $medium;;
             border-bottom: 1px solid $lightGrey;
 
@@ -60,10 +61,13 @@
         h3 {
             margin-bottom: $tiny;
             font-weight: 400;
-            font-size: 1.4rem;
+            font-size: 1.2rem;
         }
 
         .meta a {
+            display: inline-block;
+            margin-top: $tiny;
+            margin-bottom: $small;
             color: $grey;
         }
 

@@ -27,7 +27,7 @@ class App extends React.Component {
       <div className="App">
 
         <MainNavbar />
-        {['/signup', '/login'].includes(this.props.location.pathname) ? null : <Carousel />}
+        {['/signup', '/login'].includes(this.props.location.pathname) ? <div className="formSpacer"></div> : <Carousel />}
         <div className="container main">
           <div className="row">
             <Switch>

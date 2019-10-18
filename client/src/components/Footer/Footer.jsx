@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 export default class Footer extends Component {
   render() {
@@ -8,7 +9,12 @@ export default class Footer extends Component {
           <div className="container footer">
           <div className="row">
               <div className="col-2">
-                BGS Logo
+              <div className="logo">
+                <NavLink to="/">
+                  <img src="/images/board-game-silo-logo.png" alt="Board Game Silo Logo consisting of letters BGS and 3 silos" />
+                  <h1>Board Game Silo</h1>
+                  </NavLink>
+              </div>
               </div>
               <div className="col-6">
                 <ul>
@@ -19,10 +25,10 @@ export default class Footer extends Component {
               </div>
               <div className="col-4">
                 <ul>
-                  <li><NavLink to="/games">FB</NavLink></li>
-                  <li><NavLink to="/games">Instagram</NavLink></li>
-                  <li><NavLink to="/games">Reddit</NavLink></li>
-                  <li><NavLink to="/games">Twitter</NavLink></li>
+                  <li><NavLink to="/games"><FontAwesomeIcon icon={['fab', 'facebook']} /></NavLink></li>
+                  <li><NavLink to="/games"><FontAwesomeIcon icon={['fab', 'instagram']} /></NavLink></li>
+                  <li><NavLink to="/games"><FontAwesomeIcon icon={['fab', 'reddit']} /></NavLink></li>
+                  <li><NavLink to="/games"><FontAwesomeIcon icon={['fab', 'twitter']} /></NavLink></li>
                 </ul>
               </div>
           </div>

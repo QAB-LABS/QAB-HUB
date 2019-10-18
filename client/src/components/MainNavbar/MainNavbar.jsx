@@ -5,17 +5,23 @@ import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
 import api from '../../apis/backend'
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 
 
 class MainNavbar extends React.Component {
 
   render() {
     return (
-      <header className="container topNav">
+      <header className="topNav">
+        <div className="container">
         <div className="row">
             <div className="col-9 primary">
               <div className="logo">
-                <NavLink to="/">Board Game Silo</NavLink>
+                <NavLink to="/">
+                  <img src="/images/board-game-silo-logo.png" alt="Board Game Silo Logo consisting of letters BGS and 3 silos" />
+                  <h1>Board Game Silo</h1>
+                  </NavLink>
               </div>
               <div className="menu">
                 <ul>
@@ -26,12 +32,18 @@ class MainNavbar extends React.Component {
               </div>
             </div>
             <div className="col-3 secondary">
-            <div className="dropdown">
-                <div className="item">
-                  <i className="user icon" />
-                  Account
+            <div className="hasDropdown">
+                <div className="mobileMenu">
+                  Menu <FontAwesomeIcon icon="bars" />
                 </div>
-                <ul className="menu">
+                <div>
+                  <ul className="menu">
+                    <li><NavLink className="item" id="login" to="/">Login</NavLink></li>
+                    <li>/</li>
+                    <li><NavLink className="item" id="register" to="/">Register</NavLink></li>
+                  </ul>
+                </div>
+                <ul className="menu dropdown">
                   {api.isLoggedIn() && (
                     <li className="item">
                       <NavLink className="item" to="/" onClick={this.props.logout}>Logout</NavLink>
@@ -53,6 +65,7 @@ class MainNavbar extends React.Component {
                 </ul>
               </div>
             </div>
+        </div>
         </div>
       </header>
     )

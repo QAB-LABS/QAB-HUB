@@ -13,6 +13,13 @@ import Login from './pages/Login'
 import Signup from './pages/Signup'
 import Footer from './Footer/Footer'
 
+import ReactDOM from 'react-dom'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { fab } from '@fortawesome/free-brands-svg-icons'
+import { faBars, faHeart } from '@fortawesome/free-solid-svg-icons'
+ 
+library.add(fab, faBars, faHeart)
+
 
 class App extends React.Component {
 

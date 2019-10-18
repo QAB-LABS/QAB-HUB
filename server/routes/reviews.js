@@ -63,7 +63,11 @@ router.post('/', (req, res, next) => {
 router.get('/:id', async(req, res, next) => {
     try {
         const review = await Review.findById(req.params.id)
-            .populate(populatable_virtuals)
+            .populate('author')
+            .populate({
+                path: 'game',
+                populate: { path: 'reviews ratings categories mechanic_names category_names likes'}
+            })
         if (!review) throw new Error()
         res.send(review)
     } catch (e) {

@@ -89,12 +89,20 @@ class GameDetails extends React.Component {
               <div className="imageWrapper">
                 <img src={image} />
               </div>
-              <h2>Description</h2>
-              <section>{description}</section>
-              <h2>Additional Details</h2>
-              {this.renderAdditionalDetails(price, year_published, designers, artists)}
-              {this.state.needForm ? <div><button onClick={this.closeReview}>x</button><ReviewForm closeCallback={this.closeReview} game={this.props.game.game} /></div> : <button onClick={this.leaveReview}>Leave a Review</button>}
+              <section className="description">
+                <h2>Description</h2>
+                {description}
+              </section>
+              <section className="addionalDetails">
+                <h2>Additional Details</h2>
+                {this.renderAdditionalDetails(price, year_published, designers, artists)}
+              </section>
+              <section className="writeReview">
+              {this.state.needForm ? <div><button class="button large purple" onClick={this.closeReview}>x</button><ReviewForm closeCallback={this.closeReview} game={this.props.game.game} /></div> : <button  class="button large purple" onClick={this.leaveReview}>Leave a Review</button>}
+              </section>
+              <section className="reviewList">
               <ReviewsList reviews={reviews} />
+              </section>
             </div>
             <div class="col-3">
               <section>
@@ -102,12 +110,12 @@ class GameDetails extends React.Component {
                 {this.renderDetails(price, min_players, max_players, min_playtime, max_playtime, min_age, mechanics, categories)}
               </section>
               <section>
-                <button onClick={this.likeGame}>Like this Game</button>
-                <button onClick={this.leaveReview}>Leave A Review</button>
-                <button>Add To Wishlist</button>
-                <button>Owned</button>
-                <button>Add To Play Queue</button>
-                <button>Log A Gameplay</button>
+                <button className="button large" onClick={this.likeGame}>Like this Game</button>
+                <button className="button large" onClick={this.leaveReview}>Leave A Review</button>
+                <button className="button large">Add To Wishlist</button>
+                <button className="button large">Owned</button>
+                <button className="button large">Add To Play Queue</button>
+                <button className="button large">Log A Gameplay</button>
               </section>
             </div>
           </div>

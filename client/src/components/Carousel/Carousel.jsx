@@ -5,7 +5,7 @@ export default class Carousel extends Component {
         return (
         <div className="hero carousel">
             This is where the carousel goes.
-        </div>
+          </div>
         )
     }
 }

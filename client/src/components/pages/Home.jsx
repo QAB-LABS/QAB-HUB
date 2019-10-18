@@ -37,49 +37,31 @@ class Home extends React.Component {
 
   render() {
     return (
-      <div className="Home">
-        <div className="ui segments">
 
-          <div className="ui segment">
-            <p>Profile</p>
-          </div>
+      <section className="Home">
 
-          <div className="ui link cards grid">
-            {this.getPosts()}
-          </div>
+        <section className="userPosts container">
+          <h2>User Posts</h2>
+          
+          {this.getPosts()}
+        </section>
 
-          <div className="container">
-            <div className="ui grid">
-              <div className="four wide column">
-                <div className="segment">
-                  <h2>Conventions</h2>
-                  <div className="ui one cards">
-                    {this.getConventions()}
-                  </div>
-                </div>
-              </div>
+        <section className="Conventions">
+        <h2>Conventions</h2>
+        {this.getConventions()}
+        </section>
 
-              <div className="eight wide column">
-                <div className="segment">
-                  <h2>Events</h2>
-                  <div className="ui one cards">
-                    {this.getConventions()}
-                  </div>
-                </div>
-              </div>
+        <section className="events">
+          <h2>Events</h2>
+          {this.getConventions()}
+        </section>
 
-              <div className="four wide column">
-                <div className="segment">
-                  <h2>Recent Reviews</h2>
-                  <div className="ui one cards">
-                    {this.getReviews()}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+        <section className="recentReviews">
+          <h2>Recent Reviews</h2>
+          {this.getReviews()}
+        </section>
+
+      </section>
     )
   }
 }

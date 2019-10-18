@@ -48,13 +48,8 @@ router.get('/', async(req, res, next) => {
  * @example POST /api/users
  */
 router.post('/', (req, res, next) => {
-    let userData = {
-        content: req.body.content,
-        author: req.user._id,
-        post: req.post._id
-    }
-
-    User.create(userData)
+    const { username, password, name, email } = req.body
+    User.create({ username, password, name, email })
         .then((user) => {
             res.json(user)
         })

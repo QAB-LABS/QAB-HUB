@@ -2,6 +2,7 @@ const path = require('path')
 require('dotenv').config({ path: path.join(__dirname, '../.env') })
 
 const mongoose = require('mongoose')
+console.log(process.env.MONGODB_URI)
 const bcrypt = require('bcryptjs')
 const faker = require('faker');
 require('../configs/database')
@@ -15,37 +16,50 @@ const Price = require('../models/Price')
 const Review = require('../models/Review')
 const Category = require('../models/Category')
 const Like = require('../models/Like')
+const Rating = require('../models/Rating')
+const Mechanic = require('../models/Mechanic')
 
+const { databaseEntries, getRandomElement } = require('./helpers')
 
-faker.seed(123);
-const bcryptSalt = 10
-var databaseEntries = {
-    users: [],
-    posts: [],
-    comments: [],
-    reviews: [],
-    games: [],
-    categories: [],
-    merchants: [],
-}
-
-const getRandomElement = (arr) => {
-    return arr[Math.floor(Math.random() * arr.length)]
-}
-
-async function submitDocuments(name, model, jsonData) {
+async function submitDocuments(name, model, jsonData, drop = true) {
+    var documents
     try {
-        await model.deleteMany()
-        const documents = await model.create(jsonData)
-        console.log(`${documents.length} ${name} created.`)
+        console.log('dropping .')
+        console.log(model)
+        drop && await model.deleteMany()
+        console.log('dropping.')
+        documents = await model.create(jsonData)
+        console.log('dropping.')
         databaseEntries[name] = documents
     } catch (err) {
-        console.log(`Could not populate documents for ${name}: ${err.name} - ${err._message}`, err)
+        errors.push(`${name} - Could not finish populating documents: ${err.name} - ${err.errmsg}`)
+    } finally {
+        const count = await model.countDocuments()
+        console.log(`${count} ${name} created.`)
     }
 }
 
+function seed(cb) {
+    cb()
+        .then(() => {
+            console.log('\n\nRan into these errors:')
+            console.log('\n\t' + errors.join('\n\t') + '\n\n')
+            mongoose.disconnect()
+        })
+        .catch(err => {
+            console.log('Error populating the database:  ', err)
+            mongoose.disconnect()
+        })
+}
+faker.seed(123);
+const bcryptSalt = 10
+
+
 async function createDBEntries() {
-    await submitDocuments('users', User, Array.from({ length: 10 }).map(e => {
+    console.log('starting to create DB Entries.')
+
+    console.log(User)
+    await submitDocuments('users', User, Array.from({ length: 200 }).map(e => {
         return {
             username: faker.name.findName(),
             password: bcrypt.hashSync(faker.internet.password(), bcrypt.genSaltSync(bcryptSalt)),
@@ -53,7 +67,7 @@ async function createDBEntries() {
         }
     }))
 
-    await submitDocuments('posts', Post, Array.from({ length: 100 }).map((e, i) => {
+    await submitDocuments('posts', Post, Array.from({ length: 300 }).map((e, i) => {
         return {
             title: faker.lorem.sentence(),
             content: faker.lorem.paragraph(),
@@ -69,30 +83,34 @@ async function createDBEntries() {
         }
     }))
 
-    await submitDocuments('categories', Category, require('./categories.json'))
+    // await submitDocuments('categories', Category, require('./categories.json'))
 
-    await submitDocuments('games', Game, Array.from({ length: 100 }).map(e => {
-        return {
-            name: faker.commerce.productName(),
-            description: faker.lorem.sentence(),
-            price: faker.commerce.price(1, 1000, 2, ''),
-            image: faker.image.abstract(),
-            year_published: Number(faker.date.between('1990-01-01', new Date().toISOString().slice(0, 10)).toISOString().slice(0, 4)),
-            min_players: faker.random.number({ min: 1, max: 4 }),
-            max_players: faker.random.number({ min: 4, max: 20 }),
-            min_playtime: faker.random.number({ min: 5, max: 30 }),
-            max_playtime: faker.random.number({ min: 30, max: 180 }),
-            min_age: faker.random.number({ min: 5, max: 60 }),
-            mechanics: [faker.commerce.productMaterial()],
-            designers: [faker.commerce.department()],
-            artists: [faker.name.findName()],
-            publisher: faker.company.companyName(),
-            family: faker.commerce.productAdjective(),
-            categories: Array.from({ length: Math.floor(Math.random() * 5) }).map(e => getRandomElement(databaseEntries.categories)._id),
-        }
-    }))
+    databaseEntries.mechanics = await Mechanic.find()
+    databaseEntries.categories = await Category.find()
 
-    await submitDocuments('reviews', Review, Array.from({ length: 500 }).map(e => {
+    // await submitDocuments('games', Game, Array.from({ length: 1000 }).map(e => {
+    //     return {
+    //         name: faker.commerce.productName(),
+    //         description: faker.lorem.sentence(),
+    //         price: faker.commerce.price(1, 1000, 2, ''),
+    //         image: faker.image.abstract(),
+    //         year_published: Number(faker.date.between('1990-01-01', new Date().toISOString().slice(0, 10)).toISOString().slice(0, 4)),
+    //         min_players: faker.random.number({ min: 1, max: 4 }),
+    //         max_players: faker.random.number({ min: 4, max: 20 }),
+    //         min_playtime: faker.random.number({ min: 5, max: 30 }),
+    //         max_playtime: faker.random.number({ min: 30, max: 180 }),
+    //         min_age: faker.random.number({ min: 5, max: 60 }),
+    //         mechanics: [faker.commerce.productMaterial()],
+    //         designers: [faker.commerce.department()],
+    //         artists: [faker.name.findName()],
+    //         publisher: faker.company.companyName(),
+    //         family: faker.commerce.productAdjective(),
+    //         categories: Array.from({ length: Math.floor(Math.random() * 5) }).map(e => getRandomElement(databaseEntries.categories)._id),
+    //     }
+    // }))
+    databaseEntries.games = await Game.find()
+
+    await submitDocuments('reviews', Review, Array.from({ length: 10000 }).map(e => {
         return {
             title: faker.lorem.sentence(),
             content: faker.lorem.paragraph(),
@@ -101,7 +119,7 @@ async function createDBEntries() {
         }
     }))
 
-    await submitDocuments('likes', Like, Array.from({ length: 2000 }).map(e => {
+    await submitDocuments('likes', Like, Array.from({ length: 10000 }).map(e => {
         return {
             game: getRandomElement(databaseEntries.games)._id,
             user: getRandomElement(databaseEntries.users)._id
@@ -116,7 +134,7 @@ async function createDBEntries() {
         }
     }))
 
-    await submitDocuments('prices', Price, Array.from({ length: 1000 }).map(e => {
+    await submitDocuments('prices', Price, Array.from({ length: 10000 }).map(e => {
         return {
             price: faker.commerce.price(1, 1000, 2, ''),
             url: faker.internet.url() + faker.internet.domainWord(),
@@ -124,16 +142,14 @@ async function createDBEntries() {
             merchant: getRandomElement(databaseEntries.merchants)._id
         }
     }))
+
+    await submitDocuments('ratings', Rating, Array.from({ length: 10000 }).map(e => {
+        return {
+            value: faker.random.number({ min: 20, max: 100 }),
+            game: getRandomElement(databaseEntries.games)._id,
+            author: getRandomElement(databaseEntries.users)._id
+        }
+    }))
 }
 
-async function seed() {
-    try {
-        await createDBEntries()
-    } catch (err) {
-        console.log('Error populating the database:  ', err)
-    } finally {
-        mongoose.disconnect()
-    }
-}
-
-seed()
+seed(createDBEntries)

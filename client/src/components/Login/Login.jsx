@@ -11,30 +11,29 @@ class Login extends React.Component {
 
     render() {
         return (
-            <div className="ui middle aligned center aligned grid">
-                <form className="ui large form">
-                    <div className="ui stacked segment">
-                        <div className="field">
-                            <div clasSName="ui left icon input">
-                                <i className="user icon" />
-                                <input type="text" name="email" placeholder="E-mail address" />
-                            </div>
-                        </div>
-                        <div className="field">
-                            <div clasSName="ui left icon input">
-                                <i className="lock icon" />
-                                <input type="password" name="password" placeholder="Password" />
-                            </div>
-                        </div>
-                        <div className="ui fluid large submit button">Login</div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-4">
+                        <img src="/images/meeple_heart4.png" alt="" />
                     </div>
-                </form>
-                <div className="ui message">
-                    New to us?
-                    <a href='/signup'>Sign Up</a>
+                    <div class="col-8">
+                    <form className="ui large form">
+                        <label for="email">Email Address</label>
+                        <input type="text" name="email" placeholder="E-mail address" />
+
+                        <label for="password">Password</label>
+                        <input type="password" name="password" placeholder="Password" />
+                        
+                        <div className="large submit button">Login</div>
+                    </form>
+                    <div className="ui message">
+                        New to us?
+                        <a href='/signup'>Sign Up</a>
+                    </div>
+                    {api.isLoggedIn() && (<NavLink to="/" onClick={this.handleLogoutClick}>Logout</NavLink>)}
+                    <GoogleAuth />
+                    </div>
                 </div>
-                {api.isLoggedIn() && (<NavLink to="/" onClick={this.handleLogoutClick}>Logout</NavLink>)}
-                <GoogleAuth />
             </div>
         )
     }

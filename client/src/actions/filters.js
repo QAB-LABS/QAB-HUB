@@ -1,42 +1,26 @@
 import * as types from './types';
 
-
-export const addPriceFilter = (priceType) => {
-    return {
-        type: types.ADD_PRICE_FILTER,
-        priceType
+export const addFilter = (filterKey, filterValue) => {
+    return dispatch => {
+        dispatch({ type: types.ADD_FILTER, payload: { filterKey, filterValue } })
+        dispatch(updateQueryUrl())
     }
 }
 
-export const removePriceFilter = (priceType) => {
-    return {
-        type: types.REMOVE_PRICE_FILTER,
-        priceType
+export const removeFilter = (filterKey, filterValue) => {
+    return dispatch => {
+        dispatch({ type: types.REMOVE_FILTER, payload: { filterKey, filterValue } })
+        dispatch(updateQueryUrl())
     }
 }
 
-export const addLocationFilter = (zip_code) => {
-    return {
-        type: types.ADD_LOCATION_FILTER,
-        zip_code
-    }
-}
+export const filtersUpdated = () => { return { type: types.FILTERS_UPDATED } }
 
-export const removeLocationFilter = (zip_code) => {
-    return {
-        type: types.REMOVE_LOCATION_FILTER,
-        zip_code
-    }
-}
+export const filtersApplied = () => { return { type: types.FILTERS_APPLIED } }
 
-export const addTakeoutFilter = () => {
-    return {
-        type: types.ADD_TAKEOUT_FILTER
-    }
-}
-
-export const removeTakeoutFilter = () => {
-    return {
-        type: types.REMOVE_TAKEOUT_FILTER
+export const updateQueryUrl = () => {
+    return dispatch => {
+        dispatch({ type: types.UPDATE_QUERY_URL })
+        dispatch(filtersUpdated())
     }
 }

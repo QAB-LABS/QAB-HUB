@@ -6,8 +6,7 @@ import { history } from '../helpers/history';
 export const authActions = {
     login,
     logout,
-    register,
-    getAll
+    register
 };
 
 function login(username, password) {
@@ -18,7 +17,8 @@ function login(username, password) {
             .then(
                 user => {
                     dispatch(success(user));
-                    history.push('/');
+                    dispatch(alertActions.success('Registration successful'));
+                    history.push('/signup');
                 },
                 error => {
                     dispatch(failure(error.toString()));
@@ -36,17 +36,17 @@ function login(username, password) {
 
 function logout() {
     api.logout();
-    return { type: types.LOGOUT };
+    return { type: types.SIGN_OUT };
 }
 
 function register(user) {
     return dispatch => {
-        dispatch(request(user));
+        dispatch(request(user.username));
 
-        api.register(user)
+        api.signup(user)
             .then(
                 user => {
-                    dispatch(success());
+                    dispatch(success(user));
                     dispatch(alertActions.success('Registration successful'));
                 },
                 error => {
@@ -61,22 +61,4 @@ function register(user) {
     function success(user) { return { type: types.REGISTER_SUCCESS, user } }
 
     function failure(error) { return { type: types.REGISTER_FAILURE, error } }
-}
-
-function getAll() {
-    return dispatch => {
-        dispatch(request());
-
-        api.getAll()
-            .then(
-                users => dispatch(success(users)),
-                error => dispatch(failure(error.toString()))
-            );
-    };
-
-    function request() { return { type: types.GETALL_REQUEST } }
-
-    function success(users) { return { type: types.GETALL_SUCCESS, users } }
-
-    function failure(error) { return { type: types.GETALL_FAILURE, error } }
 }

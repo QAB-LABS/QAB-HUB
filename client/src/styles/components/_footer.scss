@@ -1,0 +1,90 @@
+.siteFooter {
+    width: 100%;
+    background-color: $darkGrey;
+    color: $white;
+
+    .container.footer {
+        width: 80%;
+        margin: 0 auto;
+        padding: $xlarge 0;
+        background-color: $darkGrey;
+    }
+
+    a {
+        color: #b3a9bf;
+
+        &:hover {
+            color: #f27dff;
+        }
+    }
+
+    h1 {
+        display: block;
+        margin: 1rem 0 0;
+        line-height: 1.6rem;
+        font-size: 1.6rem;
+        color: #b46be0;
+      }
+
+    .logo {
+        width: 305px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        
+        a {
+          display: inline-block;
+          width: 100%;
+          line-height: 50px;
+    
+          img {
+            display: block;
+            width: 135px;
+            float: left;
+            opacity: .9;
+          }
+        }
+      }
+
+      .social {
+          text-align: right;
+
+          a {
+              font-size: 1.6rem;
+          }
+
+          .menu {
+            display: flex;
+            justify-content: flex-end;
+
+            li {
+                margin-left: $large;
+                font-weight: normal;
+            }
+        }
+      }
+
+      .menu {
+          font-size: 1.1rem;
+          color: #b3a9bf;
+
+          li {
+              margin-bottom: $small;    
+              font-size: .9rem;           
+              
+              &.title {
+                color: #b3a9bf;
+                font-weight: bold;
+                font-size: 1rem;
+            }
+          }
+      }
+
+      .copy {
+          margin: 1rem 0 0 0;
+          font-size: .9rem;
+          color: #585858;
+      }
+
+
+  }

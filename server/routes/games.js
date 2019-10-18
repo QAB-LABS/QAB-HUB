@@ -4,7 +4,7 @@ const { isLoggedIn } = require('../middlewares')
 const Game = require('../models/Game')
 const router = express.Router()
 
-const populatable_virtuals = 'reviews ratings categories mechanic_names category_names likes';
+const populatable_virtuals = 'reviews ratings categories category_names likes';
 
 const fields = [
     "url",
@@ -26,6 +26,10 @@ const fields = [
     "categories"
 ]
 
+// function sortHelper(a, b){
+//     a.likes > 1
+// }
+
 /** 
  * Get all games with the given search parameters 
  * Only supports limit currently.
@@ -33,13 +37,14 @@ const fields = [
  * GET /api/games/search?limit=50
  * */
 router.get('/search', async(req, res, next) => {
-    const { filter, skip, limit, sort, projection } = aqp(req.query);
+    const { filter, skip, limit, sort, projection, population } = aqp(req.query);
     Game.find(filter)
-        .skip(skip || 0)
+        .lean()
+        .skip(skip)
         .limit(limit || 50)
         .sort(sort)
         .select(projection)
-        .populate(populatable_virtuals)
+        .populate(population)
         .then(games => res.json(games))
         .catch(err => next(err))
 })
@@ -50,7 +55,26 @@ router.get('/search', async(req, res, next) => {
  * GET /api/games/
  * */
 router.get('/', async(req, res, next) => {
-    res.json(await Game.find().populate(populatable_virtuals))
+    const { skip, limit, population } = aqp(req.query);
+    res.json(await Game
+        .find()
+        .lean()
+        .skip(skip || 0)
+        .limit(limit || 20)
+        .populate(population))
+})
+
+/** 
+ * Get all games and sort by number of likes.
+ * @example
+ * GET /api/games/by-likes
+ * */
+router.get('/by-likes', async(req, res, next) => {
+    const { skip, limit, population } = aqp(req.query);
+    res.json(await Game
+        .find()
+        .lean()
+        .populate(populatable_virtuals))
 })
 
 /**
@@ -78,7 +102,7 @@ router.post('/', isLoggedIn, (req, res, next) => {
  */
 router.get('/count', async(req, res, next) => {
     try {
-        res.json({ count: await Game.count() })
+        res.json({ count: await Game.countDocuments() })
     } catch (e) {
         res.status(404).send()
     }
@@ -96,7 +120,7 @@ router.get('/:id', async(req, res, next) => {
         if (!game) throw new Error()
         res.send(game)
     } catch (e) {
-        res.status(404).send()
+        res.status(404).send(e)
     }
 })
 

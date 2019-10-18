@@ -5,16 +5,30 @@ const service = getService('games')
 
 
 export default {
-    searchGames() {
+    searchGames(filter, skip, limit, sort, populate, query) {
         return service
-            .get('/search')
+            .get('/search' + (query || ''), {
+                params: {
+                    filter: new RegExp(filter, "gi"),
+                    skip,
+                    limit,
+                    sort,
+                    populate
+                }
+            })
             .then(res => res.data)
             .catch(errHandler)
     },
 
-    getGames() {
+    getGames(skip, limit, populate) {
         return service
-            .get('/')
+            .get('/', {
+                params: {
+                    skip,
+                    limit,
+                    populate
+                }
+            })
             .then(res => res.data)
             .catch(errHandler)
     },

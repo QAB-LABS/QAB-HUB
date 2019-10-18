@@ -1,67 +1,76 @@
-import React, { useState } from 'react'
-import api from '../../apis/backend'
+import React from 'react'
+import Alert from '../generic/Alert'
+import { authActions } from '../../actions/auth'
+import { connect } from 'react-redux'
 
-export default function Signup(props) {
-  const [state, setState] = useState({
+class Signup extends React.Component {
+  state = {
     username: '',
     name: '',
-    password: '',
-    message: null,
-  })
+    email: '',
+    password: ''
+  }
 
-  function handleInputChange(event) {
-    setState({
-      ...state,
+  handleInputChange = (event) => {
+    this.setState({
+      ...this.state,
       [event.target.name]: event.target.value,
     })
   }
 
-  function handleClick(e) {
+  handleClick = (e) => {
     e.preventDefault()
     let data = {
-      username: state.username,
-      name: state.name,
-      password: state.password,
+      username: this.state.username,
+      name: this.state.name,
+      password: this.state.password,
+      email: this.state.email,
     }
-    api
-      .signup(data)
-      .then(result => {
-        console.log('SUCCESS!')
-        props.history.push('/') // Redirect to the home page
-      })
-      .catch(err => setState({ message: err.toString() }))
+    this.props.register(data)
   }
-  return (
-    <div className="Signup">
-      <h2>Signup</h2>
-      <form>
-        Username:{' '}
-        <input
-          type="text"
-          value={state.username}
-          name="username"
-          onChange={handleInputChange}
-        />{' '}
-        <br />
-        Name:{' '}
-        <input
-          type="text"
-          value={state.name}
-          name="name"
-          onChange={handleInputChange}
-        />{' '}
-        <br />
-        Password:{' '}
-        <input
-          type="password"
-          value={state.password}
-          name="password"
-          onChange={handleInputChange}
-        />{' '}
-        <br />
-        <button onClick={e => handleClick(e)}>Signup</button>
-      </form>
-      {state.message && <div className="info info-danger">{state.message}</div>}
-    </div>
-  )
+
+  render() {
+    const { message } = this.props.alert
+
+    if (message && message.type === 'alert-success') this.props.history.push('/')
+
+    return (
+      <div className="container form">
+        <div className="row">
+          <div className="col-6 formInfo">
+            <img src="/images/meeple_heart4.png" alt="" />
+          </div>
+          <div className="col-6 formEntry">
+            <h2>Signup for a BGS account</h2>
+            <form onSubmit={this.handleSubmit}>
+              <label for="username">Username</label>
+              <input type="text" value={this.state.username} name="username" onChange={this.handleInputChange} required />
+
+              <label for="name">Name</label>
+              <input type="text" value={this.state.name} name="name" onChange={this.handleInputChange} required />
+
+              <label for="email">Email Address</label>
+              <input type="text" value={this.state.email} name="email" onChange={this.handleInputChange} required />
+
+              <label for="password">Password</label>
+              <input type="password" value={this.state.password} name="password" onChange={this.handleInputChange} required />
+
+              <button className="purple large submit button" onClick={e => this.handleClick(e)}>Signup</button>
+            </form>
+            <Alert />
+            <div>
+              Start your own board game silo. <a href='/login'>If you already have an account, log in.</a>
+            </div>
+            {this.state.message && <div className="info info-danger">{this.state.message}</div>}
+          </div>
+        </div>
+      </div>
+    )
+  }
 }
+
+function mapState(state) {
+  return { alert: state.alert };
+}
+
+export default connect(mapState, { register: authActions.register })(Signup)

@@ -29,11 +29,10 @@ export default class Footer extends Component {
               </div>
               <div className="col-3">
               <ul className="menu">
-                  <li className="title">Misc</li>
-                  <li><NavLink to="/">Developer</NavLink></li>
-                  <li><NavLink to="/">Terms of Service</NavLink></li>
-                  <li><NavLink to="/">Privacy Policy</NavLink></li>
-                  <li><NavLink to="/">Contact</NavLink></li>
+                  <li className="title">Authors</li>
+                  <li>Kiwi Lin <NavLink to="https://github.com/Kiwi-x-Kiwi" target="_blank"><FontAwesomeIcon icon={['fab', 'github']} /></NavLink> <NavLink to="https://www.linkedin.com/in/kiwilin/" target="_blank"><FontAwesomeIcon icon={['fab', 'linkedin']} /></NavLink></li>
+                  <li>Andres Weber <NavLink to="https://github.com/AndresMWeber" target="_blank"><FontAwesomeIcon icon={['fab', 'github']} /></NavLink> <NavLink to="https://www.linkedin.com/in/andresweber/" target="_blank"><FontAwesomeIcon icon={['fab', 'linkedin']} /></NavLink></li>
+                  <li>Bobby Wang <NavLink to="https://github.com/bobbypwang" target="_blank"><FontAwesomeIcon icon={['fab', 'github']} /></NavLink> <NavLink to="https://www.linkedin.com/in/bobbypwang/" target="_blank"><FontAwesomeIcon icon={['fab', 'linkedin']} /></NavLink></li>
                 </ul>
               </div>
               <div className="col-4 social">

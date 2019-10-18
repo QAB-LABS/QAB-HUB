@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom'
 
 
 const GameDetails = props => {
-  const { name, likes, categories, ratings, image, year_published, description, displayDescription } = props.game
+  const { name, likes, categories, ratings, image, year_published, description, displayDescription, _id } = props.game
 
   return (
     <div className={props.card ? "col-5" : "row"}>
@@ -13,7 +13,7 @@ const GameDetails = props => {
         <img alt={`Banner for ${name}`} src={image || 'https://place-hold.it/200x150/666/fff/000'} />
       </div>
       <div className="content">
-        <div className="header">{name}</div>
+        <NavLink to={`/games/${_id}`}><div className="header">{name}</div></NavLink>
         <div className="meta">
           <NavLink to={`/categories/${!!categories[0] ? categories[0]._id : ''}`}>{(!!categories[0] ? categories[0].name : 'No Category').toUpperCase()}</NavLink>
           <br />

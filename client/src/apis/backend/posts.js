@@ -1,13 +1,13 @@
 import errHandler from './error'
 import getService from './config'
 
-const service = getService('posts')
+const service = getService()
 
 
 export default {
     searchPosts(filter, skip, limit, sort, populate) {
         return service
-            .get('/search', {
+            .get('/api/posts/search', {
                 params: {
                     filter: new RegExp(filter, "gi"),
                     skip,
@@ -22,7 +22,7 @@ export default {
 
     getPosts(skip, limit, populate) {
         return service
-            .get('/', {
+            .get('/api/posts', {
                 params: {
                     skip,
                     limit,
@@ -35,28 +35,28 @@ export default {
 
     addPost(body) {
         return service
-            .post('/', body)
+            .post('/api/posts', body)
             .then(res => res.data)
             .catch(errHandler)
     },
 
     getPost(id, body) {
         return service
-            .get(`/${id}`)
+            .get(`/api/posts/${id}`)
             .then(res => res.data)
             .catch(errHandler)
     },
 
     updatePost(id, body) {
         return service
-            .patch(`/${id}`, body)
+            .patch(`/api/posts/${id}`, body)
             .then(res => res.data)
             .catch(errHandler)
     },
 
     deletePost(id) {
         return service
-            .delete(`/${id}`)
+            .delete(`/api/posts/${id}`)
             .then(res => res.data)
             .catch(errHandler)
     },

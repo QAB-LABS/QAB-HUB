@@ -1,47 +1,47 @@
 import errHandler from './error'
 import getService from './config'
 
-const service = getService('prices')
+const service = getService()
 
 export default {
     searchPrices() {
         return service
-            .get('/search')
+            .get('/api/prices/search')
             .then(res => res.data)
             .catch(errHandler)
     },
 
     getPrices() {
         return service
-            .get('/')
+            .get('/api/prices')
             .then(res => res.data)
             .catch(errHandler)
     },
 
     addPrice(body) {
         return service
-            .post('/', body)
+            .post('/api/prices', body)
             .then(res => res.data)
             .catch(errHandler)
     },
 
     getPrice(id) {
         return service
-            .get(`/${id}`)
+            .get(`/api/prices/${id}`)
             .then(res => res.data)
             .catch(errHandler)
     },
 
     updatePrice(id, body) {
         return service
-            .patch(`/${id}`, body)
+            .patch(`/api/prices/${id}`, body)
             .then(res => res.data)
             .catch(errHandler)
     },
 
     deletePrice(id) {
         return service
-            .delete(`/${id}`)
+            .delete(`/api/prices/${id}`)
             .then(res => res.data)
             .catch(errHandler)
     },

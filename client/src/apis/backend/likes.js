@@ -1,47 +1,47 @@
 import errHandler from './error'
 import getService from './config'
 
-const service = getService('likes')
+const service = getService('')
 
 export default {
     searchLikes() {
         return service
-            .get('/search')
+            .get('/api/likes/search')
             .then(res => res.data)
             .catch(errHandler)
     },
 
     getLikes() {
         return service
-            .get('/')
+            .get('/api/likes')
             .then(res => res.data)
             .catch(errHandler)
     },
 
     addLike(body) {
         return service
-            .post('/', body)
+            .post('/api/likes', body)
             .then(res => res.data)
             .catch(errHandler)
     },
 
     getLike(id) {
         return service
-            .get(`/${id}`)
+            .get(`/api/likes/${id}`)
             .then(res => res.data)
             .catch(errHandler)
     },
 
     updateLike(id, body) {
         return service
-            .patch(`/${id}`, body)
+            .patch(`/api/likes/${id}`, body)
             .then(res => res.data)
             .catch(errHandler)
     },
 
     deleteLike(id) {
         return service
-            .delete(`/${id}`)
+            .delete(`/api/likes/${id}`)
             .then(res => res.data)
             .catch(errHandler)
     },

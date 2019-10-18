@@ -19,8 +19,6 @@ class MainNavbar extends React.Component {
 
       if (window.pageYOffset > 74) {
         activeClass = 'fixed'
-      } else {
-        console.log('someshit')
       }
       this.setState({ activeClass })
     })
@@ -79,7 +77,7 @@ class MainNavbar extends React.Component {
                     </li>
                     <li>/</li>
                     <li>
-                      <NavLink className="item" id="register" to="/register">
+                      <NavLink className="item" id="register" to="/signup">
                         Register
                       </NavLink>
                     </li>

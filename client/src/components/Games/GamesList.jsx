@@ -7,10 +7,8 @@ const GameList = ({ games }) => {
 
   const renderGames = (games) => {
     return (
-      <div className="row">
-        <div className="container">
+      <div className="shopItems">
           {games.map(game => <GameDetails card={true} key={game._id} game={game} />)}
-        </div>
       </div>
     )
   }

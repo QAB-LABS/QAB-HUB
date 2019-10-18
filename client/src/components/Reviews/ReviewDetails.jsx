@@ -9,11 +9,11 @@ const ReviewDetails = props => {
 
     function renderContent(){
         return(
-            <section className={props.card ? "ui card" : "segment"}>
-                <div className="content">
-                    <NavLink to={`/reviews/${_id}`}><p className="header">{title}</p></NavLink>
+            <section className={props.card ? "column card" : "segment"}>
+                <div className="content item">
+                    <NavLink to={`/reviews/${_id}`}><h4>{title}</h4></NavLink>
                     <div className="meta">
-                        <span className="date">{created_at}</span>
+                        <span className="date">{created_at.substring(0,10)} - {created_at.substring(11,16)}</span>
                     </div>
                     <div className="description">
                         {content}
@@ -23,7 +23,7 @@ const ReviewDetails = props => {
                 <div className="extra content">
                     <NavLink to={`/profile/${author._id}`}>
                         <i className="user icon" />
-                        {author.username}
+                        Written by {author.username}
                     </NavLink>
                 </div>
             </section>

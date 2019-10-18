@@ -11,7 +11,7 @@ class Home extends React.Component {
   componentDidMount() {
     this.props.getPosts()
     this.props.getReviews()
-    this.props.getGames(0, 6, 'ratings,categories,likes')
+    this.props.getGames(0, 16, 'ratings,categories,likes')
   }
 
   getPosts = () => {
@@ -30,17 +30,27 @@ class Home extends React.Component {
     return (
       <>
         <div className='row cards'>
-        {this.props.games.slice(12, 15).map(game => (<GameDetails card='true' key={game._id} game={game} />))}
+        {this.props.games.slice(0, 3).map(game => (<GameDetails card='true' key={game._id} game={game} />))}
         </div>
         <div className = 'row cards'>
-        {this.props.games.slice(24, 27).map(game => (<GameDetails card='true' key={game._id} game={game} />))}
+        {this.props.games.slice(3, 6).map(game => (<GameDetails card='true' key={game._id} game={game} />))}
         </div>
       </>
     )
   }
 
   renderNewestGames = () => {
-    return this.props.games.slice(5,8).map(game =>(<GameDetails key={game._id} game = {game}/>))
+    return (
+      <>
+      <div className='row cards'>
+      {this.props.games.slice(6,9).map(game =>(<GameDetails card='true' key={game._id} game={game}/>))}
+      </div>
+      <div className='row cards'>
+      {this.props.games.slice(9,12).map(game =>(<GameDetails card='true' key={game._id} game={game}/>))}
+      </div>
+      </>
+    )
+    
   }
 
   render() {

@@ -1,4 +1,11 @@
 .topNav {
+  border-bottom: 1px solid #3f2856;
+
+  .container {
+    width: 80%;
+    margin: 0 auto;
+  }
+
   .primary {
     display: flex;
     align-items: center;
@@ -7,26 +14,46 @@
 
   .secondary {
     text-align: right;
-    justify-self: right;
   }
 
   .logo {
+    width: 305px;
     font-weight: 700;
-    font-size: 1rem;
-    line-height: 1rem;
     text-transform: uppercase;
     letter-spacing: 1px;
+    
+    a {
+      display: inline-block;
+      width: 100%;
+      line-height: 50px;
+
+      img {
+        display: block;
+        width: 50px;
+        float: left;
+      }
+
+      h1 {
+        display: block;
+        margin: 19px 0 0 60px;;
+        line-height: 1.6rem;
+        font-size: 1.6rem;
+      }
+    }
   }
 
   .item {
-      color: $darkGrey;
-    font-size: 0.9rem;
-    line-height: .9rem;
+    color: $darkGrey;
     text-transform: uppercase;
+
+    &:hover {
+      color: $purple;
+      border-bottom: 1px solid $purple;
+    }
   }
 
   .menu {
-    margin-left: $large;
+    margin-top: 23px;
 
     ul {
       display: flex;
@@ -41,9 +68,23 @@
     }
   }
 
-  .dropdown {
+  .hasDropdown {
     .menu {
-      display: none;
+      display: flex;
+      justify-content: flex-end;
+
+      li {
+        margin-left: $small;
+      }
+
+      &.dropdown {
+        display: none;
+      }
     }
   }
+}
+
+
+.mobileMenu {
+  display: none;
 }

@@ -39,7 +39,6 @@ router.get('/search', async(req, res, next) => {
  * */
 router.get('/', async(req, res, next) => {
     const { skip, limit, population } = aqp(req.query);
-
     res.json(await Review
         .find()
         .skip(skip || 0)

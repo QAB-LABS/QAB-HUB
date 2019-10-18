@@ -40,12 +40,12 @@ function logout() {
 
 function register(user) {
     return dispatch => {
-        dispatch(request(user));
+        dispatch(request(user.username));
 
-        api.register(user)
+        api.signup(user)
             .then(
                 user => {
-                    dispatch(success());
+                    dispatch(success(user));
                     dispatch(alertActions.success('Registration successful'));
                 },
                 error => {

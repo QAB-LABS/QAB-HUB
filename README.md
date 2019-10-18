@@ -22,8 +22,11 @@
     <a align=center href="https://www.gnu.org/licenses/gpl-3.0">
         <img src="https://img.shields.io/badge/License-GPLv3-blue.svg" />
     </a>
-    <a align=center href="https://dev.azure.com/QAB-LABS/BoardGameSiloAPI">
+    <a align=center href="https://dev.azure.com/QAB-LABS/BoardGameSiloAPI/_release?_a=releases&view=mine&definitionId=3">
         <img src="https://dev.azure.com/QAB-LABS/BoardGameSiloAPI/_apis/build/status/boardgamesiloapilinux%20-%20CI?branchName=master" />
+        <a align=center href="https://dev.azure.com/QAB-LABS/BoardGameSiloAPI/_release?_a=releases&view=mine&definitionId=4">
+        <img src="https://dev.azure.com/QAB-LABS/BoardGameSiloAPI/_apis/build/status/boardgamesilo-dev%20-%20CI?branchName=dev" />
+        
     </a>
 </div>
 

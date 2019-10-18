@@ -66,13 +66,13 @@ class MainNavbar extends React.Component {
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink className="item" to="/games">
-                      Events
+                    <NavLink className="item" to="/reviews">
+                      Reviews
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink className="item" to="/games">
-                      Groups
+                    <NavLink className="item" to="/">
+                      Coming Soon...
                     </NavLink>
                   </li>
                 </ul>

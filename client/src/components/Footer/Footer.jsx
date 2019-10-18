@@ -30,17 +30,17 @@ export default class Footer extends Component {
               <div className="col-3">
               <ul className="menu">
                   <li className="title">Authors</li>
-                  <li>Kiwi Lin <a href="https://github.com/Kiwi-x-Kiwi" target="_blank"><FontAwesomeIcon icon={['fab', 'github']} /></a> <a href="https://www.linkedin.com/in/kiwilin/" target="_blank"><FontAwesomeIcon icon={['fab', 'linkedin']} /></a></li>
-                  <li>Andres Weber <a href="https://github.com/AndresMWeber" target="_blank"><FontAwesomeIcon icon={['fab', 'github']} /></a> <a href="https://www.linkedin.com/in/andresweber/" target="_blank"><FontAwesomeIcon icon={['fab', 'linkedin']} /></a></li>
-                  <li>Bobby Wang <a href="https://github.com/bobbypwang" target="_blank"><FontAwesomeIcon icon={['fab', 'github']} /></a> <a href="https://www.linkedin.com/in/bobbypwang/" target="_blank"><FontAwesomeIcon icon={['fab', 'linkedin']} /></a></li>
+                  <li>Kiwi Lin <a href="https://github.com/Kiwi-x-Kiwi" target="_blank" rel="noopener noreferrer" ><FontAwesomeIcon icon={['fab', 'github']} /></a> <a href="https://www.linkedin.com/in/kiwilin/" target="_blank" rel="noopener noreferrer" ><FontAwesomeIcon icon={['fab', 'linkedin']} /></a></li>
+                  <li>Andres Weber <a href="https://github.com/AndresMWeber" target="_blank" rel="noopener noreferrer" ><FontAwesomeIcon icon={['fab', 'github']} /></a> <a href="https://www.linkedin.com/in/andresweber/" target="_blank" rel="noopener noreferrer" ><FontAwesomeIcon icon={['fab', 'linkedin']} /></a></li>
+                  <li>Bobby Wang <a href="https://github.com/bobbypwang" target="_blank" rel="noopener noreferrer" ><FontAwesomeIcon icon={['fab', 'github']} /></a> <a href="https://www.linkedin.com/in/bobbypwang/" target="_blank" rel="noopener noreferrer" ><FontAwesomeIcon icon={['fab', 'linkedin']} /></a></li>
                 </ul>
               </div>
               <div className="col-4 social">
                 <ul className="menu">
-                  <li><a href="https://facebook.com/boardgamesilo" target="_blank"><FontAwesomeIcon icon={['fab', 'facebook']} /></a></li>
-                  <li><a href="https://instagram.com/boardgamesilo" target="_blank"><FontAwesomeIcon icon={['fab', 'instagram']} /></a></li>
-                  <li><a href="https://reddit.com/r/boardgamesilo" target="_blank"><FontAwesomeIcon icon={['fab', 'reddit']} /></a></li>
-                  <li><a href="https://twitter.com/boardgamesilo" target="_blank"><FontAwesomeIcon icon={['fab', 'twitter']} /></a></li>
+                  <li><a href="https://facebook.com/boardgamesilo" target="_blank" rel="noopener noreferrer" ><FontAwesomeIcon icon={['fab', 'facebook']} /></a></li>
+                  <li><a href="https://instagram.com/boardgamesilo" target="_blank" rel="noopener noreferrer" ><FontAwesomeIcon icon={['fab', 'instagram']} /></a></li>
+                  <li><a href="https://reddit.com/r/boardgamesilo" target="_blank" rel="noopener noreferrer" ><FontAwesomeIcon icon={['fab', 'reddit']} /></a></li>
+                  <li><a href="https://twitter.com/boardgamesilo" target="_blank" rel="noopener noreferrer" ><FontAwesomeIcon icon={['fab', 'twitter']} /></a></li>
                 </ul>
                 <div className="copy">
                   &copy; Board Game Silo. All rights reserved. All trademarks are property of their respective owners in the US and other countries.

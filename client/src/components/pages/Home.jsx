@@ -40,20 +40,27 @@ class Home extends React.Component {
   renderTrendingGames = () => {
     return (
       <>
-        <div className='row'>
-        {this.props.games.slice(0, 3).map(game => (<GameDetails key={game._id} game={game} />))}
+        <div className='row cards'>
+        {this.props.games.slice(0, 3).map(game => (<GameDetails card='true' key={game._id} game={game} />))}
         </div>
-        <div className = 'row'>
-        {this.props.games.slice(3, 6).map(game => (<GameDetails key={game._id} game={game} />))}
+        <div className = 'row cards'>
+        {this.props.games.slice(3, 6).map(game => (<GameDetails card='true' key={game._id} game={game} />))}
         </div>
       </>
     )
   }
 
   renderNewestGames = () => {
-
-    
-    return this.props.games.slice(0,3).map(game =>(<GameDetails key={game._id} game = {game}/>))
+    return (
+      <>
+      <div className='row cards'>
+      {this.props.games.slice(6,9).map(game =>(<GameDetails card='true' key={game._id} game={game}/>))}
+      </div>
+      <div className='row cards'>
+      {this.props.games.slice(9,12).map(game =>(<GameDetails card='true' key={game._id} game={game}/>))}
+      </div>
+      </>
+    )
   }
 
   render() {
@@ -62,30 +69,42 @@ class Home extends React.Component {
       <section className='Home'>
 
         <section className='trending container'>
-          <h2>Trending</h2>
-          <div className = 'container'>
-            {this.renderTrendingGames()}
+          <div className="row">
+            <h2>Trending Games</h2>
+            </div>
+              {this.renderTrendingGames()}
+        </section>
+
+        <section className="conventionBanner container">
+          <div className="row">
+              <img style={{width: "50%"}} src= "https://s3.amazonaws.com/conventionimages.tabletop.events/C4409D10-69D0-11E9-A67D-738802F0A829/1D6BF11A-69D5-11E9-B536-D7D7686004F6/tabletop-events-logo.jpg" alt = "orlando games con 2019 banner"/>
           </div>
         </section>
 
-        <img style={{width: "50%"}} src= "https://s3.amazonaws.com/conventionimages.tabletop.events/C4409D10-69D0-11E9-A67D-738802F0A829/1D6BF11A-69D5-11E9-B536-D7D7686004F6/tabletop-events-logo.jpg" alt = "orlando games con 2019 banner"/>
-
         <section className='newest container'>
-          <h2>New {'&'} Upcoming Games</h2>
-          <div className = 'row'>
+          <div className="row">
+            <h2>New {'&'} Upcoming Games</h2>
+            </div>
             {this.renderNewestGames()}
-          </div>
         </section>
 
         <section className='reviews container'>
-          <h2>Recent Reviews</h2>
-          {this.getReviews()}
+          <div className="row">
+            <div className="col-6">
+              <section className='reviews'>
+                <h2>Recent Reviews</h2>
+                {this.getReviews()}
+              </section>
+            </div>
+            <div className="col-6">
+              <section className='posts'>
+                <h2>Recent Posts</h2>
+                {this.getPosts()}
+              </section>
+            </div>
+          </div>
         </section>
 
-        <section className='posts container'>
-          <h2>Recent Posts</h2>
-          {this.getPosts()}
-        </section>
 
       </section>
     )

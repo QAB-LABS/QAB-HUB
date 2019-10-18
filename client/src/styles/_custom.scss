@@ -1,0 +1,24 @@
+.main {
+    section {
+        .row {
+
+            &:first-child {
+                padding-top: 0;
+                padding-bottom: 0;
+            }
+
+            h2 {
+                margin-bottom: 0;
+                font-weight: 300;
+                font-size: 2.4rem;
+            }
+        }
+
+        &.conventionBanner {
+            .row {
+                padding: 4rem $xlarge;
+                border: 1px solid $lightGrey;
+            }
+        }
+    }
+}

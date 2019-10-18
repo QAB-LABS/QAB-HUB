@@ -2,13 +2,32 @@ form {
     label {
       display: block;
       width: 100%;
+      margin-bottom: $small;
+    text-transform: uppercase;
+    font-size: .9rem;
+    letter-spacing: 1px;
+    color: $darkGrey;
+
     }
   
     input {
-  
+        margin-bottom: 1.6rem;
+        border: 1px solid #c7c7c7;
     }
   }
 
-  .loginInfo {
-    padding: 4rem;
+.formSpacer {
+    margin-top: 250px;
+}
+
+.formInfo {
+    padding: 2rem 4rem;
+}
+
+.formEntry {
+    padding: 0 $xlarge;
+
+    h2 {
+        margin-bottom: 2rem;
+    }
 }

@@ -42,6 +42,12 @@ input {
   text-transform: uppercase;
 
   &.large {
-    padding: $medium;
+    padding: $medium $xlarge;
+  }
+
+  &.purple {
+    color: $white;
+    background-color: $purple;
+    border: 0;
   }
 }

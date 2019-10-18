@@ -5,6 +5,10 @@
         border-radius: $small;
         border: 1px solid $lightGrey;
         margin-right: $large;
+
+        &.shop {
+            width: 33%;
+        }
     
         &:nth-child(3) {
             margin-right: 0;
@@ -85,7 +89,7 @@
 }
 
 .reviewsPost h2 {
-    margin-bottom: $small;
+    margin-bottom: $medium !important;
 }
 
 
@@ -112,4 +116,9 @@
             }
         }
     }
+}
+
+.conventionBanner .row img {
+    margin: 0 auto;
+    display: block;
 }

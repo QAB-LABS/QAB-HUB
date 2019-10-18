@@ -38,7 +38,7 @@ class Signup extends React.Component {
       <div className="container form">
         <div className="row">
           <div className="col-6 formInfo">
-            <img src="/images/meeple_heart4.png" alt="" />
+            <img src="/images/meeple_heart3.png" alt="" />
           </div>
           <div className="col-6 formEntry">
             <h2>Signup for a BGS account</h2>

@@ -5,7 +5,9 @@
     "scripts": {
         "start": "node ./bin/www",
         "dev": "nodemon ./bin/www",
-        "seed": "cd bin && node seeds.js"
+        "seed": "cd bin && node seeds.js",
+        "pop-catsmechs": "cd bin && node ./pull_from_bga/categories_and_mechanics.js",
+        "pop-games": "cd bin && node ./pull_from_bga/games.js"
     },
     "dependencies": {
         "api-query-params": "^4.14.0",

@@ -90,10 +90,26 @@
 
 
 .shopItems {
-    position:relative;
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
 
-    .card {
-        width: 25%;
-        float: left;
+    &:after {
+        content: '';
+        clear: both;
+    }
+
+    &.cards {
+        .card {
+            width: 24%;
+            margin-right: 0;
+           margin-bottom: 2%;
+
+            &:nth-child(3) {
+                margin-right: 0;
+            }
+        }
     }
 }

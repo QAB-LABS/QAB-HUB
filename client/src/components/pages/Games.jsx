@@ -7,6 +7,8 @@ import { getMechanics } from '../../actions/mechanics'
 import Filter from '../generic/Filter'
 import ReactPaginate from 'react-paginate';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 class Games extends React.Component {
   state = {
     skip: 0,
@@ -50,10 +52,12 @@ class Games extends React.Component {
     return (
       <div className="Games container" >
         <div className="games-description row">
-          <span>Showing {`${skip + 1}-${limit + skip + 1} of ${count ? count.count : 0} results for FILTERS`}</span>
-          <div className="right">
-            <i className="icon th" />
-            <i className="icon th list" />
+          <div className="filterStats">
+            Showing {`${skip + 1}-${limit + skip + 1} of ${count ? count.count : 0} results for FILTERS`}
+          </div>
+          <div className="filterView">
+            <FontAwesomeIcon icon="grip-lines" /> 
+            <FontAwesomeIcon icon="grip-horizontal" />
           </div>
         </div>
         <div className="row">

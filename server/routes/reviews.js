@@ -38,7 +38,13 @@ router.get('/search', async(req, res, next) => {
  * GET /api/reviews/
  * */
 router.get('/', async(req, res, next) => {
-    res.json(await Review.find().populate(populatable_virtuals))
+    const { skip, limit, population } = aqp(req.query);
+    res.json(await Review
+        .find()
+        .skip(skip || 0)
+        .limit(limit || 50)
+        .lean()
+        .populate(population))
 })
 
 /**
@@ -66,7 +72,7 @@ router.get('/:id', async(req, res, next) => {
             .populate('author')
             .populate({
                 path: 'game',
-                populate: { path: 'ratings categories likes'}
+                populate: { path: 'ratings categories likes' }
             })
         if (!review) throw new Error()
         res.send(review)

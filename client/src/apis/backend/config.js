@@ -4,8 +4,10 @@ const base = process.env.NODE_ENV === 'production' ? process.env.API_URL : `http
 
 export default function getService(path) {
     const route = `api/${path}`
+    const baseURL = `${base}/${route}`
+    console.log(`Setting up API route service at URL: ${baseURL}`)
     return axios.create({
-        baseURL: `${base}/${route}`,
+        baseURL,
         withCredentials: true,
     })
 }

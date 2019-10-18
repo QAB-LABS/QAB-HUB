@@ -3,8 +3,6 @@ const Schema = mongoose.Schema
 const Like = require('../models/Like');
 const Review = require('../models/Review');
 const Rating = require('../models/Rating');
-const Category = require('../models/Category');
-const Mechanic = require('../models/Mechanic');
 
 
 const gameSchema = new mongoose.Schema({

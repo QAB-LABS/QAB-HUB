@@ -21,9 +21,14 @@ class Games extends React.Component {
     this.props.setPaginatedGames(null, this.state.skip, this.state.limit, null, "ratings,categories,likes")
   }
 
+  getFilterQuery = () => {
+    console.log(this.props.filters)
+  }
+  
   handlePageClick = data => {
     let pageIndex = data.selected;
     let offset = Math.ceil(pageIndex * this.state.limit);
+    
     this.setState({ skip: offset, }, () => {
       this.props.setPaginatedGames(null, this.state.skip, this.state.limit, null, "ratings,categories,likes")
     });

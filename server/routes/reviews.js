@@ -66,7 +66,7 @@ router.get('/:id', async(req, res, next) => {
             .populate('author')
             .populate({
                 path: 'game',
-                populate: { path: 'reviews ratings categories mechanic_names category_names likes'}
+                populate: { path: 'ratings categories likes'}
             })
         if (!review) throw new Error()
         res.send(review)

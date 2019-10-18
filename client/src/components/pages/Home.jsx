@@ -4,14 +4,25 @@ import ReviewDetails from '../Reviews/ReviewDetails'
 import { connect } from 'react-redux'
 import { getPosts } from '../../actions/posts'
 import { getReviews } from '../../actions/reviews'
-import { getGames } from '../../actions/games'
+import { searchGames, getGames } from '../../actions/games'
 import GameDetails from '../Games/GameDetails'
+import api from '../../apis/backend'
 
 class Home extends React.Component {
-  componentDidMount() {
+  state ={
+    newGames: ""
+  }
+
+  async componentDidMount() {
     this.props.getPosts()
     this.props.getReviews()
-    this.props.getGames(0, 16, 'ratings,categories,likes')
+    this.props.getGames(0, 6, 'ratings,categories,likes')
+
+    const newestGames = await api.searchGames(null, 0, 3 , { year_published: 1 }, 'ratings categories likes')
+
+    this.setState({
+      newGames: newestGames
+    })
   }
 
   getPosts = () => {
@@ -50,7 +61,6 @@ class Home extends React.Component {
       </div>
       </>
     )
-    
   }
 
   render() {

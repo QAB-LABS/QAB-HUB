@@ -19,15 +19,17 @@ const getRandomElement = (arr) => {
     return arr[Math.floor(Math.random() * arr.length)]
 }
 
-const generateUniqueNumberList = function(length, arr) {
+const generateUniqueNumberList = function(length, arr, min, max) {
     if (!arr) arr = []
     if (arr.length >= length) return arr
-    let newNumber = Math.floor(Math.random() * length + 1);
+    let newNumber
+    if (min && max) newNumber = Math.floor(Math.random() * (max - min + 1)) + min;
+    else newNumber = Math.floor(Math.random() * length + 1);
     if (arr.indexOf(newNumber) < 0) arr.push(newNumber);
-    return generateUniqueNumberList(length, arr);
+    return generateUniqueNumberList(length, arr, min, max);
 }
 
-async function submitDocuments(name, model, jsonData, drop=true) {
+async function submitDocuments(name, model, jsonData, drop = true) {
     var documents
     try {
         drop && await model.deleteMany()

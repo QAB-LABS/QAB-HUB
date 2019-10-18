@@ -58,7 +58,6 @@ export const setPaginatedGames = (filter, skip, limit, sort, population, query) 
     return async dispatch => {
         dispatch(fetchGames())
         try {
-            console.log(filter,skip,limit)
             const response = await api.searchGames(filter, skip, limit, sort, population, query)
             dispatch(filtersApplied())
             return dispatch({ type: types.PAGINATE_GAMES, payload: response })

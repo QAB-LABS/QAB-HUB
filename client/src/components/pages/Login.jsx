@@ -26,23 +26,23 @@ class Login extends React.Component {
 
   render() {
     return (
-      <div class="container form">
-        <div class="row">
-          <div class="col-6 formInfo">
+      <div className="container form">
+        <div className="row">
+          <div className="col-6 formInfo">
             <img src="/images/meeple_heart4.png" alt="" />
           </div>
-          <div class="col-6 formEntry">
+          <div className="col-6 formEntry">
             <h2>Login to your BGS</h2>
             <form onSubmit={this.handleSubmit}>
-              <label for="username">Username</label>
+              <label htmlFor="username">Username</label>
               <input type="text" name="username" onChange={this.handleChange} required />
 
-              <label for="password">Password</label>
+              <label htmlFor="password">Password</label>
               <input type="password" name="password" onChange={this.handleChange} required />
 
               <button className="purple large submit button">Login</button>
-            <Alert />
             </form>
+            <Alert />
             <div className="message">
               Start your own board game silo. <a href='/signup'>Sign up</a>
             </div>

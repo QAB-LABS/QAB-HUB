@@ -8,10 +8,9 @@ export const addFilter = (filterKey, filterValue) => {
 }
 
 export const removeFilter = (filterKey, filterValue) => {
-
-    return {
-        type: types.REMOVE_FILTER,
-        payload: { filterKey, filterValue }
+    return dispatch => {
+        dispatch({ type: types.REMOVE_FILTER, payload: { filterKey, filterValue } })
+        dispatch(updateQueryUrl())
     }
 }
 

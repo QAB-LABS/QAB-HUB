@@ -1,7 +1,11 @@
 const path = require('path')
 require('dotenv').config({ path: path.join(__dirname, '../.env') })
+
+const mongoose = require('mongoose')
+console.log(process.env.MONGODB_URI)
 const bcrypt = require('bcryptjs')
 const faker = require('faker');
+require('../configs/database')
 
 const User = require('../models/User')
 const Post = require('../models/Post')
@@ -15,14 +19,46 @@ const Like = require('../models/Like')
 const Rating = require('../models/Rating')
 const Mechanic = require('../models/Mechanic')
 
-require('../configs/database')
-const { seed, databaseEntries, getRandomElement, submitDocuments } = require('./helpers')
+const { databaseEntries, getRandomElement } = require('./helpers')
 
+async function submitDocuments(name, model, jsonData, drop = true) {
+    var documents
+    try {
+        console.log('dropping .')
+        console.log(model)
+        drop && await model.deleteMany()
+        console.log('dropping.')
+        documents = await model.create(jsonData)
+        console.log('dropping.')
+        databaseEntries[name] = documents
+    } catch (err) {
+        errors.push(`${name} - Could not finish populating documents: ${err.name} - ${err.errmsg}`)
+    } finally {
+        const count = await model.countDocuments()
+        console.log(`${count} ${name} created.`)
+    }
+}
+
+function seed(cb) {
+    cb()
+        .then(() => {
+            console.log('\n\nRan into these errors:')
+            console.log('\n\t' + errors.join('\n\t') + '\n\n')
+            mongoose.disconnect()
+        })
+        .catch(err => {
+            console.log('Error populating the database:  ', err)
+            mongoose.disconnect()
+        })
+}
 faker.seed(123);
 const bcryptSalt = 10
 
 
 async function createDBEntries() {
+    console.log('starting to create DB Entries.')
+
+    console.log(User)
     await submitDocuments('users', User, Array.from({ length: 200 }).map(e => {
         return {
             username: faker.name.findName(),

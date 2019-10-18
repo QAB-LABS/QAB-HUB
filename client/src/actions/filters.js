@@ -14,4 +14,13 @@ export const removeFilter = (filterKey, filterValue) => {
     }
 }
 
-export const updateQueryUrl = () => { return { type: types.UPDATE_QUERY_URL } }
+export const filtersUpdated = () => { return { type: types.FILTERS_UPDATED } }
+
+export const filtersApplied = () => { return { type: types.FILTERS_APPLIED } }
+
+export const updateQueryUrl = () => {
+    return dispatch => {
+        dispatch({ type: types.UPDATE_QUERY_URL })
+        dispatch(filtersUpdated())
+    }
+}

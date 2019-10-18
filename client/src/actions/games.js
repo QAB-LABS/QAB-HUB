@@ -1,5 +1,6 @@
 import * as types from './types'
 import api from '../apis/backend'
+import { filtersApplied } from './filters'
 
 
 export const fetchGames = name => ({
@@ -53,11 +54,13 @@ export const getGame = (id) => {
     }
 }
 
-export const setPaginatedGames = (filter, skip, limit, sort, population) => {
+export const setPaginatedGames = (filter, skip, limit, sort, population, query) => {
     return async dispatch => {
         dispatch(fetchGames())
         try {
-            const response = await api.searchGames(filter, skip, limit, sort, population)
+            console.log(filter,skip,limit)
+            const response = await api.searchGames(filter, skip, limit, sort, population, query)
+            dispatch(filtersApplied())
             return dispatch({ type: types.PAGINATE_GAMES, payload: response })
         } catch (error) {
             return dispatch({ type: types.ERROR, error });

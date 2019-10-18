@@ -12,25 +12,25 @@ export const userService = {
 
 function getUsers() {
     return service
-        .get('/users')
+        .get('/api/users')
         .then(handleResponse)
 }
 
 function getUser(id) {
     return service
-        .get(`/users/${id}`)
+        .get(`/api/users/${id}`)
         .then(handleResponse)
 }
 
 function updateUser(user) {
     return service
-        .post('/users/login', JSON.stringify(user))
+        .post('/api/users/login', JSON.stringify(user))
         .then(handleResponse)
 }
 
 function deleteUser(id) {
     return service
-        .delete(`/users/${id}`)
+        .delete(`/api/users/${id}`)
         .then(handleResponse)
 }
 

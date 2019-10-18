@@ -3,13 +3,47 @@ import { authActions } from '../../actions/auth'
 import { NavLink } from 'react-router-dom'
 import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
-import api from '../../apis/backend'
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
+const userMenu = (loggedIn, currentUser) => {
+  console.log(loggedIn, currentUser)
+  return (
+    <ul className="menu">
+      {loggedIn ? (
+        <React.Fragment>
+          <li className="item">
+            <NavLink className="item" to={`/profile/${currentUser._id}`}>
+              {currentUser.username}
+            </NavLink>
+          </li>
+          <li className="item">
+            <NavLink className="item" to="/" onClick={authActions.logout}>
+              Logout
+            </NavLink>
+          </li>
+        </React.Fragment>
+      ) :
+        <React.Fragment>
+          <li className="item">
+            <NavLink className="item" to="/login">
+              Log In
+                                          </NavLink>
+          </li>
+          <li>
+            <NavLink className="item" id="register" to="/signup">
+              Register
+                                  </NavLink>
+          </li>
+        </React.Fragment>
+      }
+    </ul>
+  )
+}
 class MainNavbar extends React.Component {
 
   render() {
+    const { loggedIn, currentUser } = this.props
+
     return (
       <header className="topNav fixed">
         <div className="container">
@@ -50,46 +84,33 @@ class MainNavbar extends React.Component {
                   Menu <FontAwesomeIcon icon="bars" />
                 </div>
                 <div>
-                  <ul className="menu">
-                    <li>
-                      <NavLink className="item" id="login" to="/login">
-                        Login
-                      </NavLink>
-                    </li>
-                    <li>/</li>
-                    <li>
-                      <NavLink className="item" id="register" to="/signup">
-                        Register
-                      </NavLink>
-                    </li>
-                  </ul>
+                  {userMenu(loggedIn, currentUser)}
                 </div>
+
+
                 <ul className="menu dropdown">
-                  {api.isLoggedIn() && (
+                  {(!!loggedIn && !!currentUser) ? (
                     <li className="item">
-                      <NavLink
-                        className="item"
-                        to="/"
-                        onClick={this.props.logout}
-                      >
+                      <NavLink className="item" to="/" onClick={this.props.logout}>
                         Logout
                       </NavLink>
-                    </li>
-                  )}
+                    </li>) : null
+                  }
 
-                  {api.isLoggedIn() && (
+                  {(!!loggedIn && !!currentUser) ? (
                     <li className="item">
                       <NavLink className="item" to="/profile">
                         My Profile
                       </NavLink>
                     </li>
-                  )}
-                  <li className="item">
-                    <NavLink className="item" to="/login">
-                      Log In
+                  ) : null}
+                  {!loggedIn ? (
+                    <li className="item">
+                      <NavLink className="item" to="/login">
+                        Log In
                     </NavLink>
-                  </li>
-
+                    </li>
+                  ) : null}
                   <li className="item">
                     <NavLink className="item" to="/signup">
                       Sign Up
@@ -108,6 +129,7 @@ class MainNavbar extends React.Component {
 const mapState = state => {
   return {
     currentUser: state.authentication.user,
+    loggedIn: state.authentication.loggedIn,
   }
 }
 

@@ -13,6 +13,10 @@ a {
   color: $purple;
   text-decoration: none;
   transition: all 250ms ease-in-out;
+
+  &:hover {
+    color: $hoverPurple;
+  }
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -40,6 +44,8 @@ input {
   padding: $small;
   border: 1px sold $lightGrey;
   text-transform: uppercase;
+  transition: all 250ms ease-in-out;
+  cursor: pointer;
 
   &.large {
     padding: $medium $xlarge;
@@ -49,5 +55,9 @@ input {
     color: $white;
     background-color: $purple;
     border: 0;
+
+    &:hover {
+      background-color: $hoverPurple;
+    }
   }
 }

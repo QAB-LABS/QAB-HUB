@@ -36,8 +36,8 @@ router.get('/', async(req, res, next) => {
 
     res.json(await Post
         .find()
-        .skip(skip)
-        .limit(limit)
+        .skip(skip || 0)
+        .limit(limit || 50)
         .lean()
         .populate(population))
 })

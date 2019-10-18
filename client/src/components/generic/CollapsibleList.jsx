@@ -11,7 +11,7 @@ function CollapsibleList(props) {
 
     return (
         <React.Fragment>
-            {title ? <strong>{title}</strong> : null}
+            {title ? <h4>{title}</h4>: null}
             <div className="contained" style={ul.current ? { height: (collapsed ? `${cutoff + .5}em` : ul.current.offsetHeight) } : {}}>
                 <div className={`ease-in-out ${getClassName()}`} style={{ flex: `${cutoff + .5}em` }} >
                     <ul ref={ul}>

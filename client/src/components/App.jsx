@@ -16,9 +16,9 @@ import GameDetails from './pages/GameDetails'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
-import { faBars, faHeart } from '@fortawesome/free-solid-svg-icons'
+import { faBars, faHeart, faGripHorizontal, faGripLines } from '@fortawesome/free-solid-svg-icons'
 
-library.add(fab, faBars, faHeart)
+library.add(fab, faBars, faHeart, faGripHorizontal, faGripLines)
 
 
 class App extends React.Component {

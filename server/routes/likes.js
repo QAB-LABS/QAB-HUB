@@ -44,14 +44,14 @@ router.get('/', async(req, res, next) => {
  */
 router.post('/', (req, res, next) => {
     postData = {
-        user: req.body.user,
-        game: req.body.game
+        user: req.body.user._id,
+        game: req.body.game._id
     }
 
     Like.find(postData)
         .then((like) => {
             if (like.length > 0)
-                res.status(409).send("This like already exists")
+                res.status(409).json(like)
             else {
                 Like.create(postData)
                     .then((like) => {

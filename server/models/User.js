@@ -35,13 +35,13 @@ const userSchema = new Schema({
     },
     email: {
         type: String,
+        unique: false,
         required: false,
         trim: true,
         lowercase: true,
         validate(value) {
             if (!validator.isEmail(value)) throw new Error('Email is invalid')
-        },
-        default: 'john@smith.com'
+        }
     },
     role: {
         type: String,

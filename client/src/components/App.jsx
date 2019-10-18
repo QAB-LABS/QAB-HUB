@@ -12,6 +12,7 @@ import Post from './pages/Post'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
 import Footer from './Footer/Footer'
+import GameDetails from './pages/GameDetails'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
@@ -33,7 +34,8 @@ class App extends React.Component {
           <div className="row">
           <Switch>
             <Route path="/" exact component={Home} />
-            <Route path="/games" component={Games} />
+            <Route path="/games" exact component={Games} />
+            <Route path="/games/:id" component={GameDetails} />
             <Route path="/post/:id" component={Post} />
             <Route path="/reviews" exact component={Reviews} />
             <Route path="/reviews/:id" component={Reviews} />

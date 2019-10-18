@@ -48,8 +48,8 @@ router.get('/', async(req, res, next) => {
 router.post('/', (req, res, next) => {
     reviewData = {}
     fields.forEach(field => { if (req.body[field]) reviewData[field] = req.body[field] })
-    review.author = review.author._id
-    review.game = review.game._id
+    reviewData.author = reviewData.author._id
+    reviewData.game = reviewData.game._id
 
     Review.create(reviewData)
         .then((review) => res.json(review))
@@ -63,7 +63,11 @@ router.post('/', (req, res, next) => {
 router.get('/:id', async(req, res, next) => {
     try {
         const review = await Review.findById(req.params.id)
-            .populate(populatable_virtuals)
+            .populate('author')
+            .populate({
+                path: 'game',
+                populate: { path: 'reviews ratings categories mechanic_names category_names likes'}
+            })
         if (!review) throw new Error()
         res.send(review)
     } catch (e) {

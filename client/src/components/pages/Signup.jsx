@@ -35,12 +35,12 @@ class Signup extends React.Component {
     if (message && message.type === 'alert-success') this.props.history.push('/')
 
     return (
-      <div class="container form">
-        <div class="row">
-          <div class="col-6 formInfo">
+      <div className="container form">
+        <div className="row">
+          <div className="col-6 formInfo">
             <img src="/images/meeple_heart4.png" alt="" />
           </div>
-          <div class="col-6 formEntry">
+          <div className="col-6 formEntry">
             <h2>Signup for a BGS account</h2>
             <form onSubmit={this.handleSubmit}>
               <label for="username">Username</label>

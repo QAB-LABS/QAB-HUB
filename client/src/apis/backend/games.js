@@ -5,9 +5,9 @@ const service = getService('games')
 
 
 export default {
-    searchGames(filter, skip, limit, sort, populate) {
+    searchGames(filter, skip, limit, sort, populate, query) {
         return service
-            .get('/search', {
+            .get('/search' + (query || ''), {
                 params: {
                     filter: new RegExp(filter, "gi"),
                     skip,

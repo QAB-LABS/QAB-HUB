@@ -15,19 +15,22 @@ class Games extends React.Component {
   }
 
   componentDidMount() {
+    const { query } = this.props
+    const { skip, limit } = this.state
     this.props.getGamesCount()
     this.props.getCategories()
     this.props.getMechanics()
-    this.props.setPaginatedGames(null, this.state.skip, this.state.limit, null, "ratings,categories,likes")
+    this.props.setPaginatedGames(null, skip, limit, null, "ratings,categories,likes", query)
   }
-  
+
   handlePageClick = data => {
+    const { query } = this.props
+    const { limit } = this.state
     let pageIndex = data.selected;
     let offset = Math.ceil(pageIndex * this.state.limit);
-
-    this.setState({ skip: offset, }, () => {
-      this.props.setPaginatedGames(null, this.state.skip, this.state.limit, null, "ratings,categories,likes")
-    });
+    this.setState({ skip: offset }, () => {
+      this.props.setPaginatedGames(null, this.state.skip, limit, null, "ratings,categories,likes", query)
+    })
   };
 
   generateFilters() {
@@ -43,6 +46,7 @@ class Games extends React.Component {
     const { count, paginatedGames } = this.props
     const { skip, limit, filterCutoff } = this.state
 
+
     return (
       <div className="Games container" >
         <div className="games-description row">
@@ -54,7 +58,7 @@ class Games extends React.Component {
         </div>
         <div className="row">
           <div className="col-2">
-            <Filter cutoff={filterCutoff} filters={this.generateFilters()} />
+            <Filter skip={skip} limit={limit} cutoff={filterCutoff} filters={this.generateFilters()} />
           </div>
 
           <div className="col-10">
@@ -84,6 +88,8 @@ const mapStateToProps = state => {
   return {
     games: state.games.games,
     count: state.games.count,
+    filters: state.filters,
+    needsLoading: state.filters.newFilters,
     filteredGames: state.games.filtered,
     paginatedGames: state.games.paginated,
     categories: state.categories.all,

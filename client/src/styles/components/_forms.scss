@@ -30,4 +30,28 @@ form {
     h2 {
         margin-bottom: 2rem;
     }
+
+    .message {
+        margin: $medium 0;
+
+        &.alert {
+            display: inline;
+            margin-left: $large;
+             color:red;
+             font-weight: bold;
+         }
+    }
+
+    a {
+        font-weight: bold;
+
+        &:hover {
+            color: $purple;
+        }
+
+        &:hover {
+            border-bottom: 1px solid $purple;
+        }
+    }
+
 }

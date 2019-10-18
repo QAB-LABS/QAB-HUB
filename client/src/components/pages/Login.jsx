@@ -41,11 +41,11 @@ class Login extends React.Component {
               <input type="password" name="password" onChange={this.handleChange} required />
 
               <button className="purple large submit button">Login</button>
-            </form>
-            <div className="ui message">
-             Start your own board game silo. <a href='/signup'>Sign up</a>
-            </div>
             <Alert />
+            </form>
+            <div className="message">
+              Start your own board game silo. <a href='/signup'>Sign up</a>
+            </div>
             {this.state.message && <div className="info info-danger">{this.state.message}</div>}
           </div>
         </div>

@@ -10,6 +10,24 @@
             margin-right: 0;
         }
 
+        &.column {
+            width: 99%;
+            margin: auto 0 1rem;
+
+            .item {
+                h4 {
+                    margin-bottom: $tiny;
+                }
+                .meta {
+                    color: $grey;
+                }
+            }
+        }
+
+        .description {
+            margin: $medium 0;
+        }
+
         .imageWrapper {
             padding: $small $small $medium;;
             border-bottom: 1px solid $lightGrey;
@@ -48,6 +66,34 @@
     }
 }
 
-.main .meta .date {
-    display: none;
+.main .newest,
+.main .trending, {
+    .meta .date {
+        display: none;
+    }
+}
+
+
+.reviews.cards {
+    padding-right: $small;
+    margin-top: $small;
+}
+
+.posts.cards {
+    padding-left: $small;
+    margin-top: $small;
+}
+
+.reviewsPost h2 {
+    margin-bottom: $small;
+}
+
+
+.shopItems {
+    position:relative;
+
+    .card {
+        width: 25%;
+        float: left;
+    }
 }

@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom'
 
 
 const GameDetails = props => {
-  const { name, likes, categories, ratings, year_published, description, displayDescription, _id } = props.game
+  const { name, likes, categories, ratings, image, year_published, description, displayDescription, _id } = props.game
 
   return (
     <div className={props.card ? "col-5" : "row"}>

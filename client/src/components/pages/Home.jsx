@@ -15,7 +15,7 @@ class Home extends React.Component {
 
   async componentDidMount() {
     this.props.getPosts(0, 6, 'author')
-    this.props.getReviews(0, 6, 'author')
+    this.props.getReviews(0, 6, 'author, game')
     this.props.getGames(0, 6, 'ratings,categories,likes')
 
     const newestGames = await api.searchGames(null, 0, 3 , { year_published: 1 }, 'ratings categories likes')

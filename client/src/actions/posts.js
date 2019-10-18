@@ -1,10 +1,10 @@
 import * as types from './types'
 import api from '../apis/backend'
 
-export const getPosts = () => {
+export const getPosts = (skip, limit, population) => {
     return async dispatch => {
         try {
-            const response = await api.getPosts()
+            const response = await api.getPosts(skip, limit, population)
             return dispatch({ type: types.FETCH_POSTS, payload: response });
         } catch (error) {
             return dispatch({ type: types.ERROR, error });

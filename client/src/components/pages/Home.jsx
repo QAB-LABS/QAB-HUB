@@ -88,16 +88,16 @@ class Home extends React.Component {
             {this.renderNewestGames()}
         </section>
 
-        <section className='reviews container'>
+        <section className='reviewsPost container'>
           <div className="row">
             <div className="col-6">
-              <section className='reviews'>
+              <section className='reviews cards'>
                 <h2>Recent Reviews</h2>
                 {this.getReviews()}
               </section>
             </div>
             <div className="col-6">
-              <section className='posts'>
+              <section className='posts cards'>
                 <h2>Recent Posts</h2>
                 {this.getPosts()}
               </section>

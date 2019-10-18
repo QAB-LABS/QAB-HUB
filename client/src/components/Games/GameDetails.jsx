@@ -10,7 +10,7 @@ const GameDetails = props => {
   console.log(props.game)
 
   return (
-    <div className={props.card ? "card col-4" : "card row"}>
+    <div className={props.card ? "card flex shop" : "card row"}>
       <div className="imageWrapper">
         <div className="image" style={{backgroundImage: `url(${image})`}} >
           <div className="extraContent">

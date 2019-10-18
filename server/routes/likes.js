@@ -44,8 +44,8 @@ router.get('/', async(req, res, next) => {
  */
 router.post('/', (req, res, next) => {
     postData = {
-        user: req.body.user,
-        game: req.body.game
+        user: req.body.user._id,
+        game: req.body.game._id
     }
 
     Like.find(postData)

@@ -5,8 +5,9 @@ import api from '../../apis/backend'
 
 class ReviewForm extends React.Component {
   state = {
-    game: '5da8953e82546637cc595b6d',
+    // game: '5da8953e82546637cc595b6d',
     // game: this.props.match.params.id,
+    game: this.props.game,
     author: this.props.user,
     title: '',
     content: '',

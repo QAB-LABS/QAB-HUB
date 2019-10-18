@@ -55,8 +55,8 @@ router.get('/', async(req, res, next) => {
     res.json(await Game
         .find()
         .lean()
-        .skip(skip)
-        .limit(limit)
+        .skip(skip || 0)
+        .limit(limit || 20)
         .populate(population))
 })
 

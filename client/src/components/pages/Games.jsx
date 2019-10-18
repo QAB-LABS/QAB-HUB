@@ -3,6 +3,7 @@ import GamesList from '../Games/GamesList'
 import { connect } from 'react-redux'
 import { getGames, getGamesCount, setFilteredGames, setPaginatedGames } from '../../actions/games'
 import { getCategories } from '../../actions/categories'
+import { getMechanics } from '../../actions/mechanics'
 import Filter from '../generic/Filter'
 import ReactPaginate from 'react-paginate';
 
@@ -16,9 +17,9 @@ class Games extends React.Component {
   componentDidMount() {
     this.props.getGamesCount()
     this.props.getCategories()
+    this.props.getMechanics()
     this.props.setPaginatedGames(null, this.state.skip, this.state.limit, null, "ratings,categories,likes")
   }
-
 
   handlePageClick = data => {
     let pageIndex = data.selected;
@@ -85,8 +86,10 @@ const mapStateToProps = state => {
     filteredGames: state.games.filtered,
     paginatedGames: state.games.paginated,
     categories: state.categories.all,
-    categoriesLoading: state.categories.isLoading
+    categoriesLoading: state.categories.isLoading,
+    mechanics: state.mechanics.all,
+    mechanicsLoading: state.mechanics.isLoading
   }
 }
 
-export default connect(mapStateToProps, { getCategories, getGames, getGamesCount, setFilteredGames, setPaginatedGames })(Games)
+export default connect(mapStateToProps, { getMechanics, getCategories, getGames, getGamesCount, setFilteredGames, setPaginatedGames })(Games)

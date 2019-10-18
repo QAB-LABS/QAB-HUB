@@ -1,7 +1,6 @@
 const mongoose = require('mongoose')
 
-// Don't forget to set "MONGODB_URI" in ~/server/.env
-const uri = process.env.MONGODB_URI || `mongodb://localhost/please-set-process-env-mongodb-uri`
+const uri = process.env.MONGODB_LOCAL || process.env.MONGODB_URI || `mongodb://localhost/please-set-process-env-mongodb-uri`
 
 module.export = mongoose.connect(uri, {
         useUnifiedTopology: true,
@@ -25,12 +24,12 @@ mongoose.connection.on('error', function(err) {
 });
 
 mongoose.connection.on('disconnected', function() {
-    console.log("Mongoose default connection is disconnected");
+    console.log(`Mongoose default connection is disconnected from ${uri}`);
 });
 
 process.on('SIGINT', function() {
     mongoose.connection.close(function() {
-        console.log("Mongoose default connection is disconnected due to application termination");
+        console.log(`Mongoose default connection to ${uri} is disconnected due to application termination`);
         process.exit(0)
     });
 });

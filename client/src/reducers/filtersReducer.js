@@ -2,6 +2,12 @@ import * as types from '../actions/types';
 
 let initialState = {}
 
+// 1  0 - 10
+// 2  11 - 29
+// 3  30-60
+// 4  61-100
+// 5  100+
+
 const createQueryString = (filters) => {
     console.log(filters)
     return ''

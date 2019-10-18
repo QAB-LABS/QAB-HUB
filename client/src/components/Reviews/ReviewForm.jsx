@@ -19,30 +19,29 @@ class ReviewForm extends React.Component {
     this.setState({ [name]: value });
   }
 
-  handleSubmit = async(e) => {
+  handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await this.props.addReview(this.state)
-    console.log(this.state);
-    console.log(response);
+    await this.props.addReview(this.state)
     this.setState({ submitted: true });
+    this.props.closeCallback()
   }
-  
-  async componentDidMount(){
+
+  async componentDidMount() {
     const game = await api.getGame(this.state.game)
     this.setState({
       game
     })
   }
-  
+
   render() {
     return (
       <section className="review-form">
         <h2>Leave a Review!</h2>
         <form onSubmit={this.handleSubmit}>
           <label htmlFor="title">Title: </label>
-          <input id = "title" type="text" name="title" onChange={this.handleChange} /> <br />
+          <input id="title" type="text" name="title" onChange={this.handleChange} /> <br />
           <label htmlFor="content">Review: </label>
-          <textarea id = "content" name="content" onChange={this.handleChange} /> <br />
+          <textarea id="content" name="content" onChange={this.handleChange} /> <br />
           <></>
           <button type="submit">Submit</button>
         </form>
@@ -54,7 +53,7 @@ class ReviewForm extends React.Component {
 
 
 function mapState(state) {
-  return { 
+  return {
     user: state.authentication.user
   };
 }

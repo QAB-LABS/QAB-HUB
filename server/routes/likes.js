@@ -51,7 +51,7 @@ router.post('/', (req, res, next) => {
     Like.find(postData)
         .then((like) => {
             if (like.length > 0)
-                res.status(409).send("This like already exists")
+                res.status(409).json(like)
             else {
                 Like.create(postData)
                     .then((like) => {

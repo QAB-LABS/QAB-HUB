@@ -1,6 +1,8 @@
 const path = require('path')
 require('dotenv').config({ path: path.join(__dirname, '.env') })
-
+const app_name = require('./package.json').name
+const version = require('./package.json').version
+const emoji = require('node-emoji')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const cookieParser = require('cookie-parser')
@@ -13,7 +15,10 @@ const MongoStore = require('connect-mongo')(session)
 
 require('./configs/database')
 
-const app_name = require('./package.json').name
+var rocket = emoji.get('rocket')
+var pizza = emoji.get('pizza')
+console.log(pizza + rocket + rocket + rocket + `    Welcome to the BoardGameSilo API - v${version}     ` + rocket + rocket + rocket + pizza)
+
 const app = express()
 
 app.use(nocache())

@@ -26,6 +26,10 @@ const fields = [
     "categories"
 ]
 
+// function sortHelper(a, b){
+//     a.likes > 1
+// }
+
 /** 
  * Get all games with the given search parameters 
  * Only supports limit currently.
@@ -58,6 +62,19 @@ router.get('/', async(req, res, next) => {
         .skip(skip || 0)
         .limit(limit || 20)
         .populate(population))
+})
+
+/** 
+ * Get all games and sort by number of likes.
+ * @example
+ * GET /api/games/by-likes
+ * */
+router.get('/by-likes', async(req, res, next) => {
+    const { skip, limit, population } = aqp(req.query);
+    res.json(await Game
+        .find()
+        .lean()
+        .populate(populatable_virtuals))
 })
 
 /**

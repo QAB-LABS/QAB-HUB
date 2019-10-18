@@ -66,11 +66,14 @@
 
       .menu {
           font-size: 1.1rem;
+          color: #b3a9bf;
+
           li {
               margin-bottom: $small;    
               font-size: .9rem;           
               
               &.title {
+                color: #b3a9bf;
                 font-weight: bold;
                 font-size: 1rem;
             }

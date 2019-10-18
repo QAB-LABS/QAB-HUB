@@ -9,30 +9,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 class MainNavbar extends React.Component {
 
-  state = {
-    activeClass: ''
-  }
-
-  componentDidMount() {
-    window.addEventListener('scroll', () => {
-      let activeClass = ''
-
-      if (window.pageYOffset > 74) {
-        activeClass = 'fixed'
-      } else {
-        console.log('someshit')
-      }
-      this.setState({ activeClass })
-    })
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('scroll')
-  }
-
   render() {
     return (
-      <header className={`topNav ${this.state.activeClass}`}>
+      <header className="topNav fixed">
         <div className="container">
           <div className="row">
             <div className="col-9 primary">
@@ -79,7 +58,7 @@ class MainNavbar extends React.Component {
                     </li>
                     <li>/</li>
                     <li>
-                      <NavLink className="item" id="register" to="/register">
+                      <NavLink className="item" id="register" to="/signup">
                         Register
                       </NavLink>
                     </li>

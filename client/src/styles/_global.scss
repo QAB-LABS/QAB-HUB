@@ -30,3 +30,18 @@ ul {
   padding: 0;
   list-style-type: none;
 }
+
+input {
+  width: 100%;
+  padding: $medium;
+}
+
+.button {
+  padding: $small;
+  border: 1px sold $lightGrey;
+  text-transform: uppercase;
+
+  &.large {
+    padding: $medium;
+  }
+}

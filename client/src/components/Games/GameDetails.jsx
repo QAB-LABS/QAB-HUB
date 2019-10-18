@@ -10,7 +10,7 @@ const GameDetails = props => {
   return (
     <div className={props.card ? "col-5" : "row"}>
       <div className="image">
-        <img alt={`Banner for ${name}`} src={'https://place-hold.it/200x150/666/fff/000'} />
+        <img alt={`Banner for ${name}`} src={image || 'https://place-hold.it/200x150/666/fff/000'} />
       </div>
       <div className="content">
         <NavLink to={`/games/${_id}`}><div className="header">{name}</div></NavLink>

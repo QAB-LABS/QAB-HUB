@@ -3,7 +3,8 @@ import { getReview, getReviews } from '../../actions/reviews'
 import { connect } from 'react-redux'
 import ReviewsList from '../Reviews/ReviewsList'
 import ReviewDetails from '../Reviews/ReviewDetails'
-import GameDetails from './GameDetails'
+// import GameDetails from './GameDetails'
+import GameDetails from '../Games/GameDetails'
 
 class Reviews extends React.Component {
   componentDidMount() {

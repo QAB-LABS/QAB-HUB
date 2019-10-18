@@ -6,6 +6,7 @@ const base = process.env.NODE_ENV === 'https://boardgamesilo-dev.azurewebsites.n
 export default function getService(endpoint) {
     const route = `api/${endpoint}`
     const baseURL = base ? `${base}/${route}` : route
+    console.log(`Creating service with endpoint: ${baseURL}`)
     return axios.create({
         baseURL,
         withCredentials: true,

@@ -11,16 +11,37 @@ export default (state = initialState, action) => {
                 loggingIn: true,
                 user: action.user
             };
+
         case types.LOGIN_SUCCESS:
             return {
                 ...state,
                 loggedIn: true,
                 user: action.user
             };
+
+        case types.REGISTER_REQUEST:
+            return {
+                ...state,
+                loggingIn: true,
+                user: action.user
+            };
+
+        case types.REGISTER_SUCCESS:
+            return {
+                ...state,
+                loggedIn: true,
+                user: action.user
+            };
+
+        case types.REGISTER_FAILURE:
+            return {...state, loggedIn: false, user: null }
+            
         case types.LOGIN_FAILURE:
-            return state;
+            return {...state, loggedIn: false, user: null }
+
         case types.SIGN_OUT:
-            return state;
+            return {...state, loggedIn: false, user: null }
+
         default:
             return state
     }

@@ -41,8 +41,8 @@ class Login extends React.Component {
               <input type="password" name="password" onChange={this.handleChange} required />
 
               <button className="purple large submit button">Login</button>
-            <Alert />
             </form>
+            <Alert />
             <div className="message">
               Start your own board game silo. <a href='/signup'>Sign up</a>
             </div>

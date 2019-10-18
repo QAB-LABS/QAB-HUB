@@ -26,7 +26,7 @@ library.add(fab, faBars, faHeart)
 class App extends React.Component {
   render() {
     const { alert, clearAlerts } = this.props;
-    if (alert.message) setTimeout(() => this.props.clearAlerts(), 3000)
+    if (alert.message) setTimeout(() => clearAlerts(), 3000)
 
     return (
       <div className="App">

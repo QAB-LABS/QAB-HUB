@@ -6,7 +6,7 @@ import ReviewsList from '../Reviews/ReviewsList'
 class GameDetails extends React.Component {
   componentDidMount() {
     const val = this.props.getGame(this.props.match.params.id)
-    
+    console.log(val)
   }
 
   renderAdditionalDetails = (year_published, designers, artists) => {
@@ -37,16 +37,17 @@ class GameDetails extends React.Component {
   }
 
   renderMainContent = () =>{
-    let name, image, categories, description, reviews, ratings, min_players, max_players, min_playtime, max_playtime, min_age, mechanics, designers, artists, year_published;
+    let name, image, categories, description, reviews, ratings, min_players, max_players, min_playtime, max_playtime, min_age, mechanics, designers, artists, year_published, likes;
 
-    if (this.props.game.games) {
-      ({ name, image, categories, description, reviews, ratings, min_players, max_players, min_playtime, max_playtime, mechanics, designers, artists, year_published } = this.props.game.games)
+    if (this.props.game.game) {
+      ({ name, image, categories, description, reviews, ratings, min_players, max_players, min_playtime, max_playtime, mechanics, designers, artists, year_published, likes } = this.props.game.game)
     }
 
     return (
       <>
-        <div className>
+        <div>
           <h1>{name}</h1>
+          <p>{likes.length} LIKES</p>
           <img src={image} />
           <h2>Description</h2>
           <section>{description}</section>
@@ -79,9 +80,10 @@ class GameDetails extends React.Component {
   }
 
   render() {    
+    console.log(this.props.game.game)
     return (
       <>
-        {this.props.game.games ? this.renderMainContent() : null}
+        {this.props.game.game ? this.renderMainContent() : null}
 
       </>
     )

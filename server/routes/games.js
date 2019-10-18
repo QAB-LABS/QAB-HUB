@@ -4,7 +4,7 @@ const { isLoggedIn } = require('../middlewares')
 const Game = require('../models/Game')
 const router = express.Router()
 
-const populatable_virtuals = 'reviews ratings categories mechanic_names category_names likes';
+const populatable_virtuals = 'reviews ratings categories category_names likes';
 
 const fields = [
     "url",
@@ -55,8 +55,8 @@ router.get('/', async(req, res, next) => {
     res.json(await Game
         .find()
         .lean()
-        .skip(skip)
-        .limit(limit)
+        .skip(skip || 0)
+        .limit(limit || 20)
         .populate(population))
 })
 
@@ -103,7 +103,7 @@ router.get('/:id', async(req, res, next) => {
         if (!game) throw new Error()
         res.send(game)
     } catch (e) {
-        res.status(404).send()
+        res.status(404).send(e)
     }
 })
 

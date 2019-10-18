@@ -1,0 +1,94 @@
+.topNav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  border-bottom: 1px solid #3f2856;
+  background-color: $white;
+
+  .container {
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  .primary {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+  }
+
+  .secondary {
+    text-align: right;
+  }
+
+  .logo {
+    width: 305px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    
+    a {
+      display: inline-block;
+      width: 100%;
+      line-height: 50px;
+
+      img {
+        display: block;
+        width: 50px;
+        float: left;
+      }
+
+      h1 {
+        display: block;
+        margin: 19px 0 0 60px;;
+        line-height: 1.6rem;
+        font-size: 1.6rem;
+      }
+    }
+  }
+
+  .item {
+    color: $darkGrey;
+    text-transform: uppercase;
+
+    &:hover {
+      color: $purple;
+      border-bottom: 1px solid $purple;
+    }
+  }
+
+  .menu {
+    margin-top: 23px;
+
+    ul {
+      display: flex;
+      justify-content: left;
+
+      li {
+        margin-left: $medium;
+
+        a {
+        }
+      }
+    }
+  }
+
+  .hasDropdown {
+    .menu {
+      display: flex;
+      justify-content: flex-end;
+
+      li {
+        margin-left: $small;
+      }
+
+      &.dropdown {
+        display: none;
+      }
+    }
+  }
+}
+
+
+.mobileMenu {
+  display: none;
+}

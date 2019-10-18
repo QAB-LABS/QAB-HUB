@@ -8,6 +8,55 @@
         width: 80%;
         margin: 0 auto;
         padding: $xlarge 0;
-        background-color: $grey;
+        background-color: $darkGrey;
     }
+
+    a {
+        color: #b3a9bf;
+
+        &:hover {
+            color: $lightPurple;
+        }
+    }
+
+    .logo {
+        width: 305px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        
+        a {
+          display: inline-block;
+          width: 100%;
+          line-height: 50px;
+    
+          img {
+            display: block;
+            width: 100px;
+            float: left;
+            opacity: .9;
+          }
+    
+          h1 {
+            display: block;
+            margin: 19px 0 0 60px;;
+            line-height: 1.6rem;
+            font-size: 1.6rem;
+          }
+        }
+      }
+
+      .social {
+          text-align: right;
+          a {
+              font-size: 1.6rem;
+          }
+      }
+
+      .menu {
+          display: flex;
+          li {
+              margin-right: $large;
+          }
+      }
   }

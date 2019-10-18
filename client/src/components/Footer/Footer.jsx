@@ -11,20 +11,17 @@ export default class Footer extends Component {
               <div className="col-2">
               <div className="logo">
                 <NavLink to="/">
-                  <img src="/images/board-game-silo-logo.png" alt="Board Game Silo Logo consisting of letters BGS and 3 silos" />
+                  <img src="/images/board-game-silo-logo-white.png" alt="Board Game Silo Logo consisting of letters BGS and 3 silos" />
                   <h1>Board Game Silo</h1>
                   </NavLink>
+                  
               </div>
               </div>
               <div className="col-6">
-                <ul>
-                  <li><NavLink to="/games">Board Games</NavLink></li>
-                  <li><NavLink to="/games">Events</NavLink></li>
-                  <li><NavLink to="/games">Groups</NavLink></li>
-                </ul>
+
               </div>
-              <div className="col-4">
-                <ul>
+              <div className="col-4 social">
+                <ul className="menu">
                   <li><NavLink to="/games"><FontAwesomeIcon icon={['fab', 'facebook']} /></NavLink></li>
                   <li><NavLink to="/games"><FontAwesomeIcon icon={['fab', 'instagram']} /></NavLink></li>
                   <li><NavLink to="/games"><FontAwesomeIcon icon={['fab', 'reddit']} /></NavLink></li>
@@ -37,7 +34,7 @@ export default class Footer extends Component {
                 <p>&copy; Board Game Silo. All rights reserved. All trademarks are property of their respective owners in the US and other countries.</p>
             </div>
             <div className="col-12">
-                <ul>
+                <ul className="menu">
                   <li><NavLink to="/">About</NavLink></li>
                   <li><NavLink to="/">Developer</NavLink></li>
                   <li><NavLink to="/">Terms of Service</NavLink></li>

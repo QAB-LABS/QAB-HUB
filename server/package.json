@@ -7,7 +7,8 @@
         "dev": "nodemon ./bin/www",
         "seed": "cd bin && node seeds.js",
         "pop-catsmechs": "cd bin && node ./pull_from_bga/categories_and_mechanics.js",
-        "pop-games": "cd bin && node ./pull_from_bga/games.js"
+        "pop-games": "cd bin && node ./pull_from_bga/games.js",
+        "connect-entries": "cd bin && node ./pull_from_bga/connectGamesCategoriesMerchants.js"
     },
     "dependencies": {
         "api-query-params": "^4.14.0",

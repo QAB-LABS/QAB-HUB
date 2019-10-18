@@ -13,7 +13,7 @@ yarn-debug.log*
 yarn-error.log*
 
 /client/build
-/client/client.zip
+/client/*.zip
 /client/.npmrc
 
 .vscode/

@@ -1,47 +1,47 @@
 import errHandler from './error'
 import getService from './config'
 
-const service = getService('comments')
+const service = getService('')
 
 export default {
     searchComments() {
         return service
-            .get('/search')
+            .get('/api/comments/search')
             .then(res => res.data)
             .catch(errHandler)
     },
 
     getComments() {
         return service
-            .get('/')
+            .get('/api/comments')
             .then(res => res.data)
             .catch(errHandler)
     },
 
     addComment(body) {
         return service
-            .post('/', body)
+            .post('/api/comments', body)
             .then(res => res.data)
             .catch(errHandler)
     },
 
     getComment(id) {
         return service
-            .get(`/${id}`)
+            .get(`/api/comments/${id}`)
             .then(res => res.data)
             .catch(errHandler)
     },
 
     updateComment(id, body) {
         return service
-            .patch(`/${id}`, body)
+            .patch(`/api/comments/${id}`, body)
             .then(res => res.data)
             .catch(errHandler)
     },
 
     deleteComment(id) {
         return service
-            .delete(`/${id}`)
+            .delete(`/api/comments/${id}`)
             .then(res => res.data)
             .catch(errHandler)
     },

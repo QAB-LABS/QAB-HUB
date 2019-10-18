@@ -14,7 +14,7 @@ export default {
 
     signup(userInfo) {
         return service
-            .post('/signup', userInfo)
+            .post('/api/signup', userInfo)
             .then(res => {
                 localStorage.setItem('user', JSON.stringify(res.data))
                 return res.data
@@ -24,7 +24,7 @@ export default {
 
     login(username, password) {
         return service
-            .post('/login', {
+            .post('/api/login', {
                 username,
                 password,
             })
@@ -37,20 +37,6 @@ export default {
 
     logout() {
         localStorage.removeItem('user')
-        return service.get('/logout')
-    },
-
-
-    addPicture(file) {
-        const formData = new FormData()
-        formData.append('picture', file)
-        return service
-            .post('/endpoint/to/add/a/picture', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
-            })
-            .then(res => res.data)
-            .catch(errHandler)
+        return service.get('/api/logout')
     },
 }

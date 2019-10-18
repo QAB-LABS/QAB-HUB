@@ -1,7 +1,7 @@
 
 import getService from './config'
 
-const service = getService('users')
+const service = getService()
 
 export const userService = {
     getUsers,
@@ -12,25 +12,25 @@ export const userService = {
 
 function getUsers() {
     return service
-        .get('/')
+        .get('/users')
         .then(handleResponse)
 }
 
 function getUser(id) {
     return service
-        .get(`/${id}`)
+        .get(`/users/${id}`)
         .then(handleResponse)
 }
 
 function updateUser(user) {
     return service
-        .post('/login', JSON.stringify(user))
+        .post('/users/login', JSON.stringify(user))
         .then(handleResponse)
 }
 
 function deleteUser(id) {
     return service
-        .delete(`/${id}`)
+        .delete(`/users/${id}`)
         .then(handleResponse)
 }
 

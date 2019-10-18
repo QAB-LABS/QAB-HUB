@@ -22,3 +22,69 @@
         }
     }
 }
+
+.filter-container {
+    padding-right: 3rem;
+
+    h3 {
+        margin-top: 0;
+    }
+
+    h4 {
+        margin-top: 0;
+        margin-bottom: $medium;
+    }
+
+    strong {
+        line-height: 1.2rem;
+    }
+
+    .contained {
+        margin-bottom: 3rem;
+    }
+
+    .filterWrap {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: $small;
+
+        .filterInput {
+            align-self: flex-end;
+            width: 14px;
+        }
+    }
+
+    #more-less {
+        border-top: 1px solid $lightGrey;
+        padding-top: $tiny;
+
+        &:hover {
+            cursor: pointer;
+            color: $purple;
+        }
+    }
+    
+}
+
+.row.games-description {
+    justify-content: space-between;
+    font-size: 1.4rem;
+
+    .filterStats {
+        align-self: flex-start;
+        font-size: 1rem;
+    }
+    .filterView {
+        align-self: flex-end;
+        svg {
+            margin-left: $medium;
+            color: $purple;
+
+            &:hover {
+                cursor:pointer;
+                color: $hoverPurple;
+
+            }
+        }
+    }
+}

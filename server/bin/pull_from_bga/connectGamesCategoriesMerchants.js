@@ -17,7 +17,6 @@ async function connectDBEntries() {
             // game.categories = generateUniqueNumberList(5, [], 1, categories.length-1).map(i => categories[i]._id)
             game.mechanics = generateUniqueNumberList(Math.floor(Math.random() * 5), [], 1, mechanics.length - 1).map(i => mechanics[i]._id)
             await game.save()
-            console.log('finished?')
         })
 
     } catch (err) {

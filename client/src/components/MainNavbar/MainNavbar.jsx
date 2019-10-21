@@ -6,7 +6,6 @@ import { connect } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const userMenu = (loggedIn, currentUser) => {
-  console.log(loggedIn, currentUser)
   return (
     <ul className="menu">
       {loggedIn ? (

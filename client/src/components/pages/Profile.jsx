@@ -60,7 +60,6 @@ class UserProfile extends React.Component {
 }
 
 const mapState = state => {
-  console.log('updating state', state)
   return {
     currentProfile: state.users.user,
     currentUser: state.authentication.user

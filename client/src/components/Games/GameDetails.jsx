@@ -7,8 +7,6 @@ import { NavLink } from 'react-router-dom'
 const GameDetails = props => {
   const { name, likes, categories, ratings, image, year_published, description, displayDescription, _id } = props.game
 
-  console.log(props.game)
-
   return (
     <div className={props.card ? "card flex shop" : "card row"}>
       <div className="imageWrapper">

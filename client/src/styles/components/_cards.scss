@@ -5,6 +5,10 @@
         border-radius: $small;
         border: 1px solid $lightGrey;
         margin-right: $large;
+
+        &.shop {
+            width: 33%;
+        }
     
         &:nth-child(3) {
             margin-right: 0;
@@ -29,6 +33,7 @@
         }
 
         .imageWrapper {
+            display: inline-table;
             padding: $small $small $medium;;
             border-bottom: 1px solid $lightGrey;
 
@@ -56,10 +61,13 @@
         h3 {
             margin-bottom: $tiny;
             font-weight: 400;
-            font-size: 1.4rem;
+            font-size: 1.2rem;
         }
 
         .meta a {
+            display: inline-block;
+            margin-top: $tiny;
+            margin-bottom: $small;
             color: $grey;
         }
 
@@ -85,7 +93,7 @@
 }
 
 .reviewsPost h2 {
-    margin-bottom: $small;
+    margin-bottom: $medium !important;
 }
 
 
@@ -112,4 +120,9 @@
             }
         }
     }
+}
+
+.conventionBanner .row img {
+    margin: 0 auto;
+    display: block;
 }

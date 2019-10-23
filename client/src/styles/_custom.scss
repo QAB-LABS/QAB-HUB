@@ -76,6 +76,11 @@
     }
     .filterView {
         align-self: flex-end;
+
+        .active svg {
+            color: #bfbfbf;
+        }
+
         svg {
             margin-left: $medium;
             color: $purple;
@@ -86,5 +91,30 @@
 
             }
         }
+    }
+}
+
+.imageWrapper {
+    max-height: 55vh;
+    height: 100%;
+    width: 100%;
+    display: inline-block;
+    text-align: center;
+    border: 1px solid $lightGrey;
+    padding: 4rem 2rem;
+
+    img {
+        display: inline-block;
+        width: auto;
+        margin: 0 auto;
+        height: 100%;
+    }
+}
+
+.oneGame {
+    section {
+        margin-top:2rem;
+        border: 1px solid $lightGrey;
+        padding: 1rem;
     }
 }

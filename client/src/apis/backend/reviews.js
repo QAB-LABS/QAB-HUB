@@ -11,9 +11,15 @@ export default {
             .catch(errHandler)
     },
 
-    getReviews() {
+    getReviews(skip, limit, populate) {
         return service
-            .get('/api/reviews')
+            .get('/api/reviews',{
+                params: {
+                    skip,
+                    limit,
+                    populate
+                }
+            })
             .then(res => res.data)
             .catch(errHandler)
     },

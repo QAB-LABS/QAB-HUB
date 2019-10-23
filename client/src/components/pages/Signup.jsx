@@ -2,6 +2,8 @@ import React from 'react'
 import Alert from '../generic/Alert'
 import { authActions } from '../../actions/auth'
 import { connect } from 'react-redux'
+import { NavLink } from 'react-router-dom'
+
 
 class Signup extends React.Component {
   state = {
@@ -38,7 +40,7 @@ class Signup extends React.Component {
       <div className="container form">
         <div className="row">
           <div className="col-6 formInfo">
-            <img src="/images/meeple_heart4.png" alt="" />
+            <img src="/images/meeple_heart3.png" alt="" />
           </div>
           <div className="col-6 formEntry">
             <h2>Signup for a BGS account</h2>
@@ -59,7 +61,7 @@ class Signup extends React.Component {
             </form>
             <Alert />
             <div>
-              Start your own board game silo. <a href='/login'>If you already have an account, log in.</a>
+              Start your own board game silo. <NavLink to='/login'>If you already have an account, log in.</NavLink>
             </div>
             {this.state.message && <div className="info info-danger">{this.state.message}</div>}
           </div>

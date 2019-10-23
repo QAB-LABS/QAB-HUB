@@ -1,7 +1,8 @@
 .pagination{
-    display: block;
-    text-align: center;
-    font-size: 1.2rem;
+    display: inline-block;
+    margin-right: 5px;
+    border: 1px solid #f1efef;
+    padding: 5px 10px;
 
     li {
         display: inline-block;

@@ -1,6 +1,6 @@
 .pagination{
     display: inline-block;
-    margin-right: 5px;
+    // margin-right: 5px;
     border: 1px solid #f1efef;
     padding: 5px 10px;
 
@@ -23,4 +23,11 @@
             cursor: pointer;
         }
     }
+}
+
+#pagination-box{
+    margin-top: 150px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
 }

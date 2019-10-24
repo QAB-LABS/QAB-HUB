@@ -53,7 +53,10 @@ class Games extends React.Component {
       <div className="Games container" >
         <div className="games-description row">
           <div className="filterStats">
-            Showing {`${skip + 1}-${limit + skip} of ${count ? count.count : 0} results for FILTERS`}
+            {count ? 
+            `Showing ${skip + 1}-${(limit + skip) > count.count ? count.count : limit + skip} of ${count ? count.count : 0} results for FILTERS`
+            :"Showing 0 of 0 results for FILTERS "
+            }
           </div>
           <div className="filterView">
             <span className="active"><FontAwesomeIcon icon="grip-horizontal" /></span>

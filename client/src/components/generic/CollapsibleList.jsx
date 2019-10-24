@@ -11,8 +11,8 @@ function CollapsibleList(props) {
     const getMoreLessText = () => collapsed ? <>More <FontAwesomeIcon icon="caret-down" color="purple" /></> : <>Less <FontAwesomeIcon icon="caret-up" color="purple" /></>
 
     return (
-        <React.Fragment>
-            {title ? <h4>{title}</h4>: null}
+        <div className="filter-item">
+            {title ? <><h4>{title}</h4><FontAwesomeIcon icon="caret-down" color="purple" /></> : null}
             <div className="contained" style={ul.current ? { height: (collapsed ? `${cutoff + .5}em` : ul.current.offsetHeight) } : {}}>
                 <div className={`ease-in-out ${getClassName()}`} style={{ flex: `${cutoff + .5}em` }} >
                     <ul ref={ul}>
@@ -22,7 +22,7 @@ function CollapsibleList(props) {
                 {items.length > cutoff ? <div id="more-less" onClick={() => setCollapsed(!collapsed)}> {getMoreLessText()} </div> : null}
 
             </div>
-        </React.Fragment >
+        </div>
     )
 }
 

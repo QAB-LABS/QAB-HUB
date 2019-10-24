@@ -50,7 +50,7 @@ class Games extends React.Component {
 
 
     return (
-      <div className="Games container" >
+      <div className="games container" >
         <div className="games-description row">
           <div className="filterStats">
             {count ? 

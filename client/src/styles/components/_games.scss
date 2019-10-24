@@ -1,0 +1,133 @@
+.games.container {
+    h4 {
+        display: inline;
+        margin-right: $small;
+        line-height: 1.2rem;
+    }
+    @include breakpoint-tablet-land {
+        .row {
+            .col-2,
+            .col-10 {
+                width: 100%;
+            }
+        }
+
+        h3 {
+            width: 100%;
+        }
+
+
+        .filter-wrap {
+            display: flex;
+            justify-content: space-between;
+            padding-bottom: $large;
+            margin-bottom: $large;
+            border-bottom: 1px solid $lightGrey;
+
+            h4 {
+                &:hover + .contained,
+                &:active + .contained {
+                    display: block;
+                    height: 109px !important;
+                }
+            }
+
+            .contained {
+                display: none;
+            }
+        }
+
+        .filterView {
+            display: none;
+        }
+      }
+}
+
+.filter-container {
+    padding-right: 3rem;
+
+    h3 {
+        margin-top: 0;
+    }
+
+    h4 {
+        margin-top: 0;
+        margin-bottom: $medium;
+    }
+
+    strong {
+        line-height: 1.2rem;
+    }
+
+    .contained {
+        margin-top:1rem;
+        margin-bottom: 3rem;
+    }
+
+    .filterWrap {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: $small;
+
+        .filterInput {
+            align-self: flex-end;
+            width: 14px;
+            input {
+                width: 16px;
+            }
+        }
+    }
+
+    #more-less {
+        position: relative;
+        border-top: 1px solid $lightGrey;
+        padding-top: $tiny;
+
+        &:hover {
+            cursor: pointer;
+            color: $purple;
+        }
+
+        svg{
+            position: absolute;
+            right: 0;
+        }
+    }
+
+    label{
+        display: inline-block;
+        width: 115px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    
+}
+
+.row.games-description {
+    justify-content: space-between;
+    font-size: 1.4rem;
+
+    .filterStats {
+        align-self: flex-start;
+        font-size: 1rem;
+    }
+    .filterView {
+        align-self: flex-end;
+
+        .active svg {
+            color: #bfbfbf;
+        }
+
+        svg {
+            margin-left: $medium;
+            color: $purple;
+
+            &:hover {
+                cursor:pointer;
+                color: $hoverPurple;
+
+            }
+        }
+    }
+}

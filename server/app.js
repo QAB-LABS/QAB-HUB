@@ -60,14 +60,9 @@ app.use('/api/users', require('./routes/users'))
 app.use('/api/categories', require('./routes/categories'))
 app.use('/api/likes', require('./routes/likes'))
 app.use('/api/mechanics', require('./routes/mechanics'))
-if (process.env.NODE_ENV === 'production') {
-    // app.use(express.static(path.join(__dirname, 'client/build')));  //  
-    app.get('*', (req, res) => {
-        res.sendfile(path.join(__dirname = '../client/build/index.html'));  
-    })
-}else{
-    app.get('*', (req, res) => { res.sendFile(path.join(__dirname + '../client/public/index.html')); })
-}
+app.get('*', (req, res) => {
+    res.sendfile(path.resolve(path.join(_dirname, '../client/build/index.html')));  
+})
 
 app.use('/api/*', (req, res, next) => {
     let err = new Error('Not Found')

@@ -53,7 +53,10 @@ class Games extends React.Component {
       <div className="Games container" >
         <div className="games-description row">
           <div className="filterStats">
-            Showing {`${skip + 1}-${limit + skip + 1} of ${count ? count.count : 0} results for FILTERS`}
+            {count ? 
+            `Showing ${skip + 1}-${(limit + skip) > count.count ? count.count : limit + skip} of ${count ? count.count : 0} results for FILTERS`
+            :"Showing 0 of 0 results for FILTERS "
+            }
           </div>
           <div className="filterView">
             <span className="active"><FontAwesomeIcon icon="grip-horizontal" /></span>
@@ -67,19 +70,21 @@ class Games extends React.Component {
 
           <div className="col-10">
             <GamesList games={paginatedGames} />
-            <ReactPaginate
-              previousLabel={'<'}
-              nextLabel={'>'}
-              breakLabel={'...'}
-              breakClassName={'break-me'}
-              pageCount={count ? Math.ceil(count.count / limit) : 0}
-              marginPagesDisplayed={2}
-              pageRangeDisplayed={1}
-              onPageChange={this.handlePageClick}
-              containerClassName={'pagination'}
-              subContainerClassName={'pages pagination'}
-              activeClassName={'active'}
-            />
+            <div id='pagination-box'>
+              <ReactPaginate
+                previousLabel={'<'}
+                nextLabel={'>'}
+                breakLabel={'...'}
+                breakClassName={'break-me'}
+                pageCount={count ? Math.ceil(count.count / limit) : 0}
+                marginPagesDisplayed={2}
+                pageRangeDisplayed={1}
+                onPageChange={this.handlePageClick}
+                containerClassName={'pagination'}
+                subContainerClassName={'pages pagination'}
+                activeClassName={'active'}
+              />
+            </div>
           </div>
         </div>
       </div>

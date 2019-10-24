@@ -64,6 +64,7 @@ app.get('*', (req, res) => {
     res.sendfile(path.resolve(path.join(_dirname, '../client/build/index.html')));  
 })
 
+
 app.use('/api/*', (req, res, next) => {
     let err = new Error('Not Found')
     err.status = 404

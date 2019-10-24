@@ -37,7 +37,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
 
-app.use(express.static(path.join(__dirname, '../client/build')))
+app.use(express.static(path.resolve(path.join(__dirname, '../client/build'))))
 
 app.use(
     session({

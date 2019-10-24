@@ -13,6 +13,7 @@ $lightPurple: #a156f1;
 $darkPurple: #2d223b;
 $lighterPurple: #b2b1d3;
 $hoverPurple: #7e00ff;
+$teal: #3edaea;
 
 // Used to calculate the column classes in _grid.scss
 $columnNumber: 12;
@@ -24,3 +25,14 @@ $small: 7px;
 $medium: 15px;
 $large: 27px;
 $xlarge: 42px;
+
+// Mixins
+@mixin breakpoint-phone {
+    @media (max-width: 600px) { @content };
+}
+@mixin breakpoint-tablet-port {
+    @media (max-width: 900px) { @content };
+}
+@mixin breakpoint-tablet-land {
+    @media (max-width: 1200px) { @content };
+}

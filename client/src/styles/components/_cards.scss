@@ -1,17 +1,25 @@
+.row.cards {
+    flex-wrap: wrap;
+}
+
 .cards {
     
     .card {
         padding: $tiny;
         border-radius: $small;
         border: 1px solid $lightGrey;
-        margin-right: $large;
+        margin-bottom: 1rem;
 
         &.shop {
-            width: 33%;
-        }
-    
-        &:nth-child(3) {
-            margin-right: 0;
+            width: 32%;    
+            
+            @include breakpoint-tablet-port {
+                width: 48%;
+            }   
+
+            @include breakpoint-phone {
+                width: 100%;
+            }
         }
 
         &.column {
@@ -33,7 +41,7 @@
         }
 
         .imageWrapper {
-            display: inline-table;
+            display: inline;
             padding: $small $small $medium;;
             // border-bottom: 1px solid $lightGrey;
 
@@ -69,20 +77,15 @@
 
         .game-name{
             width: 100%;
-            // height: 50px;
-            // overflow: "hidden";
-            // white-space: "nowrap";
-            // text-overflow: "ellipsis";
 
             
             h3 {
-                width: 200px;
                 height: 50px;
                 margin-bottom: $tiny;
                 padding-top: $tiny;
                 border-top: 1px solid $lightGrey;
                 font-weight: 400;
-                font-size: 1.2rem;
+                font-size: 1.1rem;
                 line-height: 1.2em;
                 max-height: 2.4em; 
                 overflow: hidden;
@@ -133,10 +136,14 @@
         .card {
             width: 24%;
             margin-right: 0;
-           margin-bottom: 2%;
+            margin-bottom: 2%;
 
-            &:nth-child(3) {
-                margin-right: 0;
+            @include breakpoint-tablet-port {
+                width: 32%;
+            }
+
+            @include breakpoint-phone {
+                width: 48%;
             }
         }
     }

@@ -41,10 +41,7 @@ class Home extends React.Component {
     return (
       <>
         <div className='row cards'>
-        {this.props.games.slice(0, 3).map(game => (<GameDetails card='true' key={game._id} game={game} />))}
-        </div>
-        <div className = 'row cards'>
-        {this.props.games.slice(3, 6).map(game => (<GameDetails card='true' key={game._id} game={game} />))}
+        {this.props.games.slice(0, 6).map(game => (<GameDetails card='true' key={game._id} game={game} />))}
         </div>
       </>
     )
@@ -54,10 +51,7 @@ class Home extends React.Component {
     return (
       <>
       <div className='row cards'>
-      {this.props.games.slice(6,9).map(game =>(<GameDetails card='true' key={game._id} game={game}/>))}
-      </div>
-      <div className='row cards'>
-      {this.props.games.slice(9,12).map(game =>(<GameDetails card='true' key={game._id} game={game}/>))}
+      {this.props.games.slice(6,12).map(game =>(<GameDetails card='true' key={game._id} game={game}/>))}
       </div>
       </>
     )

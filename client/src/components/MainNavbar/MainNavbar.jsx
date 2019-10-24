@@ -27,12 +27,13 @@ const userMenu = (loggedIn, currentUser) => {
           <li className="item">
             <NavLink className="item" to="/login">
               Log In
-                                          </NavLink>
+            </NavLink>
           </li>
+          <li>/</li>
           <li>
             <NavLink className="item" id="register" to="/signup">
               Register
-                                  </NavLink>
+            </NavLink>
           </li>
         </React.Fragment>
       }
@@ -70,11 +71,6 @@ class MainNavbar extends React.Component {
                       Reviews
                     </NavLink>
                   </li>
-                  <li>
-                    <NavLink className="item" to="/">
-                      Coming Soon...
-                    </NavLink>
-                  </li>
                 </ul>
               </div>
             </div>
@@ -82,13 +78,17 @@ class MainNavbar extends React.Component {
               <div className="hasDropdown">
                 <div className="mobileMenu">
                   Menu <FontAwesomeIcon icon="bars" />
-                </div>
-                <div>
-                  {userMenu(loggedIn, currentUser)}
-                </div>
-
-
-                <ul className="menu dropdown">
+                  <ul className="menu dropdown">
+                  <li className="item">
+                      <NavLink to="/games">
+                        Board Games
+                      </NavLink>
+                    </li>
+                    <li className="item">
+                      <NavLink to="/reviews">
+                        Reviews
+                      </NavLink>
+                    </li>
                   {(!!loggedIn && !!currentUser) ? (
                     <li className="item">
                       <NavLink className="item" to="/" onClick={this.props.logout}>
@@ -111,12 +111,17 @@ class MainNavbar extends React.Component {
                     </NavLink>
                     </li>
                   ) : null}
+                  
                   <li className="item">
                     <NavLink className="item" to="/signup">
                       Sign Up
                     </NavLink>
                   </li>
                 </ul>
+                </div>
+                <div>
+                  {userMenu(loggedIn, currentUser)}
+                </div>
               </div>
             </div>
           </div>

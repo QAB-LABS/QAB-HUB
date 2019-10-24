@@ -43,7 +43,9 @@ class Filter extends Component {
     return (
       <div className="filter-container" >
         <h3>Filter Options</h3>
+        <div className="filter-wrap">
         {this.renderFilters()}
+        </div>
       </div>
     )
   }

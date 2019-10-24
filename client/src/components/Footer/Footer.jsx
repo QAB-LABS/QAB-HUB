@@ -18,7 +18,7 @@ export default class Footer extends Component {
                     <h1>Board Game Silo</h1>
                   </NavLink>
               </div>
-              <div className="col-3">
+              <div className="col-2">
                   <ul className="menu">
                     <li className="title">Site</li>
                     <li><NavLink to="/games">Board Games</NavLink></li>

@@ -37,7 +37,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
 
-app.use(express.static(path.join(__dirname, '../client/build')))
+app.use(express.static(path.resolve(path.join(__dirname, '../client/build'))))
 
 app.use(
     session({
@@ -64,7 +64,6 @@ app.get('*', (req, res) => {
     res.sendfile(path.resolve(path.join(_dirname, '../client/build/index.html')));  
 })
 
-
 app.use('/api/*', (req, res, next) => {
     let err = new Error('Not Found')
     err.status = 404
@@ -79,5 +78,4 @@ app.use((err, req, res, next) => {
         else res.json(JSON.parse(JSON.stringify(err, Object.getOwnPropertyNames(err))))
     }
 })
-
 module.exports = app

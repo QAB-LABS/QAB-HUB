@@ -1,7 +1,7 @@
 .cards {
     
     .card {
-        padding: $medium;
+        padding: $tiny;
         border-radius: $small;
         border: 1px solid $lightGrey;
         margin-right: $large;
@@ -35,34 +35,30 @@
         .imageWrapper {
             display: inline-table;
             padding: $small $small $medium;;
-            border-bottom: 1px solid $lightGrey;
+            // border-bottom: 1px solid $lightGrey;
 
             .image {
                 position: relative;
                 width: 100%;
-                height: 100%;
-                min-height: 250px;
+                height: 35%;
+                min-height: 200px;
                 background-size: contain;
                 background-repeat: no-repeat;
                 background-position: center center;
+            }
+            .extraContent {
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-end;
 
-                .extraContent {
-                    position: absolute;
-                    bottom: $tiny;
-                    right: $tiny;
-
-                    div {
-                        margin-top: $tiny;
-                    }
+                div {
+                    margin-right: $small;
+                    margin-top: $medium;
                 }
             }
         }
 
-        h3 {
-            margin-bottom: $tiny;
-            font-weight: 400;
-            font-size: 1.2rem;
-        }
+
 
         .meta a {
             display: inline-block;
@@ -71,11 +67,35 @@
             color: $grey;
         }
 
+        .game-name{
+            width: 100%;
+            // height: 50px;
+            // overflow: "hidden";
+            // white-space: "nowrap";
+            // text-overflow: "ellipsis";
+
+            
+            h3 {
+                width: 200px;
+                height: 50px;
+                margin-bottom: $tiny;
+                padding-top: $tiny;
+                border-top: 1px solid $lightGrey;
+                font-weight: 400;
+                font-size: 1.2rem;
+                line-height: 1.2em;
+                max-height: 2.4em; 
+                overflow: hidden;
+                white-space: normal;
+                text-overflow: ellipsis;
+            }
+        }
+
     }
 }
 
 .main .newest,
-.main .trending, {
+.main .trending {
     .meta .date {
         display: none;
     }
@@ -126,3 +146,4 @@
     margin: 0 auto;
     display: block;
 }
+

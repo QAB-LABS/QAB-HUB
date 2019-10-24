@@ -4,7 +4,7 @@ const { isLoggedIn } = require('../middlewares')
 const Game = require('../models/Game')
 const router = express.Router()
 
-const populatable_virtuals = 'reviews ratings categories category_names likes';
+const populatable_virtuals = 'reviews ratings categories mechanics likes';
 
 const fields = [
     "url",

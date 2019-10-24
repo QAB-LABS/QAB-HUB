@@ -109,13 +109,13 @@ class GameDetails extends React.Component {
                 <h2>Details</h2>
                 {this.renderDetails(price, min_players, max_players, min_playtime, max_playtime, min_age, mechanics, categories)}
               </section>
-              <section>
-                <button className="button large" onClick={this.likeGame}>Like this Game</button>
-                <button className="button large" onClick={this.leaveReview}>Leave A Review</button>
-                <button className="button large">Add To Wishlist</button>
-                <button className="button large">Owned</button>
-                <button className="button large">Add To Play Queue</button>
-                <button className="button large">Log A Gameplay</button>
+              <section className="userActions">
+                <button className="button purple purple large" onClick={this.likeGame}>Like this Game</button>
+                <button className="button purple large" onClick={this.leaveReview}>Leave A Review</button>
+                <button className="button purple large">Add To Wishlist</button>
+                <button className="button purple large">Owned</button>
+                <button className="button purple large">Add To Play Queue</button>
+                <button className="button purple large">Log A Gameplay</button>
               </section>
             </div>
           </div>

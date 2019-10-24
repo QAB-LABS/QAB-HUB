@@ -131,3 +131,25 @@
         }
     }
 }
+
+
+#details-table {
+    tr {
+        margin-bottom: $medium;
+        border-bottom: 1px solid $lightGrey;
+        vertical-align: top;
+
+        td {
+            &:last-child {
+                padding: $small $small $small $medium;
+            }
+        }
+    }
+}
+
+.userActions {
+    button {
+        width: 100%;
+        margin-bottom: $tiny;
+    }
+}

@@ -55,6 +55,7 @@
     }
 
     #more-less {
+        position: relative;
         border-top: 1px solid $lightGrey;
         padding-top: $tiny;
 
@@ -62,6 +63,19 @@
             cursor: pointer;
             color: $purple;
         }
+
+        svg{
+            position: absolute;
+            right: 0;
+        }
+    }
+
+    label{
+        display: inline-block;
+        width: 115px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
     
 }
@@ -100,7 +114,6 @@
     width: 100%;
     display: inline-block;
     text-align: center;
-    border: 1px solid $lightGrey;
     padding: 4rem 2rem;
 
     img {

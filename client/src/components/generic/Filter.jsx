@@ -21,9 +21,9 @@ class Filter extends Component {
   renderFilterList = (filter) => {
     const { heading, values } = filter
     return values.map((value, i) => (
-        <div class="filterWrap" key={i}>
-        <div class="filterLabel"><label htmlFor={value + i}>{value}</label></div>
-        <div class="filterInput">
+        <div className="filterWrap" key={i}>
+        <div className="filterLabel"><label htmlFor={value + i}>{value}</label></div>
+        <div className="filterInput">
         <input type="checkbox" id={value + i} value={value} onClick={e => this.handleFilterChange(e, heading.toLowerCase())} /></div>
         </div>
     ))

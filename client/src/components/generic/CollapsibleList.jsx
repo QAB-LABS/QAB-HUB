@@ -1,7 +1,6 @@
 import React, { useState, useRef } from "react";
 import './CollapsibleList.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCaretDown, faCaretUp  } from '@fortawesome/free-solid-svg-icons'
 
 function CollapsibleList(props) {
     const { items, title, cutoff } = props
@@ -9,7 +8,7 @@ function CollapsibleList(props) {
     let ul = useRef();
 
     const getClassName = () => `${collapsed ? 'section collapsed' : 'section'}`
-    const getMoreLessText = () => collapsed ? <>More <FontAwesomeIcon icon={faCaretDown} color="purple" /></> : <>Less <FontAwesomeIcon icon={faCaretUp} color="purple" /></>
+    const getMoreLessText = () => collapsed ? <>More <FontAwesomeIcon icon="caret-down" color="purple" /></> : <>Less <FontAwesomeIcon icon="caret-up" color="purple" /></>
 
     return (
         <React.Fragment>

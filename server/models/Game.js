@@ -24,7 +24,10 @@ const gameSchema = new mongoose.Schema({
     min_playtime: Number,
     max_playtime: Number,
     min_age: Number,
-    mechanics: [String],
+    mechanics: [{
+        type: Schema.Types.ObjectId,
+        ref: "Mechanic"
+    }],
     designers: [String],
     artists: [String],
     publishers: [String],

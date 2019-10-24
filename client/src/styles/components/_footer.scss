@@ -9,6 +9,18 @@
         margin: 0 auto;
         padding: $xlarge 0;
         background-color: $darkGrey;
+
+        @include breakpoint-phone {
+          .row > div{
+            margin-bottom: $large;
+          }
+        }
+
+        @include breakpoint-tablet-port {
+          .row > div.col-4{
+            width: 100%;
+          }
+        }
     }
 
     a {
@@ -48,7 +60,11 @@
       }
 
       .social {
-          text-align: right;
+          text-align: right;  
+
+          @include breakpoint-phone {
+              text-align: left;
+          }
 
           a {
               font-size: 1.6rem;
@@ -56,11 +72,20 @@
 
           .menu {
             display: flex;
-            justify-content: flex-end;
+            justify-content: flex-end;  
+
+          @include breakpoint-phone {
+              justify-content: flex-start;
+          }
 
             li {
                 margin-left: $large;
                 font-weight: normal;
+
+                @include breakpoint-phone {
+                  margin-left: 0;
+                  margin-right: $medium;
+                }
             }
         }
       }

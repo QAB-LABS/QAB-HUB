@@ -35,9 +35,15 @@ ul {
   list-style-type: none;
 }
 
-input {
+input,
+textarea {
   width: 100%;
   padding: $medium;
+}
+
+textarea {
+  height: 10rem;
+  margin-bottom: 1rem;
 }
 
 .button {

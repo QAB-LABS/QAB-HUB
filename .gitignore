@@ -20,6 +20,9 @@ yarn-error.log*
 
 .vscode/
 
+# DB Collection Exports
+working-collection
+
 # Temp
 client-old
 server-old

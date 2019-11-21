@@ -1,7 +1,7 @@
 <div align=center>
     <h1 align=center>
         <img align=center
-            src="https://github.com/QAB-LABS/QAB-HUB/blob/master/client/public/logo-placeholder.png?raw=true"
+            src="https://github.com/QAB-LABS/QAB-HUB/blob/master/client/public/images/board-game-silo-logo.png?raw=true"
             alt="QAB-HUB logo">
         <br>
         QAB HUB

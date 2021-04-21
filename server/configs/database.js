@@ -5,7 +5,12 @@ const uri = process.env.MONGODB_LOCAL || process.env.MONGODB_URI || `mongodb://l
 module.export = mongoose.connect(uri, {
         useUnifiedTopology: true,
         useNewUrlParser: true,
-        useCreateIndex: true
+        useCreateIndex: true,
+        reconnectTries: 10,
+        reconnectInterval: 1500,
+        connectTimeoutMS: 3000,
+        socketTimeoutMS: 8000,
+        keepAlive: true,
     })
     .then(x => {
         console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
@@ -25,6 +30,10 @@ mongoose.connection.on('error', function(err) {
 
 mongoose.connection.on('disconnected', function() {
     console.log(`Mongoose default connection is disconnected from ${uri}`);
+});
+
+mongoose.connection.on("reconnected", err => {
+    console.log(`MongoDB reconnection success @ ${config.mongoDbUri}`, err);
 });
 
 process.on('SIGINT', function() {

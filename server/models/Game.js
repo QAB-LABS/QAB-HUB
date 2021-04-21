@@ -29,10 +29,11 @@ const gameSchema = new mongoose.Schema({
     artists: [String],
     publishers: [String],
     categories: [{
-        type: Schema.Types.ObjectId,
+        type: String,
         ref: "Category"
     }]
 })
+
 
 gameSchema.index({ name: 1, bga_id: 1 }, { unique: true })
 

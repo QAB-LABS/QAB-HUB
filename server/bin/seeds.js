@@ -1,10 +1,9 @@
 const path = require('path')
 require('dotenv').config({ path: path.join(__dirname, '../.env') })
 
-const mongoose = require('mongoose')
-console.log(process.env.MONGODB_URI)
+const { databaseEntries, submitDocuments, getRandomElement, seed, errors } = require('./helpers')
 const bcrypt = require('bcryptjs')
-const faker = require('faker');
+const faker = require('faker')
 require('../configs/database')
 
 const User = require('../models/User')
@@ -19,137 +18,121 @@ const Like = require('../models/Like')
 const Rating = require('../models/Rating')
 const Mechanic = require('../models/Mechanic')
 
-const { databaseEntries, getRandomElement } = require('./helpers')
 
-async function submitDocuments(name, model, jsonData, drop = true) {
-    var documents
-    try {
-        console.log('dropping .')
-        console.log(model)
-        drop && await model.deleteMany()
-        console.log('dropping.')
-        documents = await model.create(jsonData)
-        console.log('dropping.')
-        databaseEntries[name] = documents
-    } catch (err) {
-        errors.push(`${name} - Could not finish populating documents: ${err.name} - ${err.errmsg}`)
-    } finally {
-        const count = await model.countDocuments()
-        console.log(`${count} ${name} created.`)
-    }
-}
-
-function seed(cb) {
-    cb()
-        .then(() => {
-            console.log('\n\nRan into these errors:')
-            console.log('\n\t' + errors.join('\n\t') + '\n\n')
-            mongoose.disconnect()
-        })
-        .catch(err => {
-            console.log('Error populating the database:  ', err)
-            mongoose.disconnect()
-        })
-}
-faker.seed(123);
+faker.seed(123)
 const bcryptSalt = 10
 
-
 async function createDBEntries() {
-    console.log('starting to create DB Entries.')
+  console.log('starting to create DB Entries.')
 
-    console.log(User)
-    await submitDocuments('users', User, Array.from({ length: 200 }).map(e => {
-        return {
-            username: faker.name.findName(),
-            password: bcrypt.hashSync(faker.internet.password(), bcrypt.genSaltSync(bcryptSalt)),
-            email: faker.internet.email()
-        }
-    }))
+  await submitDocuments(
+    'users',
+    User,
+    Array.from({ length: 200 }).map((e) => {
+      return {
+        username: faker.name.findName(),
+        password: bcrypt.hashSync(
+          faker.internet.password(),
+          bcrypt.genSaltSync(bcryptSalt)
+        ),
+        email: faker.internet.email(),
+      }
+    })
+  )
 
-    await submitDocuments('posts', Post, Array.from({ length: 300 }).map((e, i) => {
-        return {
-            title: faker.lorem.sentence(),
-            content: faker.lorem.paragraph(),
-            author: databaseEntries.users[i % databaseEntries.users.length]._id
-        }
-    }))
+  await submitDocuments(
+    'posts',
+    Post,
+    Array.from({ length: 300 }).map((e, i) => {
+      return {
+        title: faker.lorem.sentence(),
+        content: faker.lorem.paragraph(),
+        author: databaseEntries.users[i % databaseEntries.users.length]._id,
+      }
+    })
+  )
 
-    await submitDocuments('comments', Comment, Array.from({ length: 1000 }).map((e, i) => {
-        return {
-            content: faker.lorem.paragraph(),
-            post: databaseEntries.posts[i % databaseEntries.posts.length]._id,
-            author: databaseEntries.users[Math.floor(Math.random() * databaseEntries.users.length)]._id
-        }
-    }))
+  await submitDocuments(
+    'comments',
+    Comment,
+    Array.from({ length: 1000 }).map((e, i) => {
+      return {
+        content: faker.lorem.paragraph(),
+        post: databaseEntries.posts[i % databaseEntries.posts.length]._id,
+        author:
+          databaseEntries.users[
+            Math.floor(Math.random() * databaseEntries.users.length)
+          ]._id,
+      }
+    })
+  )
 
-    // await submitDocuments('categories', Category, require('./categories.json'))
+  databaseEntries.mechanics = await Mechanic.find()
+  databaseEntries.categories = await Category.find()
+  databaseEntries.games = await Game.find()
 
-    databaseEntries.mechanics = await Mechanic.find()
-    databaseEntries.categories = await Category.find()
+  await submitDocuments(
+    'reviews',
+    Review,
+    Array.from({ length: 10000 }).map((e) => {
+      return {
+        title: faker.lorem.sentence(),
+        content: faker.lorem.paragraph(),
+        game: getRandomElement(databaseEntries.games)._id,
+        author: getRandomElement(databaseEntries.users)._id,
+      }
+    })
+  )
 
-    // await submitDocuments('games', Game, Array.from({ length: 1000 }).map(e => {
-    //     return {
-    //         name: faker.commerce.productName(),
-    //         description: faker.lorem.sentence(),
-    //         price: faker.commerce.price(1, 1000, 2, ''),
-    //         image: faker.image.abstract(),
-    //         year_published: Number(faker.date.between('1990-01-01', new Date().toISOString().slice(0, 10)).toISOString().slice(0, 4)),
-    //         min_players: faker.random.number({ min: 1, max: 4 }),
-    //         max_players: faker.random.number({ min: 4, max: 20 }),
-    //         min_playtime: faker.random.number({ min: 5, max: 30 }),
-    //         max_playtime: faker.random.number({ min: 30, max: 180 }),
-    //         min_age: faker.random.number({ min: 5, max: 60 }),
-    //         mechanics: [faker.commerce.productMaterial()],
-    //         designers: [faker.commerce.department()],
-    //         artists: [faker.name.findName()],
-    //         publisher: faker.company.companyName(),
-    //         family: faker.commerce.productAdjective(),
-    //         categories: Array.from({ length: Math.floor(Math.random() * 5) }).map(e => getRandomElement(databaseEntries.categories)._id),
-    //     }
-    // }))
-    databaseEntries.games = await Game.find()
+  await submitDocuments(
+    'likes',
+    Like,
+    Array.from({ length: 10000 }).map((e) => {
+      return {
+        game: getRandomElement(databaseEntries.games)._id,
+        user: getRandomElement(databaseEntries.users)._id,
+      }
+    })
+  )
 
-    await submitDocuments('reviews', Review, Array.from({ length: 10000 }).map(e => {
-        return {
-            title: faker.lorem.sentence(),
-            content: faker.lorem.paragraph(),
-            game: getRandomElement(databaseEntries.games)._id,
-            author: getRandomElement(databaseEntries.users)._id
-        }
-    }))
+  await submitDocuments(
+    'merchants',
+    Merchant,
+    Array.from({ length: 75 }).map((e) => {
+      return {
+        name: faker.commerce.productName(),
+        url: faker.internet.url(),
+        country: faker.address.countryCode(),
+      }
+    })
+  )
 
-    await submitDocuments('likes', Like, Array.from({ length: 10000 }).map(e => {
-        return {
-            game: getRandomElement(databaseEntries.games)._id,
-            user: getRandomElement(databaseEntries.users)._id
-        }
-    }))
+  databaseEntries.merchants = await Merchant.find()
 
-    await submitDocuments('merchants', Merchant, Array.from({ length: 75 }).map(e => {
-        return {
-            name: faker.commerce.productName(),
-            url: faker.internet.url(),
-            country: faker.address.countryCode()
-        }
-    }))
+  await submitDocuments(
+    'prices',
+    Price,
+    Array.from({ length: 10000 }).map((e) => {
+      return {
+        price: faker.commerce.price(1, 1000, 2, ''),
+        url: faker.internet.url() + faker.internet.domainWord(),
+        game: getRandomElement(databaseEntries.games)._id,
+        merchant: getRandomElement(databaseEntries.merchants)._id,
+      }
+    })
+  )
 
-    await submitDocuments('prices', Price, Array.from({ length: 10000 }).map(e => {
-        return {
-            price: faker.commerce.price(1, 1000, 2, ''),
-            url: faker.internet.url() + faker.internet.domainWord(),
-            game: getRandomElement(databaseEntries.games)._id,
-            merchant: getRandomElement(databaseEntries.merchants)._id
-        }
-    }))
-
-    await submitDocuments('ratings', Rating, Array.from({ length: 10000 }).map(e => {
-        return {
-            value: faker.random.number({ min: 20, max: 100 }),
-            game: getRandomElement(databaseEntries.games)._id,
-            author: getRandomElement(databaseEntries.users)._id
-        }
-    }))
+  await submitDocuments(
+    'ratings',
+    Rating,
+    Array.from({ length: 10000 }).map((e) => {
+      return {
+        value: faker.random.number({ min: 20, max: 100 }),
+        game: getRandomElement(databaseEntries.games)._id,
+        author: getRandomElement(databaseEntries.users)._id,
+      }
+    })
+  )
 }
 
 seed(createDBEntries)

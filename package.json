@@ -5,7 +5,8 @@
     "scripts": {
         "preinstall": "echo --- preinstall --- && cd server && npm install && cd ../client && npm install && npm run build && cd ..",
         "start": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
-        "dev:server": "cd server && npm run dev",
+        "build:client": "cd client && npm run build && cd ..",
+        "dev:server": "cd server && npm run start",
         "dev:client": "cd client && npm start",
         "seed": "cd server && npm run seed"
     },

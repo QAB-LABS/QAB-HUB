@@ -9,6 +9,25 @@
     </h1>
     <p style="font-size: 1.35rem; font-weight: 500; padding: 2rem; text-align: center">Board Game Silo is an online social networking service that fosters its community for tabletop gamers to express their views, share their collections, and organize gaming groups for meetups.</p>
     <br>
+    <a href="http://bgs.andresmweber.com" target="_blank">
+    <button style="	box-shadow: 0px 0px 0px 0px #9fb4f2;
+	background-color:#1a458f;
+	border-radius:3px;
+	border:1px solid #4e6096;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Trebuchet MS;
+	font-size:13px;
+	font-weight:bold;
+	padding:6px 24px;
+	text-decoration:none;
+    margin: 10px;
+	text-shadow:0px 1px 0px #283966;">
+    Live Demo
+    </button>
+    </a>
+    <br>
     <a align=center href="https://heroku.com/deploy?template=https://github.com/QAB-LABS/QAB-HUB/">
         <img alt="deploy" src="https://www.herokucdn.com/deploy/button.png">
     </a>

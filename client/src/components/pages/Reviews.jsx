@@ -12,7 +12,6 @@ class Reviews extends React.Component {
       this.props.getReview(this.props.match.params.id)
     }
     else {
-      console.log('getting all reviews')
       this.props.getReviews()
     }
   }

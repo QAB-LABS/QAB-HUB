@@ -6,7 +6,6 @@ import { connect } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const userMenu = (loggedIn, currentUser) => {
-  console.log(loggedIn, currentUser)
   return (
     <ul className="menu">
       {loggedIn ? (
@@ -22,25 +21,24 @@ const userMenu = (loggedIn, currentUser) => {
             </NavLink>
           </li>
         </React.Fragment>
-      ) :
+      ) : (
         <React.Fragment>
           <li className="item">
             <NavLink className="item" to="/login">
               Log In
-                                          </NavLink>
+            </NavLink>
           </li>
           <li>
             <NavLink className="item" id="register" to="/signup">
               Register
-                                  </NavLink>
+            </NavLink>
           </li>
         </React.Fragment>
-      }
+      )}
     </ul>
   )
 }
 class MainNavbar extends React.Component {
-
   render() {
     const { loggedIn, currentUser } = this.props
 
@@ -55,27 +53,20 @@ class MainNavbar extends React.Component {
                     src="/images/board-game-silo-logo.png"
                     alt="Board Game Silo Logo consisting of letters BGS and 3 silos"
                   />
-                  <h1>Board Game Silo</h1>
+                  <h1 id="short-title">BGS</h1>
+                  <h1 id="long-title">Board Game Silo</h1>
                 </NavLink>
               </div>
               <div className="menu">
-                <ul>
-                  <li>
-                    <NavLink className="item" to="/games">
-                      Board Games
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink className="item" to="/reviews">
-                      Reviews
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink className="item" to="/">
-                      Coming Soon...
-                    </NavLink>
-                  </li>
-                </ul>
+                <NavLink className="item" to="/games">
+                  Board Games
+                </NavLink>
+                <NavLink className="item" to="/reviews">
+                  Reviews
+                </NavLink>
+                <NavLink className="item" to="/">
+                  Coming Soon...
+                </NavLink>
               </div>
             </div>
             <div className="col-3 secondary">
@@ -83,21 +74,22 @@ class MainNavbar extends React.Component {
                 <div className="mobileMenu">
                   Menu <FontAwesomeIcon icon="bars" />
                 </div>
-                <div>
-                  {userMenu(loggedIn, currentUser)}
-                </div>
-
+                <div>{userMenu(loggedIn, currentUser)}</div>
 
                 <ul className="menu dropdown">
-                  {(!!loggedIn && !!currentUser) ? (
+                  {!!loggedIn && !!currentUser ? (
                     <li className="item">
-                      <NavLink className="item" to="/" onClick={this.props.logout}>
+                      <NavLink
+                        className="item"
+                        to="/"
+                        onClick={this.props.logout}
+                      >
                         Logout
                       </NavLink>
-                    </li>) : null
-                  }
+                    </li>
+                  ) : null}
 
-                  {(!!loggedIn && !!currentUser) ? (
+                  {!!loggedIn && !!currentUser ? (
                     <li className="item">
                       <NavLink className="item" to="/profile">
                         My Profile
@@ -108,7 +100,7 @@ class MainNavbar extends React.Component {
                     <li className="item">
                       <NavLink className="item" to="/login">
                         Log In
-                    </NavLink>
+                      </NavLink>
                     </li>
                   ) : null}
                   <li className="item">
@@ -126,7 +118,7 @@ class MainNavbar extends React.Component {
   }
 }
 
-const mapState = state => {
+const mapState = (state) => {
   return {
     currentUser: state.authentication.user,
     loggedIn: state.authentication.loggedIn,
@@ -137,7 +129,4 @@ const actionCreators = {
   logout: authActions.logout,
 }
 
-export default connect(
-  mapState,
-  actionCreators
-)(withRouter(MainNavbar))
+export default connect(mapState, actionCreators)(withRouter(MainNavbar))

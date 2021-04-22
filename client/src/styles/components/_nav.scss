@@ -1,3 +1,5 @@
+@import './../media-queries.scss';
+
 .topNav {
   z-index: 5;
   position: fixed;
@@ -26,7 +28,7 @@
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
-    
+
     a {
       display: inline-block;
       width: 100%;
@@ -38,9 +40,28 @@
         float: left;
       }
 
+      @include lt-md {
+        font-size: 4rem;
+        #short-title {
+          display: block;
+        }
+        #long-title {
+          display: none;
+        }
+      }
+
+      @include gt-sm {
+        #short-title {
+          display: none;
+        }
+        #long-title {
+          display: block;
+        }
+      }
+
       h1 {
         display: block;
-        margin: 19px 0 0 60px;;
+        margin: 19px 0 0 60px;
         line-height: 1.6rem;
         font-size: 1.6rem;
       }
@@ -58,17 +79,16 @@
   }
 
   .menu {
-    margin-top: 23px;
+    margin: 23px 10px 0 10px;
+    display: flex;
+    flex: 1;
+    justify-content: space-between;
 
-    ul {
-      display: flex;
-      justify-content: left;
-
-      li {
-        margin-left: $medium;
-
-        a {
-        }
+    .item {
+      padding-left: $medium;
+      inline-size: max-content;
+      @include lt-md {
+        inline-size: min-content;
       }
     }
   }
@@ -88,7 +108,6 @@
     }
   }
 }
-
 
 .mobileMenu {
   display: none;

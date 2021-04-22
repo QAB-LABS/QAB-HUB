@@ -74,10 +74,10 @@ class GameDetails extends React.Component {
   }
 
   renderMainContent = () => {
-    let name, image, categories, description, reviews, ratings, price, min_players, max_players, min_playtime, max_playtime, min_age, mechanics, designers, artists, year_published, likes;
+    let name, image, categories, description, reviews, price, min_players, max_players, min_playtime, max_playtime, min_age, mechanics, designers, artists, year_published, likes;
 
     if (this.props.game.game) {
-      ({ name, image, categories, description, reviews, ratings, price, min_players, max_players, min_playtime, max_playtime, min_age, mechanics, designers, artists, year_published, likes } = this.props.game.game)
+      ({ name, image, categories, description, reviews, price, min_players, max_players, min_playtime, max_playtime, min_age, mechanics, designers, artists, year_published, likes } = this.props.game.game)
     }
 
     return (
@@ -87,7 +87,7 @@ class GameDetails extends React.Component {
               <h1>{name}</h1>
               <p>{likes.length} LIKES</p>
               <div className="imageWrapper">
-                <img src={image} />
+                <img src={image} alt={`${name}-box-art`}/>
               </div>
               <section className="description">
                 <h2>Description</h2>

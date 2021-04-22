@@ -36,7 +36,8 @@ form {
         display: block;
         margin-left: $large;
         font-weight: bold;
-        color: transparent;
+        font-size: .8rem;
+        color: black;
         transition: color .3s ease-in-out;
 
         &.alert-success {

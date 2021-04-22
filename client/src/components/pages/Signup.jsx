@@ -4,13 +4,12 @@ import { authActions } from '../../actions/auth'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 
-
 class Signup extends React.Component {
   state = {
     username: '',
     name: '',
     email: '',
-    password: ''
+    password: '',
   }
 
   handleInputChange = (event) => {
@@ -34,7 +33,8 @@ class Signup extends React.Component {
   render() {
     const { message } = this.props.alert
 
-    if (message && message.type === 'alert-success') this.props.history.push('/')
+    if (message && message.type === 'alert-success')
+      this.props.history.push('/')
 
     return (
       <div className="container form">
@@ -45,25 +45,57 @@ class Signup extends React.Component {
           <div className="col-6 formEntry">
             <h2>Signup for a BGS account</h2>
             <form onSubmit={this.handleSubmit}>
-              <label for="username">Username</label>
-              <input type="text" value={this.state.username} name="username" onChange={this.handleInputChange} required />
+              <label htmlFor="username">Username</label>
+              <input
+                type="text"
+                value={this.state.username}
+                name="username"
+                onChange={this.handleInputChange}
+                required
+              />
 
               <label for="name">Name</label>
-              <input type="text" value={this.state.name} name="name" onChange={this.handleInputChange} required />
+              <input
+                type="text"
+                value={this.state.name}
+                name="name"
+                onChange={this.handleInputChange}
+                required
+              />
 
               <label for="email">Email Address</label>
-              <input type="text" value={this.state.email} name="email" onChange={this.handleInputChange} required />
+              <input
+                type="text"
+                value={this.state.email}
+                name="email"
+                onChange={this.handleInputChange}
+                required
+              />
 
               <label for="password">Password</label>
-              <input type="password" value={this.state.password} name="password" onChange={this.handleInputChange} required />
+              <input
+                type="password"
+                value={this.state.password}
+                name="password"
+                onChange={this.handleInputChange}
+                required
+              />
 
-              <button className="purple large submit button" onClick={e => this.handleClick(e)}>Signup</button>
+              <button
+                className="purple large submit button"
+                onClick={(e) => this.handleClick(e)}
+              >
+                Signup
+              </button>
             </form>
             <Alert />
-            <div>
-              Start your own board game silo. <NavLink to='/login'>If you already have an account, log in.</NavLink>
+            <div className="message">
+              If you already have an account,{' '}
+              <NavLink to="/login"> log in.</NavLink>
             </div>
-            {this.state.message && <div className="info info-danger">{this.state.message}</div>}
+            {this.state.message && (
+              <div className="info info-danger">{this.state.message}</div>
+            )}
           </div>
         </div>
       </div>
@@ -72,7 +104,7 @@ class Signup extends React.Component {
 }
 
 function mapState(state) {
-  return { alert: state.alert };
+  return { alert: state.alert }
 }
 
 export default connect(mapState, { register: authActions.register })(Signup)

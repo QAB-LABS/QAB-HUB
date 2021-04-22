@@ -4,7 +4,7 @@ import ReviewDetails from '../Reviews/ReviewDetails'
 import { connect } from 'react-redux'
 import { getPosts } from '../../actions/posts'
 import { getReviews } from '../../actions/reviews'
-import { searchGames, getGames } from '../../actions/games'
+import { getGames } from '../../actions/games'
 import GameDetails from '../Games/GameDetails'
 import api from '../../apis/backend'
 

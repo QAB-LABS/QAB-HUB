@@ -5,11 +5,10 @@
   "scripts": {
     "preinstall": "npm install --prefix client",
     "postinstall": "npm install --prefix server",
+    "build:client": "npm run --prefix client build",
+    "heroku-postbuild": "npm run build:client",
     "start": "npm run dev:server",
     "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
-    "deploy:client": "cp -a client/build/. public/",
-    "build:client": "npm run --prefix client build",
-    "heroku-postbuild": "npm run build:client && npm run deploy:client",
     "dev:server": "npm --prefix server run start",
     "dev:client": "npm --prefix client start",
     "seed": "npm --prefix server run seed"

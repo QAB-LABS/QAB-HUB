@@ -68,6 +68,10 @@ app.use('/api/*', (req, res, next) => {
     next(err)
 })
 
+app.get('*', (req,res) =>{
+    res.sendFile(path.join(__dirname+'../client/build/index.html'));
+});
+
 app.use((err, req, res, next) => {
     console.error(err)
     if (!res.headersSent) {

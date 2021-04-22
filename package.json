@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "preinstall": "npm ci --prefix client",
-    "postinstall": "npm ci --prefix server",
+    "preinstall": "npm install --prefix client",
+    "postinstall": "npm install --prefix server",
     "start": "npm run dev:server",
     "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
     "deploy:client": "cp -a client/build/. public/",

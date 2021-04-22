@@ -17,19 +17,29 @@ require('./configs/database')
 
 var rocket = emoji.get('rocket')
 var pizza = emoji.get('pizza')
-console.log(pizza + rocket + rocket + rocket + `    Welcome to the BoardGameSilo API - v${version}     ` + rocket + rocket + rocket + pizza)
+console.log(
+  pizza +
+    rocket +
+    rocket +
+    rocket +
+    `    Welcome to the BoardGameSilo API - v${version}     ` +
+    rocket +
+    rocket +
+    rocket +
+    pizza
+)
 
 const app = express()
 
 app.use(nocache())
 app.use(
-    cors({
-        origin: (origin, cb) => {
-            cb(null, process.env.NODE_ENV !== 'production')
-        },
-        optionsSuccessStatus: 200,
-        credentials: true,
-    })
+  cors({
+    origin: (origin, cb) => {
+      cb(null, process.env.NODE_ENV !== 'production')
+    },
+    optionsSuccessStatus: 200,
+    credentials: true,
+  })
 )
 
 app.use(logger('dev'))
@@ -37,16 +47,19 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
 
-app.use(express.static(path.join(__dirname, '../client/build')))
-app.use(express.static(path.join(__dirname, '../public')))
+const staticDirs = ['/../client/build', '/../public'].map((p) =>
+  path.join(__dirname, p)
+)
+console.log(`Adding static dirs: ${staticDirs}`)
+staticDirs.forEach((dir) => app.use(express.static(dir)))
 
 app.use(
-    session({
-        secret: process.env.SESSION_SECRET || 'default-secret-not-secure',
-        resave: true,
-        saveUninitialized: true,
-        store: new MongoStore({ mongooseConnection: mongoose.connection }),
-    })
+  session({
+    secret: process.env.SESSION_SECRET || 'default-secret-not-secure',
+    resave: true,
+    saveUninitialized: true,
+    store: new MongoStore({ mongooseConnection: mongoose.connection }),
+  })
 )
 require('./passport')(app)
 
@@ -63,22 +76,23 @@ app.use('/api/likes', require('./routes/likes'))
 app.use('/api/mechanics', require('./routes/mechanics'))
 
 app.use('/api/*', (req, res, next) => {
-    let err = new Error('Not Found')
-    err.status = 404
-    next(err)
+  let err = new Error('Not Found')
+  err.status = 404
+  next(err)
 })
 
-app.get('*', (req,res) =>{
-    res.sendFile(path.join(__dirname+'../client/build/index.html'));
-});
+const reactHtml = path.join(__dirname + '/../client/build/index.html')
+console.log(`delegating all other paths to: ${reactHtml}`)
+app.get('*', (req, res) => res.sendFile(reactHtml))
 
 app.use((err, req, res, next) => {
-    console.error(err)
-    if (!res.headersSent) {
-        res.status(err.status || 500)
-        if (process.env.NODE_ENV === 'production') res.json(err)
-        else res.json(JSON.parse(JSON.stringify(err, Object.getOwnPropertyNames(err))))
-    }
+  console.error(err)
+  if (!res.headersSent) {
+    res.status(err.status || 500)
+    if (process.env.NODE_ENV === 'production') res.json(err)
+    else
+      res.json(JSON.parse(JSON.stringify(err, Object.getOwnPropertyNames(err))))
+  }
 })
 
 module.exports = app

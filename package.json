@@ -1,19 +1,23 @@
 {
-    "name": "qabhub",
-    "version": "0.1.0",
-    "private": true,
-    "scripts": {
-        "preinstall": "echo --- preinstall --- && cd server && npm install && cd ../client && npm install && npm run build && cd ..",
-        "start": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
-        "build:client": "cd client && npm run build && cd ..",
-        "dev:server": "cd server && npm run start",
-        "dev:client": "cd client && npm start",
-        "seed": "cd server && npm run seed"
-    },
-    "engines": {
-        "node": "8.9.4"
-    },
-    "dependencies": {
-        "concurrently": "^5.0.0"
-    }
+  "name": "qabhub",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "preinstall": "echo --- preinstall --- && cd server && npm install && cd ../client && npm install && npm run build && cd ..",
+    "start": "npm run dev:server",
+    "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
+    "build": "yarn --cwd client install && yarn --cwd client build",
+    "deploy": "cp -a client/build/. public/",
+    "heroku-postbuild": "yarn build && yarn deploy",
+    "build:client": "cd client && npm run build && cd ..",
+    "dev:server": "cd server && npm run start",
+    "dev:client": "cd client && npm start",
+    "seed": "cd server && npm run seed"
+  },
+  "engines": {
+    "node": "8.9.4"
+  },
+  "dependencies": {
+    "concurrently": "^5.0.0"
+  }
 }

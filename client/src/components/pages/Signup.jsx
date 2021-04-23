@@ -50,6 +50,7 @@ class Signup extends React.Component {
                 type="text"
                 value={this.state.username}
                 name="username"
+                autoComplete="username"
                 onChange={this.handleInputChange}
                 required
               />
@@ -58,6 +59,7 @@ class Signup extends React.Component {
               <input
                 type="text"
                 value={this.state.name}
+                autoComplete="given-name"
                 name="name"
                 onChange={this.handleInputChange}
                 required
@@ -68,6 +70,7 @@ class Signup extends React.Component {
                 type="text"
                 value={this.state.email}
                 name="email"
+                autoComplete="email"
                 onChange={this.handleInputChange}
                 required
               />
@@ -77,6 +80,7 @@ class Signup extends React.Component {
                 type="password"
                 value={this.state.password}
                 name="password"
+                autoComplete="new-password"
                 onChange={this.handleInputChange}
                 required
               />

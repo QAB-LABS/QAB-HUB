@@ -67,6 +67,7 @@ async function createDBEntries() {
     })
   )
 
+  databaseEntries.users = await User.find()
   databaseEntries.mechanics = await Mechanic.find()
   databaseEntries.categories = await Category.find()
   databaseEntries.games = await Game.find()

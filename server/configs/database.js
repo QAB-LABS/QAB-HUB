@@ -33,7 +33,7 @@ mongoose.connection.on('disconnected', function() {
 });
 
 mongoose.connection.on("reconnected", err => {
-    console.log(`MongoDB reconnection success @ ${config.mongoDbUri}`, err);
+    console.log(`MongoDB reconnection success @ ${uri}`, err);
 });
 
 process.on('SIGINT', function() {

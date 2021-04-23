@@ -4,25 +4,24 @@ import { authActions } from '../../actions/auth'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 
-
 class Login extends React.Component {
   state = {
     username: '',
     password: '',
-    submitted: false
+    submitted: false,
   }
 
   handleChange = (e) => {
-    const { name, value } = e.target;
-    this.setState({ [name]: value });
+    const { name, value } = e.target
+    this.setState({ [name]: value })
   }
 
   handleSubmit = (e) => {
-    e.preventDefault();
-    this.setState({ submitted: true });
-    const { username, password } = this.state;
+    e.preventDefault()
+    this.setState({ submitted: true })
+    const { username, password } = this.state
     if (username && password) {
-      this.props.login(username, password);
+      this.props.login(username, password)
     }
   }
 
@@ -37,18 +36,33 @@ class Login extends React.Component {
             <h2>Login to your BGS</h2>
             <form onSubmit={this.handleSubmit}>
               <label htmlFor="username">Username</label>
-              <input type="text" name="username" onChange={this.handleChange} required />
+              <input
+                type="text"
+                name="username"
+                autoComplete="username"
+                onChange={this.handleChange}
+                required
+              />
 
               <label htmlFor="password">Password</label>
-              <input type="password" name="password" onChange={this.handleChange} required />
+              <input
+                type="password"
+                autoComplete="current-password"
+                name="password"
+                onChange={this.handleChange}
+                required
+              />
 
               <button className="purple large submit button">Login</button>
             </form>
             <Alert />
             <div className="message">
-              Start your own board game silo. <NavLink to='/signup'>Sign up</NavLink>
+              Start your own board game silo.{' '}
+              <NavLink to="/signup">Sign up</NavLink>
             </div>
-            {this.state.message && <div className="info info-danger">{this.state.message}</div>}
+            {this.state.message && (
+              <div className="info info-danger">{this.state.message}</div>
+            )}
           </div>
         </div>
       </div>
@@ -56,15 +70,14 @@ class Login extends React.Component {
   }
 }
 
-
 function mapState(state) {
-  const { loggingIn } = state.authentication;
-  return { loggingIn };
+  const { loggingIn } = state.authentication
+  return { loggingIn }
 }
 
 const actionCreators = {
   login: authActions.login,
-  logout: authActions.logout
-};
+  logout: authActions.logout,
+}
 
 export default connect(mapState, actionCreators)(Login)

@@ -1,120 +1,120 @@
 .main {
-    section {
-        .row {
+  section {
+    .row {
+      &:first-child {
+        padding-top: 0;
+        padding-bottom: 0;
+      }
 
-            &:first-child {
-                padding-top: 0;
-                padding-bottom: 0;
-            }
-
-            h2 {
-                margin-bottom: 0;
-                font-weight: 300;
-                font-size: 2.4rem;
-            }
-        }
-
-        &.conventionBanner {
-            .row {
-                padding: 4rem $xlarge;
-                border: 1px solid $lightGrey;
-            }
-        }
+      h2 {
+        margin-bottom: 0;
+        font-weight: 300;
+        font-size: 2.4rem;
+      }
     }
+
+    &.conventionBanner {
+      .row {
+        padding: 4rem $xlarge;
+        border: 1px solid $lightGrey;
+      }
+    }
+  }
 }
 
 .filter-container {
-    padding-right: 3rem;
+  padding-right: 3rem;
 
-    h3 {
-        margin-top: 0;
+  h3 {
+    margin-top: 0;
+  }
+
+  h4 {
+    margin-top: 0;
+    margin-bottom: $medium;
+  }
+
+  strong {
+    line-height: 1.2rem;
+  }
+
+  .contained {
+    margin-bottom: 3rem;
+  }
+
+  .filterWrap {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: $small;
+
+    .filterInput {
+      align-self: flex-end;
+      width: 14px;
     }
+  }
 
-    h4 {
-        margin-top: 0;
-        margin-bottom: $medium;
+  #more-less {
+    border-top: 1px solid $lightGrey;
+    padding-top: $tiny;
+
+    &:hover {
+      cursor: pointer;
+      color: $purple;
     }
-
-    strong {
-        line-height: 1.2rem;
-    }
-
-    .contained {
-        margin-bottom: 3rem;
-    }
-
-    .filterWrap {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: $small;
-
-        .filterInput {
-            align-self: flex-end;
-            width: 14px;
-        }
-    }
-
-    #more-less {
-        border-top: 1px solid $lightGrey;
-        padding-top: $tiny;
-
-        &:hover {
-            cursor: pointer;
-            color: $purple;
-        }
-    }
-    
+  }
 }
 
 .row.games-description {
-    justify-content: space-between;
-    font-size: 1.4rem;
+  justify-content: space-between;
+  font-size: 1.4rem;
 
-    .filterStats {
-        align-self: flex-start;
-        font-size: 1rem;
+  .filterStats {
+    align-self: flex-start;
+    font-size: 1rem;
+  }
+  .filterView {
+    align-self: flex-end;
+
+    .active svg {
+      color: #bfbfbf;
     }
-    .filterView {
-        align-self: flex-end;
 
-        .active svg {
-            color: #bfbfbf;
-        }
+    svg {
+      margin-left: $medium;
+      color: $purple;
 
-        svg {
-            margin-left: $medium;
-            color: $purple;
-
-            &:hover {
-                cursor:pointer;
-                color: $hoverPurple;
-
-            }
-        }
+      &:hover {
+        cursor: pointer;
+        color: $hoverPurple;
+      }
     }
+  }
+}
+
+.maxSize {
+  height: 100%;
+  width: 100%;
 }
 
 .imageWrapper {
-    max-height: 55vh;
-    height: 100%;
-    width: 100%;
-    display: inline-block;
-    text-align: center;
-    border: 1px solid $lightGrey;
-    padding: 4rem 2rem;
+  max-height: 55vh;
+  display: inline-block;
+  text-align: center;
+  border: 1px solid $lightGrey;
+  padding: 4rem 2rem;
 
-    img {
-        display: inline-block;
-        width: auto;
-        margin: 0 auto;
-        height: 100%;
-    }
+  img {
+    display: inline-block;
+    width: auto;
+    margin: 0 auto;
+    height: 100%;
+  }
 }
 
 .oneGame {
-    section {
-        margin-top:2rem;
-        border: 1px solid $lightGrey;
-        padding: 1rem;
-    }
+  section {
+    margin-top: 2rem;
+    border: 1px solid $lightGrey;
+    padding: 1rem;
+  }
 }

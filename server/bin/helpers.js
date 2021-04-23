@@ -71,7 +71,6 @@ function seed(cb) {
 }
 
 const transpose_game_entry = (game) => {
-  console.log(game.categories)
   return {
     name: game.name,
     bga_id: game.id,

@@ -38,6 +38,7 @@ const fields = [
  * */
 router.get('/search', async(req, res, next) => {
     const { filter, skip, limit, sort, projection, population } = aqp(req.query);
+    console.log(filter, skip, limit, sort, projection, population)
     Game.find(filter)
         .lean()
         .skip(skip)

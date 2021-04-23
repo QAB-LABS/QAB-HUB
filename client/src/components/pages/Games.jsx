@@ -32,7 +32,7 @@ class Games extends React.Component {
       skip,
       limit,
       null,
-      'ratings,categories,likes',
+      'ratings,category_names,likes',
       query
     )
   }
@@ -48,7 +48,7 @@ class Games extends React.Component {
         this.state.skip,
         limit,
         null,
-        'ratings,categories,likes',
+        'ratings,category_names,likes',
         query
       )
     })
@@ -62,7 +62,7 @@ class Games extends React.Component {
     if (!this.props.categoriesLoading)
       baseCategories.push({
         heading: 'Categories',
-        values: this.props.categories.map((c) => c.name),
+        values: this.props.categories,
       })
     return baseCategories
   }

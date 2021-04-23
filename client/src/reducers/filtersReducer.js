@@ -25,7 +25,7 @@ const createQueryString = (filters) => {
   qString += Object.keys(filters)
     .map((k) => {
       if (k === 'categories')
-        return filters[k].map((f) => 'category=' + f).join('&')
+        return '&categories=' + filters[k].join(',')
 
       if (!['query', 'newFilters'].includes(k)) {
         return filters[k].map((filter) => filterLookup[k][filter]).join('&')

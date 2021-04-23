@@ -12,7 +12,7 @@ class Reviews extends React.Component {
       this.props.getReview(this.props.match.params.id)
     }
     else {
-      this.props.getReviews()
+      this.props.getReviews(undefined, undefined, 'author,game')
     }
   }
 

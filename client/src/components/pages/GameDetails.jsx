@@ -82,11 +82,11 @@ class GameDetails extends React.Component {
 
     return (
         <div className="oneGame container">
-          <div class="row">
-            <div class="col-9">
+          <div className="row">
+            <div className="col-9">
               <h1>{name}</h1>
               <p>{likes.length} LIKES</p>
-              <div className="imageWrapper">
+              <div className="imageWrapper maxSize">
                 <img src={image} alt={`${name}-box-art`}/>
               </div>
               <section className="description">
@@ -98,13 +98,13 @@ class GameDetails extends React.Component {
                 {this.renderAdditionalDetails(price, year_published, designers, artists)}
               </section>
               <section className="writeReview">
-              {this.state.needForm ? <div><button class="button large purple" onClick={this.closeReview}>x</button><ReviewForm closeCallback={this.closeReview} game={this.props.game.game} /></div> : <button  class="button large purple" onClick={this.leaveReview}>Leave a Review</button>}
+              {this.state.needForm ? <div><button className="button large purple" onClick={this.closeReview}>x</button><ReviewForm closeCallback={this.closeReview} game={this.props.game.game} /></div> : <button  className="button large purple" onClick={this.leaveReview}>Leave a Review</button>}
               </section>
               <section className="reviewList">
               <ReviewsList reviews={reviews} />
               </section>
             </div>
-            <div class="col-3">
+            <div className="col-3">
               <section>
                 <h2>Details</h2>
                 {this.renderDetails(price, min_players, max_players, min_playtime, max_playtime, min_age, mechanics, categories)}

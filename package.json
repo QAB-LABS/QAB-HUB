@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "client": "file:client",
-    "concurrently": "^5.0.0",
+    "concurrently": "^6.1.0",
     "server": "file:server"
   }
 }
